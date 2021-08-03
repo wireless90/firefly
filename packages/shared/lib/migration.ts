@@ -19,8 +19,8 @@ const LEGACY_ADDRESS_WITHOUT_CHECKSUM_LENGTH = 81
 export const LOG_FILE_NAME = 'migration.log'
 
 // TODO: Change back temp migration nodes (previously https://nodes.devnet.iota.org)
-export const MIGRATION_NODES = ['https://nodes-legacy.ledgermigration1.net']
-export const PERMANODE = "http://permanode.ledgermigration1.net:4000/api"
+export const MIGRATION_NODES = ['https://nodes-legacy.lmigration2.net/']
+export const PERMANODE = "http://permanode.lmigration2.net:4000/api"
 
 export const ADDRESS_SECURITY_LEVEL = 2
 
