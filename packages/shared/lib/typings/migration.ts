@@ -63,6 +63,7 @@ export enum RiskLevel {
  * @param {number} [securityLevel] 
  * @param {number} [initialAddressIndex]
  * @param {string} [permanode]
+ * @param {string} [gapLimit]
  *  
  * @returns {Promise}
  */
@@ -74,6 +75,7 @@ export function getMigrationData(
     securityLevel?: number,
     initialAddressIndex?: number,
     permanode?: string,
+    gapLimit?: number
 ) {
     return bridge({
         actorId: __ids.actorId,
@@ -84,7 +86,8 @@ export function getMigrationData(
             nodes,
             permanode,
             securityLevel,
-            initialAddressIndex
+            initialAddressIndex,
+            gapLimit
         },
     })
 }

@@ -219,7 +219,7 @@ export const api = {
     },
 
     // Migration related methods
-    getMigrationData: function (seed: string, nodes: string[], securityLevel?: number, initialAddressIndex?: number, permanode?: string):
+    getMigrationData: function (seed: string, nodes: string[], securityLevel?: number, initialAddressIndex?: number, permanode?: string, gapLimit ?: number):
         ((__ids: CommunicationIds) => Promise<string>) {
         return (__ids: CommunicationIds) => _getMigrationData(
             sendMessage,
@@ -229,6 +229,7 @@ export const api = {
             securityLevel,
             initialAddressIndex,
             permanode,
+            gapLimit
         )
     },
     createMigrationBundle: function (seed: string, inputAddressIndexes: number[], mine: boolean, timeoutSeconds: number, offset: number, logFileName: string):

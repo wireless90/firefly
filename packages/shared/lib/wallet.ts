@@ -240,6 +240,7 @@ export const api: {
         securityLevel: number,
         initialAddressIndex: number,
         permanode: string | undefined,
+        gapLimit: number | undefined,
         callbacks: { onSuccess: (response: Event<MigrationData>) => void, onError: (err: ErrorEventPayload) => void }
     ),
     createMigrationBundle(

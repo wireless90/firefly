@@ -40,6 +40,8 @@ const HARDWARE_ADDRESS_GAP = 3
 
 const CHECKSUM_LENGTH = 9
 
+const ADDRESS_GAP_LIMIT = 50000
+
 interface MigrationLog {
     bundleHash: string;
     trytes: string[];
@@ -209,7 +211,9 @@ export const getMigrationData = (migrationSeed: string, initialAddressIndex = 0)
                 MIGRATION_NODES,
                 ADDRESS_SECURITY_LEVEL,
                 initialAddressIndex,
-                PERMANODE, {
+                PERMANODE,
+                ADDRESS_GAP_LIMIT,
+                {
                 onSuccess(response) {
                     const { seed, data } = get(migration)
 
