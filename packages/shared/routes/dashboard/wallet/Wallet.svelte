@@ -183,7 +183,7 @@
                     const { gapLimit, accountDiscoveryThreshold } = getSyncAccountOptions()
 
                     try {
-                        await asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold, false)
+                        //await asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold, false)
 
                         if ($isFirstSessionSync) isFirstSessionSync.set(false)
                     } catch (err) {

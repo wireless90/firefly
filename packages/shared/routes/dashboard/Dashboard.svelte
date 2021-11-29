@@ -66,7 +66,7 @@
             api.setStrongholdPasswordClearInterval({ secs: STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS, nanos: 0 })
         }
 
-        if (!get(isBackgroundSyncing)) {
+        /*if (!get(isBackgroundSyncing)) {
             api.startBackgroundSync(
                 {
                     secs: 30,
@@ -85,7 +85,7 @@
                     },
                 }
             )
-        }
+        }*/
 
         Electron.onEvent('menu-logout', () => {
             void logout()
