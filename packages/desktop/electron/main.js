@@ -62,6 +62,24 @@ process.on('unhandledRejection', (error) => {
     handleError('Main Unhandled Promise Rejection', error)
 })
 
+/* eslint-disable no-console */
+app.on('gpu-info-update', () => {
+    console.log(app.getGPUFeatureStatus())
+    app.getGPUInfo('complete').then((info) => {
+        console.log(info)
+    })
+})
+
+app.on('child-process-gone', (_event, details) => {
+    if (details.name) {
+        console.log(`Process name: ${details.name}`)
+    }
+    console.log(`Process type: ${details.type}`)
+    console.log(`Exit code: ${details.exitCode}`)
+    console.log(`Reason: ${details.reason}`)
+})
+/* eslint-enable no-console */
+
 /**
  * Define wallet windows
  */
