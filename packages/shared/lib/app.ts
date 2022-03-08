@@ -11,7 +11,7 @@ import { activeProfile, clearActiveProfile, isLedgerProfile, isStrongholdLocked 
 import { resetRouter } from './router'
 import { Stage } from './typings/stage'
 import { api, destroyActor, resetWallet } from './wallet'
-import { SendParams } from 'shared/lib/typings/sendParams'
+import type { SendParams } from 'shared/lib/typings/sendParams'
 
 /**
  * Beta mode

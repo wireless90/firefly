@@ -1,4 +1,4 @@
-import { Unit } from '@iota/unit-converter'
+import type { Unit } from '@iota/unit-converter'
 
 export interface SendParams {
     amount: number
