@@ -16,7 +16,7 @@ on:
 jobs:
   setup:
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs')
+    if: startsWith(github.ref, 'blabla')
     outputs:
       version: ${{ steps.set_outputs.outputs.version }}
       release_name: ${{ steps.set_outputs.outputs.release_name }}
