@@ -39,6 +39,21 @@ jobs:
         echo "::set-output name=release_name::$RELEASE_NAME"
         echo "::set-output name=stage::$STAGE"
 
+
+  build:
+    runs-on: ubuntu-latest
+    if: ${{ always() }}
+    needs: [setup]
+    env:
+      VERSION: ${{ needs.setup.outputs.version }}
+      STAGE: ${{ needs.setup.outputs.stage }}
+
+    steps:
+      - name: Echo outputs
+        run: |
+          echo $VERSION
+          echo $STAGE
+      
   # build:
   #   needs: [stage-setup]
   #   runs-on: ${{ matrix.os }}
