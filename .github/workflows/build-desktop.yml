@@ -14,12 +14,12 @@ on:
         default: "false"
 
 jobs:
-  stage:
+  setup:
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs')
 
     steps:
-    - name: Set environment variables for stage
+    - name: Set environment variables for version and stage
       run: |
         TEST=refs/tags/desktop-1.3.3-beta-1
         VERSION=${TEST#refs/*/desktop-}
@@ -30,6 +30,12 @@ jobs:
           STAGE="prod"
         fi
 
+        echo "VERSION=$VERSION" >> $GITHUB_ENV
+        echo "RELEASE_NAME=$RELEASE_NAME" >> $GITHUB_ENV
+        echo "STAGE=$STAGE" >> $GITHUB_ENV
+
+    - name: Echo env vars
+      run: |
         echo $VERSION
         echo $RELEASE_NAME
         echo $STAGE
