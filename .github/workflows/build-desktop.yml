@@ -1,9 +1,9 @@
 name: Build Firefly Desktop
 
 on:
-  push:
-    branches:
-      - "test/stage-workflow"
+  # push:
+  #   branches:
+  #     - "test/stage-workflow"
     # tags:
     #   - desktop-*
   workflow_dispatch:
@@ -123,6 +123,7 @@ jobs:
     - name: Bundle desktop JS
       run: yarn build:${STAGE}
       working-directory: packages/desktop
+      shell: bash
       env:
         HARDCODE_NODE_ENV: true
         SENTRY: true
