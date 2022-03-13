@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { onDestroy, onMount } from 'svelte'
+    import { get } from 'svelte/store'
     import { SecurityTile, Text } from 'shared/components'
     import { versionDetails } from 'shared/lib/appUpdater'
     import { diffDates, getBackupWarningColor, isRecentDate } from 'shared/lib/helpers'
@@ -9,8 +10,10 @@
     import { activeProfile, isSoftwareProfile, isStrongholdLocked, profiles } from 'shared/lib/profile'
     import { LedgerApp, LedgerAppName, LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { api } from 'shared/lib/wallet'
-    import type { Locale, LocaleArgs } from 'shared/lib/typings/i18n'
-    import type { DateDiff } from 'shared/lib/typings/wallet'
+    import { Locale, LocaleArgs } from 'shared/lib/typings/i18n'
+    import { DateDiff } from 'shared/lib/typings/wallet'
+    import { stage } from 'shared/lib/app'
+    import { Stage } from 'shared/lib/typings/stage'
 
     export let locale: Locale
 
@@ -144,7 +147,9 @@
             title={locale('views.dashboard.security.version.title', {
                 values: { version: $versionDetails.currentVersion },
             })}
-            message={locale(`views.dashboard.security.version.${$versionDetails.upToDate ? 'upToDate' : 'outOfDate'}`)}
+            message={get(stage) === Stage.PROD
+                ? locale(`views.dashboard.security.version.${$versionDetails.upToDate ? 'upToDate' : 'outOfDate'}`)
+                : locale('views.dashboard.security.version.updatesDisabled')}
             color={$versionDetails.upToDate ? 'blue' : 'yellow'}
             warning={!$versionDetails.upToDate}
             icon="firefly"
