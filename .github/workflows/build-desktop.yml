@@ -17,9 +17,14 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs')
+    outputs:
+      version: ${{ steps.set_outputs.outputs.version }}
+      release_name: ${{ steps.set_outputs.outputs.release_name }}
+      stage: ${{ steps.set_outputs.outputs.stage }}
 
     steps:
-    - name: Set output variables for version and stage
+    - id: set_outputs
+      name: Set output variables for version and stage
       run: |
         TEST=refs/tags/desktop-1.3.3-beta-1
         VERSION=${TEST#refs/*/desktop-}
@@ -30,9 +35,9 @@ jobs:
           STAGE="prod"
         fi
 
-        echo "::set-output name=VERSION::$VERSION"
-        echo "::set-output name=RELEASE_NAME::$RELEASE_NAME"
-        echo "::set-output name=STAGE::$STAGE"
+        echo "::set-output name=version::$VERSION"
+        echo "::set-output name=release_name::$RELEASE_NAME"
+        echo "::set-output name=stage::$STAGE"
 
   # build:
   #   needs: [stage-setup]
