@@ -12,6 +12,10 @@ on:
         description: "Verbose electron-builder output"     
         required: true
         default: "false"
+      stage:
+        description: "Stage (alpha, beta, or prod)"
+        required: true
+        default: "prod"
 
 jobs:
   setup:
@@ -24,7 +28,7 @@ jobs:
 
     steps:
     - id: set_outputs
-      name: Set output variables for version and stage
+      name: Set outputs for version, release name, and stage
       run: |
         TEST=refs/tags/desktop-1.3.3-beta-1
         VERSION=${TEST#refs/*/desktop-}
@@ -46,7 +50,7 @@ jobs:
     needs: [setup]
     env:
       VERSION: ${{ needs.setup.outputs.version }}
-      STAGE: ${{ needs.setup.outputs.stage }}
+      STAGE: ${{ needs.setup.outputs.stage || github.event.inputs.stage }}
 
     steps:
       - name: Echo outputs
