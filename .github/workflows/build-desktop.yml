@@ -203,6 +203,7 @@ jobs:
     env:
       VERSION: ${{ needs.setup.outputs.version }}
       RELEASE_NAME: ${{ needs.setup.outputs.release_name }}
+      STAGE: ${{ needs.setup.outputs.stage }}
 
     steps:
     - run: echo ${{github.ref}}
