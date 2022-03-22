@@ -114,7 +114,7 @@ jobs:
       working-directory: packages/backend/bindings/node
       env:
         SENTRY_DSN: ${{ secrets.SENTRY_DSN_PROD_BACKEND }}
-        SENTRY_ENVIRONMENT: 'prod'
+        SENTRY_ENVIRONMENT: ${{ env.STAGE }}
 
     - name: Set productName
       run: node scripts/fix-productName.js
@@ -127,10 +127,8 @@ jobs:
       env:
         HARDCODE_NODE_ENV: true
         SENTRY: true
-        # Change to prod
-        SENTRY_DSN: ${{ secrets.SENTRY_DSN_TEST_DESKTOP }}
-        # Change to prod
-        SENTRY_ENVIRONMENT: 'test'
+        SENTRY_DSN: ${{ secrets.SENTRY_DSN_PROD_DESKTOP }}
+        SENTRY_ENVIRONMENT: ${{ env.STAGE }}
         SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
 
     - name: Build Electron app (macOS)
