@@ -23,5 +23,5 @@ once_cell = { version = "1.8.0", default-features = false }
 firefly-actor-system = { path = "../../.." }
 
 [profile.release]
-# Build with debug symbols included
-debug = true
+# Build with debug symbols included (line tables only)
+debug = 1
