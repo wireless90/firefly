@@ -9,7 +9,7 @@ import { resetParticipation } from './participation'
 import { closePopup } from './popup'
 import { activeProfile, clearActiveProfile, isLedgerProfile, isStrongholdLocked } from './profile'
 import { resetRouter } from './router'
-import { api, asyncClearStoragePassword, clearStoragePassword, destroyActor, resetWallet } from './wallet'
+import { api, asyncClearStoragePassword, destroyActor, resetWallet } from './wallet'
 import { SendParams } from 'shared/lib/typings/sendParams'
 
 /**
