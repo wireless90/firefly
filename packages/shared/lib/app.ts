@@ -9,7 +9,7 @@ import { resetParticipation } from './participation'
 import { closePopup } from './popup'
 import { activeProfile, clearActiveProfile, isLedgerProfile, isStrongholdLocked } from './profile'
 import { resetRouter } from './router'
-import { api, asyncClearStoragePassword, destroyActor, resetWallet } from './wallet'
+import { api, asyncClearStoragePassword, clearStoragePassword, destroyActor, resetWallet } from './wallet'
 import { SendParams } from 'shared/lib/typings/sendParams'
 
 /**
@@ -76,12 +76,19 @@ export const login = (): void => {
 
  * Logout from current profile
  */
-export const logout = (_clearActiveProfile: boolean = false, _lockStronghold: boolean = true): Promise<void> =>
+export const logout = (
+    _clearActiveProfile: boolean = false,
+    _lockStronghold: boolean = true,
+    _clearStoragePassword: boolean = true,
+): Promise<void> =>
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises, no-async-promise-executor
     new Promise<void>(async (resolve) => {
         const _activeProfile = get(activeProfile)
 
         const _cleanup = async () => {
-            await asyncClearStoragePassword()
+            if (_clearStoragePassword) {
+                await asyncClearStoragePassword()
+            }
 
             /**
              * CAUTION: Be sure to make any necessary API calls before
@@ -115,11 +122,11 @@ export const logout = (_clearActiveProfile: boolean = false, _lockStronghold: bo
         // or we are not using a software profile
         if (_lockStronghold && get(isSoftwareProfile) && !get(isStrongholdLocked)) {
             api.lockStronghold({
-                onSuccess() {
-                    _cleanup()
+                async onSuccess() {
+                    await _cleanup()
                 },
-                onError(err) {
-                    _cleanup()
+                async onError(err) {
+                    await _cleanup()
 
                     showAppNotification({
                         type: 'error',
@@ -128,7 +135,7 @@ export const logout = (_clearActiveProfile: boolean = false, _lockStronghold: bo
                 },
             })
         } else {
-            _cleanup()
+            await _cleanup()
         }
     })
 

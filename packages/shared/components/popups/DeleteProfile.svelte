@@ -56,7 +56,7 @@
              * from the Svelte store list of profiles, otherwise the
              * actor is not able to be destroyed.
              */
-            await logout(true, false)
+            await logout(true, false, false)
 
             /**
              * CAUTION: The profile must be removed from the

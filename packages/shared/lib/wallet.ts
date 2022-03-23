@@ -363,8 +363,8 @@ export const asyncSetStoragePassword = (password: string): Promise<void> =>
         })
     })
 
-export const asyncClearStoragePassword = (): Promise<void> =>
-    new Promise<void>((resolve, reject) => {
+export const asyncClearStoragePassword = (): Promise<void> => {
+    return new Promise<void>((resolve, reject) => {
         api.clearStoragePassword({
             onSuccess() {
                 console.log('Success: StoragePasswordCleared')
@@ -376,6 +376,7 @@ export const asyncClearStoragePassword = (): Promise<void> =>
             }
         })
     })
+}
 
 export const asyncRestoreBackup = (importFilePath: string, password: string): Promise<void> =>
     new Promise<void>((resolve, reject) => {
