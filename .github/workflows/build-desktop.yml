@@ -128,7 +128,6 @@ jobs:
         HARDCODE_NODE_ENV: true
         SENTRY: true
         SENTRY_DSN: ${{ secrets.SENTRY_DSN_PROD_DESKTOP }}
-        SENTRY_ENVIRONMENT: ${{ env.STAGE }}
         SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
 
     - name: Build Electron app (macOS)
@@ -204,7 +203,7 @@ jobs:
       STAGE: ${{ needs.setup.outputs.stage }}
 
     steps:
-    - run: echo ${{github.ref}}
+    - run: echo ${{ github.ref }}
 
     - name: Checkout code
       uses: actions/checkout@v2
