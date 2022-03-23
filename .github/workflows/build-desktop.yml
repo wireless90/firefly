@@ -153,21 +153,21 @@ jobs:
       working-directory: packages/desktop
       if: matrix.os == 'ubuntu-18.04'
     
-    # - name: Import GPG key (Linux)
-    #   run: |
-    #     echo "$GPG_PRIVATE_KEY" | base64 -d > /tmp/private.key && \
-    #     echo "$GPG_PASSPHRASE" | gpg --batch --yes --passphrase-fd 0 --import /tmp/private.key
-    #   env:
-    #     GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
-    #     GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-    #   if: matrix.os == 'ubuntu-18.04'
+    - name: Import GPG key (Linux)
+      run: |
+        echo "$GPG_PRIVATE_KEY" | base64 -d > /tmp/private.key && \
+        echo "$GPG_PASSPHRASE" | gpg --batch --yes --passphrase-fd 0 --import /tmp/private.key
+      env:
+        GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+        GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+      if: matrix.os == 'ubuntu-18.04'
     
-    # - name: Sign AppImage (Linux)
-    #   run: echo $GPG_PASSPHRASE | gpg --pinentry-mode loopback --batch --passphrase-fd 0 --armor --detach-sign --default-key contact@iota.org firefly-desktop*.AppImage
-    #   working-directory: packages/desktop/out
-    #   env:
-    #     GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-    #   if: matrix.os == 'ubuntu-18.04'
+    - name: Sign AppImage (Linux)
+      run: echo $GPG_PASSPHRASE | gpg --pinentry-mode loopback --batch --passphrase-fd 0 --armor --detach-sign --default-key contact@iota.org firefly-desktop*.AppImage
+      working-directory: packages/desktop/out
+      env:
+        GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+      if: matrix.os == 'ubuntu-18.04'
 
     - name: Compute checksums (Linux)
       run: for i in `ls | grep 'firefly-desktop*'` ; do sha256sum $i | awk {'print $1'} > $i.sha256 ; done
