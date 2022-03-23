@@ -77,20 +77,12 @@ export const login = (): void => {
  * Logout from current profile
  */
 export const logout = (_clearActiveProfile: boolean = false, _lockStronghold: boolean = true): Promise<void> =>
-    new Promise<void>((resolve) => {
+    new Promise<void>(async (resolve) => {
         const _activeProfile = get(activeProfile)
 
-        api.clearStoragePassword({
-            onSuccess() {
-                console.log('Success: StoragePasswordCleared')
-            },
-            onError(err) {
-                console.error('Error: StoragePasswordNotCleared')
-                console.error(err)
-            }
-        })
+        const _cleanup = async () => {
+            await asyncClearStoragePassword()
 
-        const _cleanup = () => {
             /**
              * CAUTION: Be sure to make any necessary API calls before
              * the event actor is destroyed!

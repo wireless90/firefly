@@ -789,6 +789,7 @@ export default class ValidatorService {
             [ResponseTypes.Ok]: this.createBaseValidator().getFirst(),
             [ResponseTypes.SentTransfer]: this.createBaseValidator().add(new MessageValidator()).getFirst(),
             [ResponseTypes.StoragePasswordSet]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.StoragePasswordCleared]: this.createBaseValidator().getFirst(),
             [ResponseTypes.StrongholdStatus]: this.createBaseValidator()
                 .add(new StrongholdStatusValidator())
                 .getFirst(),
