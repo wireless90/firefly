@@ -20,7 +20,7 @@ on:
 jobs:
   setup:
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'blabla')
+    if: startsWith(github.ref, 'refs/tags/desktop')
     outputs:
       version: ${{ steps.set_outputs.outputs.version }}
       release_name: ${{ steps.set_outputs.outputs.release_name }}
@@ -30,8 +30,7 @@ jobs:
     - id: set_outputs
       name: Set outputs for version, release name, and stage
       run: |
-        TEST=refs/tags/desktop-1.4.0-alpha-1
-        VERSION=${TEST#refs/*/desktop-}
+        VERSION=${GITHUB_REF#refs/*/desktop-}
         RELEASE_NAME=$(echo $VERSION | perl -0777 -pe 's/^([0-9]\d*\.[0-9]\d*\.[0-9]\d*)(?:-([a-z]*)-(\d*))?$/$1 \u$2 $3/')
         STAGE=$(echo $VERSION | perl -0777 -pe 's/^([0-9]\d*\.[0-9]\d*\.[0-9]\d*)(?:-([a-z]*)-(\d*))?$/$2/')
 
@@ -126,7 +125,7 @@ jobs:
       shell: bash
       env:
         HARDCODE_NODE_ENV: true
-        SENTRY: ${{ startsWith(github.ref, 'blabla') }}
+        SENTRY: ${{ startsWith(github.ref, 'refs/tags/desktop') }}
         SENTRY_DSN: ${{ secrets.SENTRY_DSN_PROD_DESKTOP }}
         SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
 
@@ -196,7 +195,7 @@ jobs:
   release:
     runs-on: ubuntu-latest
     needs: [setup, build]
-    if: startsWith(github.ref, 'blabla')
+    if: startsWith(github.ref, 'refs/tags/desktop')
     env:
       VERSION: ${{ needs.setup.outputs.version }}
       RELEASE_NAME: ${{ needs.setup.outputs.release_name }}
@@ -302,6 +301,7 @@ jobs:
       run: ls -al assets
 
     - name: Upload to S3
+      # Change to ==
       if: env.STAGE != 'prod'
       run: |
         aws s3 cp assets/ s3://iotaledger-files/4a1ddea1-10c1-4f1d-83f0-e14903931a46/releases/ --recursive --include "*" --exclude "*.sha256" --exclude "*.blockmap" --exclude "*.asc" --acl public-read
@@ -312,6 +312,7 @@ jobs:
         AWS_DEFAULT_REGION: eu-central-1
 
     - name: Invalidate CloudFront cache for auto-update files
+      # Change to ==
       if: env.STAGE != 'prod'
       run: aws cloudfront create-invalidation --distribution-id E32G4HRED4PO65 --paths "/latest*"
       env:
