@@ -126,7 +126,7 @@ jobs:
       shell: bash
       env:
         HARDCODE_NODE_ENV: true
-        SENTRY: true
+        SENTRY: ${{ startsWith(github.ref, 'blabla') }}
         SENTRY_DSN: ${{ secrets.SENTRY_DSN_PROD_DESKTOP }}
         SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
 
