@@ -43,6 +43,7 @@ import {
     restoreBackup as _restoreBackup,
     setStrongholdPassword as _setStrongholdPassword,
     setStoragePassword as _setStoragePassword,
+    clearStoragePassword as _clearStoragePassword,
     send as _send,
     generateMnemonic as _generateMnemonic,
     storeMnemonic as _storeMnemonic,
@@ -245,6 +246,9 @@ export const api = {
     },
     setStoragePassword: function (password: string): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _setStoragePassword(sendMessage, __ids, password)
+    },
+    clearStoragePassword: function (): (__ids: CommunicationIds) => Promise<string> {
+        return (__ids: CommunicationIds) => _clearStoragePassword(sendMessage, __ids)
     },
     deleteStorage: function (): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _deleteStorage(sendMessage, __ids)

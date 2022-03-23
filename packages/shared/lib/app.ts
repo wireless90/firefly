@@ -9,7 +9,7 @@ import { resetParticipation } from './participation'
 import { closePopup } from './popup'
 import { activeProfile, clearActiveProfile, isLedgerProfile, isStrongholdLocked } from './profile'
 import { resetRouter } from './router'
-import { api, destroyActor, resetWallet } from './wallet'
+import { api, asyncClearStoragePassword, destroyActor, resetWallet } from './wallet'
 import { SendParams } from 'shared/lib/typings/sendParams'
 
 /**
@@ -79,6 +79,16 @@ export const login = (): void => {
 export const logout = (_clearActiveProfile: boolean = false, _lockStronghold: boolean = true): Promise<void> =>
     new Promise<void>((resolve) => {
         const _activeProfile = get(activeProfile)
+
+        api.clearStoragePassword({
+            onSuccess() {
+                console.log('Success: StoragePasswordCleared')
+            },
+            onError(err) {
+                console.error('Error: StoragePasswordNotCleared')
+                console.error(err)
+            }
+        })
 
         const _cleanup = () => {
             /**

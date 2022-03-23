@@ -77,6 +77,7 @@ const apiToResponseTypeMap = {
     storeMnemonic: ResponseTypes.StoredMnemonic,
     verifyMnemonic: ResponseTypes.VerifiedMnemonic,
     setStoragePassword: ResponseTypes.StoragePasswordSet,
+    clearStoragePassword: ResponseTypes.StoragePasswordCleared,
     getStrongholdStatus: ResponseTypes.StrongholdStatus,
     getUnusedAddress: ResponseTypes.UnusedAddress,
     isLatestAddressUnused: ResponseTypes.IsLatestAddressUnused,

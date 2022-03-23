@@ -61,6 +61,7 @@ export enum ResponseTypes {
     StoredMnemonic = 'StoredMnemonic',
     VerifiedMnemonic = 'VerifiedMnemonic',
     StoragePasswordSet = 'StoragePasswordSet',
+    StoragePasswordCleared = 'StoragePasswordCleared',
     StrongholdStatus = 'StrongholdStatus',
     UnusedAddress = 'UnusedAddress',
     IsLatestAddressUnused = 'IsLatestAddressUnused',
@@ -122,6 +123,7 @@ export type GenerateMnemonicResponse = Response<ResponseTypes.GeneratedMnemonic,
 export type StoreMnemonicResponse = Response<ResponseTypes.StoredMnemonic, void>
 export type VerifyMnemonicResponse = Response<ResponseTypes.VerifiedMnemonic, void>
 export type SetStoragePasswordResponse = Response<ResponseTypes.StoragePasswordSet, void>
+export type ClearStoragePasswordResponse = Response<ResponseTypes.StoragePasswordCleared, void>
 export type StrongholdStatusResponse = Response<ResponseTypes.StrongholdStatus, StrongholdStatus>
 export type UnusedAddressResponse = Response<ResponseTypes.UnusedAddress, Address>
 export type IsLatestAddressUnusedResponse = Response<ResponseTypes.IsLatestAddressUnused, boolean>
@@ -178,6 +180,7 @@ export type MessageResponse =
     | StoreMnemonicResponse
     | VerifyMnemonicResponse
     | SetStoragePasswordResponse
+    | ClearStoragePasswordResponse
     | StrongholdStatusResponse
     | UnusedAddressResponse
     | IsLatestAddressUnusedResponse

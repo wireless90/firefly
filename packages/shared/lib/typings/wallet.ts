@@ -147,6 +147,14 @@ export function setStoragePassword(bridge: Bridge, __ids: CommunicationIds, pass
     })
 }
 
+export function clearStoragePassword(bridge: Bridge, __ids: CommunicationIds): Promise<string> {
+    return bridge({
+        actorId: __ids.actorId,
+        id: __ids.messageId,
+        cmd: 'ClearStoragePassword',
+    })
+}
+
 export function deleteStorage(bridge: Bridge, __ids: CommunicationIds): Promise<string> {
     return bridge({
         actorId: __ids.actorId,

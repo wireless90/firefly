@@ -140,6 +140,10 @@ export interface IWalletApi {
         newPinCode: string,
         callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void }
     )
+    clearStoragePassword(callbacks: {
+        onSuccess: (response: Event<void>) => void
+        onError: (err: ErrorEventPayload) => void
+    })
     deleteStorage(callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void })
     setClientOptions(
         clientOptions: ClientOptions,
