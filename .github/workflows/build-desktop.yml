@@ -1,11 +1,9 @@
 name: Build Firefly Desktop
 
 on:
-  # push:
-  #   branches:
-  #     - "test/stage-workflow"
-    # tags:
-    #   - desktop-*
+  push:
+    tags:
+      - desktop-*
   workflow_dispatch:
     inputs:
       debugElectronBuilder:
@@ -301,8 +299,7 @@ jobs:
       run: ls -al assets
 
     - name: Upload to S3
-      # Change to ==
-      if: env.STAGE != 'prod'
+      if: env.STAGE == 'prod'
       run: |
         aws s3 cp assets/ s3://iotaledger-files/4a1ddea1-10c1-4f1d-83f0-e14903931a46/releases/ --recursive --include "*" --exclude "*.sha256" --exclude "*.blockmap" --exclude "*.asc" --acl public-read
         aws s3 cp assets/ s3://iotaledger-files/firefly/releases/ --recursive --include "*" --exclude "*.sha256" --exclude "*.blockmap" --exclude "*.asc" --acl public-read
@@ -312,8 +309,7 @@ jobs:
         AWS_DEFAULT_REGION: eu-central-1
 
     - name: Invalidate CloudFront cache for auto-update files
-      # Change to ==
-      if: env.STAGE != 'prod'
+      if: env.STAGE == 'prod'
       run: aws cloudfront create-invalidation --distribution-id E32G4HRED4PO65 --paths "/latest*"
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
