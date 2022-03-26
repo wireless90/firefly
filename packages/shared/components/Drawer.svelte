@@ -26,6 +26,7 @@
     export let classes = ''
     export let fullScreen = false
     export let preventClose = false
+    export let zIndex = 'z-30'
 
     const dispatch = createEventDispatcher()
 
@@ -40,9 +41,16 @@
         },
         { duration: 350, easing: quintOut }
     )
-
-    onMount(() => {
+    
+    let handle_idle_call_back
+    onMount(async () => {
+        const sleep = ms => new Promise(r => setTimeout(r, ms));
         if (opened) {
+            // await sleep(500)
+            // if (handle_idle_call_back) window.cancelIdleCallback(handle_idle_call_back);
+            // handle_idle_call_back = window.requestIdleCallback(open, {
+            //     timeout: 5800,
+            // });
             open()
         }
     })
@@ -154,7 +162,7 @@
     $: contentOpacity = getScale(fromRight ? $coords.x : $coords.y, 100)
 </script>
 
-<drawer class="absolute top-0 z-30" class:invisible={!isOpen}>
+<drawer class="absolute top-0 {zIndex}" class:invisible={!isOpen}>
     <slide-zone
         class="fixed h-screen w-screen"
         use:slidable={!preventClose}
