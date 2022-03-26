@@ -8,6 +8,7 @@
 	@prop {boolean} [opened] - Opens drawer on load.
 	@prop {boolean} [fromRight] - Slide from right side.
     @prop {boolean} [preventClose] - Prevent close the Drawer.
+    @prop {string} [zIndex] - Main container Tailwind z-index. Ex. "z-40".
 	
 	@function {() => Promise<viod>} open - Opens drawer.
 	@function {() => Promise<void>} close - Closes drawer.
@@ -41,17 +42,10 @@
         },
         { duration: 350, easing: quintOut }
     )
-    
-    let handle_idle_call_back
+
     onMount(async () => {
-        const sleep = ms => new Promise(r => setTimeout(r, ms));
         if (opened) {
-            // await sleep(500)
-            // if (handle_idle_call_back) window.cancelIdleCallback(handle_idle_call_back);
-            // handle_idle_call_back = window.requestIdleCallback(open, {
-            //     timeout: 5800,
-            // });
-            open()
+            await open()
         }
     })
 
@@ -110,8 +104,8 @@
         }
     }
 
-    function handleSlideMove(event: CustomEvent) {
-        coords.update(
+    async function handleSlideMove(event: CustomEvent): Promise<void> {
+        await coords.update(
             ($coords) => ({
                 x: $coords.x + event.detail.sx,
                 y: $coords.y + event.detail.sy,
@@ -120,18 +114,18 @@
         )
     }
 
-    function handleSlideEnd() {
+    async function handleSlideEnd() {
         const thresholdUnreached = fromRight
             ? (viewportLength - dimLength) / 2 > $coords.x
             : (viewportLength - dimLength) / 1.2 > $coords.y
         if (thresholdUnreached) {
-            open()
+            await open()
         } else {
-            close()
+            await close()
         }
     }
 
-    export async function open() {
+    export async function open(): Promise<void> {
         isOpen = true
         await coords.set(
             {
@@ -142,7 +136,7 @@
         )
     }
 
-    export async function close() {
+    export async function close(): Promise<void> {
         await coords.set(
             {
                 x: fromRight ? viewportLength : 0,
