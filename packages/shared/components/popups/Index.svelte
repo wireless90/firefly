@@ -166,14 +166,13 @@
         }
     })
 
-    const sleep = ms => new Promise(r => setTimeout(r, ms));
-    $: isReady = async () => await sleep(300) && await tick()
-
+    const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
+    $: isReady = async () => (await sleep(300)) && tick()
 </script>
 
 <svelte:window on:keydown={onKey} />
 {#if $mobile && !fullScreen && isReady}
-    <Drawer 
+    <Drawer
         opened
         zIndex="z-40"
         preventClose={hideClose}
