@@ -53,6 +53,7 @@ import {
     send as _send,
     setClientOptions as _setClientOptions,
     setStoragePassword as _setStoragePassword,
+    clearStoragePassword as _clearStoragePassword,
     setStrongholdPassword as _setStrongholdPassword,
     setStrongholdPasswordClearInterval as _setStrongholdPasswordClearInterval,
     storeMnemonic as _storeMnemonic,
@@ -222,6 +223,7 @@ export const api = {
         (password: string): Api =>
         (__ids) =>
             _setStoragePassword(sendMessage, __ids, password),
+    clearStoragePassword: (): Api => (__ids) => _clearStoragePassword(sendMessage, __ids),
     deleteStorage: (): Api => (__ids) => _deleteStorage(sendMessage, __ids),
     send:
         (fromAccountId: AccountIdentifier, transfer: Transfer): Api =>
