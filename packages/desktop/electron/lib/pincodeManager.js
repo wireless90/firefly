@@ -29,19 +29,6 @@ const PincodeManager = {
     verify(key, pincode) {
         return ipcRenderer.invoke('keychain-get', key).then((storedPincode) => storedPincode === pincode)
     },
-
-    /**
-     * Removes pincode entry from the keychain
-     *
-     * @method remove
-     *
-     * @param {string} key
-     *
-     * @returns {Promise}
-     */
-    remove(key) {
-        return ipcRenderer.invoke('keychain-remove', key)
-    },
 }
 
 module.exports = PincodeManager

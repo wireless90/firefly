@@ -32,16 +32,4 @@ export const PincodeManager: IPincodeManager = {
             console.error(error)
         }
     },
-    /**
-     * Removes pincode entry from the keychain
-     * @method remove
-     */
-    remove: async (key: string): Promise<boolean> => {
-        try {
-            const { value } = await SecureStoragePlugin.remove({ key })
-            return value
-        } catch (error) {
-            console.error(error)
-        }
-    },
 }
