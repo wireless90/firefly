@@ -209,8 +209,8 @@ export const initialise = (id: string, storagePath: string, sendCrashReports: bo
     if (Object.keys(actors).length > 0) {
         console.error('Initialise called when another actor already initialised')
     }
-
     actors[id] = WALLET.init(id, storagePath, sendCrashReports, machineId)
+    console.log('initialize success')
 }
 
 /**
@@ -354,9 +354,11 @@ export const asyncSetStoragePassword = (password: string): Promise<void> =>
     new Promise<void>((resolve, reject) => {
         api.setStoragePassword(password, {
             onSuccess() {
+                console.log('asyncSetStoragePassword in lib/wallet.rs onSuccess()')
                 resolve()
             },
             onError(err) {
+                console.error('asyncSetStoragePassword onError: ', err)
                 reject(err)
             },
         })

@@ -7,7 +7,7 @@
     import { popupState } from 'shared/lib/popup'
     import { activeProfile, clearActiveProfile } from 'shared/lib/profile'
     import { validatePinFormat } from 'shared/lib/utils'
-    import { api, getProfileDataPath, initialise } from 'shared/lib/wallet'
+    import { api, destroyActor, getProfileDataPath, initialise } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { ErrorType } from 'shared/lib/typings/events'
     import { Locale } from 'shared/lib/typings/i18n'
@@ -69,7 +69,7 @@
         }
     }
 
-    function onSubmit() {
+    async function onSubmit() {
         if ($ongoingSnapshot === true) {
             return openSnapshotPopup()
         }
@@ -79,11 +79,14 @@
 
             isBusy = true
 
+            console.log('isActorInitialized: ', isActorInitialized)
+
             if (!isActorInitialized) {
-                void Platform.getMachineId().then((machineId) =>
+                await Platform.getMachineId().then((machineId) =>
                     getProfileDataPath(profile.name).then((path) => {
                         initialise(profile.id, path, sendCrashReports, machineId)
                         isActorInitialized = true
+                        console.log('logging after initialize()\n...isActorInitialized: ', isActorInitialized)
                     })
                 ).catch((error) => {
                     console.error(error)
@@ -93,11 +96,45 @@
 
             api.setStoragePassword(pinCode, {
                 onSuccess() {
-                    dispatch('next')
+                    try {
+                        console.log('setStoragePassword success: ', pinCode)
+                        dispatch('next')
+                    } catch (err) {
+                        console.log('there is an error inside the catch block: ', err.type)
+                        console.error('inside setStoragePassword try block', err)
+                        // const _activeProfile = get(activeProfile)
+                        // destroyActor(_activeProfile.id)
+                        // isActorInitialized = false
+                        // if (err.type === ErrorType.RecordDecrypt) {
+                        //     shake = true
+                        //     shakeTimeout = setTimeout(() => {
+                        //         shake = false
+                        //         isBusy = false
+                        //         attempts++
+                        //         if (attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS) {
+                        //             clearInterval(maxAttemptsTimer)
+                        //             maxAttemptsTimer = setInterval(countdown, 1000)
+                        //         } else {
+                        //             pinRef.resetAndFocus()
+                        //         }
+                        //     }, 1000)
+                        // } else {
+                        //     isBusy = false
+                        //     showAppNotification({
+                        //         type: 'error',
+                        //         message: locale(err.error),
+                        //     })
+                        // }
+                    }
                 },
                 onError(err) {
+                    console.log('setStoragePassword onError: ', pinCode)
                     console.error(err)
+                    const _activeProfile = get(activeProfile)
+                    destroyActor(_activeProfile.id)
+                    isActorInitialized = false
                     if (err.type === ErrorType.RecordDecrypt) {
+                        console.log('inside RecordDecrypt')
                         shake = true
                         shakeTimeout = setTimeout(() => {
                             shake = false
