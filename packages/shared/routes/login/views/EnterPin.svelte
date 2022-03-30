@@ -9,11 +9,13 @@
     import { validatePinFormat } from 'shared/lib/utils'
     import { api, getProfileDataPath, initialise } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy } from 'svelte'
+    import { ErrorType } from 'shared/lib/typings/events'
     import { Locale } from 'shared/lib/typings/i18n'
     import { get } from 'svelte/store'
 
     export let locale: Locale
 
+    let isActorInitialized = false
     let attempts = 0
     let pinCode = ''
     let isBusy = false
@@ -77,27 +79,25 @@
 
             isBusy = true
 
-            Platform.PincodeManager.verify(profile.id, pinCode)
-                .then((verified) => {
-                    if (verified === true) {
-                        return Platform.getMachineId().then((machineId) =>
-                            getProfileDataPath(profile.name).then((path) => {
-                                initialise(profile.id, path, sendCrashReports, machineId)
-                                api.setStoragePassword(pinCode, {
-                                    onSuccess() {
-                                        dispatch('next')
-                                    },
-                                    onError(err) {
-                                        isBusy = false
-                                        showAppNotification({
-                                            type: 'error',
-                                            message: locale(err.error),
-                                        })
-                                    },
-                                })
-                            })
-                        )
-                    } else {
+            if (!isActorInitialized) {
+                void Platform.getMachineId().then((machineId) =>
+                    getProfileDataPath(profile.name).then((path) => {
+                        initialise(profile.id, path, sendCrashReports, machineId)
+                        isActorInitialized = true
+                    })
+                ).catch((error) => {
+                    console.error(error)
+                    isBusy = false
+                })
+            }
+
+            api.setStoragePassword(pinCode, {
+                onSuccess() {
+                    dispatch('next')
+                },
+                onError(err) {
+                    console.error(err)
+                    if (err.type === ErrorType.RecordDecrypt) {
                         shake = true
                         shakeTimeout = setTimeout(() => {
                             shake = false
@@ -110,12 +110,55 @@
                                 pinRef.resetAndFocus()
                             }
                         }, 1000)
+                    } else {
+                        isBusy = false
+                        showAppNotification({
+                            type: 'error',
+                            message: locale(err.error),
+                        })
                     }
-                })
-                .catch((error) => {
-                    console.error(error)
-                    isBusy = false
-                })
+                }
+            })
+
+            // Platform.PincodeManager.verify(profile.id, pinCode)
+            //     .then((verified) => {
+            //         if (verified === true) {
+            //             return Platform.getMachineId().then((machineId) =>
+            //                 getProfileDataPath(profile.name).then((path) => {
+            //                     initialise(profile.id, path, sendCrashReports, machineId)
+            //                     api.setStoragePassword(pinCode, {
+            //                         onSuccess() {
+            //                             dispatch('next')
+            //                         },
+            //                         onError(err) {
+            //                             isBusy = false
+            //                             showAppNotification({
+            //                                 type: 'error',
+            //                                 message: locale(err.error),
+            //                             })
+            //                         },
+            //                     })
+            //                 })
+            //             )
+            //         } else {
+            //             shake = true
+            //             shakeTimeout = setTimeout(() => {
+            //                 shake = false
+            //                 isBusy = false
+            //                 attempts++
+            //                 if (attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS) {
+            //                     clearInterval(maxAttemptsTimer)
+            //                     maxAttemptsTimer = setInterval(countdown, 1000)
+            //                 } else {
+            //                     pinRef.resetAndFocus()
+            //                 }
+            //             }, 1000)
+            //         }
+            //     })
+            //     .catch((error) => {
+            //         console.error(error)
+            //         isBusy = false
+            //     })
         }
     }
 
