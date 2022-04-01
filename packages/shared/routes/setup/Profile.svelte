@@ -27,6 +27,7 @@
     import { Locale } from 'shared/lib/typings/i18n'
     import { Platform } from 'shared/lib/platform'
     import { Stage } from 'shared/lib/typings/stage'
+    import { SentryTags } from 'shared/lib/typings/app'
 
     export let locale: Locale
 
@@ -70,7 +71,8 @@
                 const path = await getProfileDataPath($newProfile.name)
                 const machineId = await Platform.getMachineId()
                 const { sendCrashReports } = $initAppSettings ?? { sendCrashReports: false }
-                initialise($newProfile.id, path, sendCrashReports, machineId)
+                const sentryTags: SentryTags = { profileType: $newProfile.type }
+                initialise($newProfile.id, path, sendCrashReports, machineId, sentryTags)
                 initialiseMigrationListeners()
             }
 

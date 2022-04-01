@@ -11,6 +11,7 @@
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { Locale } from 'shared/lib/typings/i18n'
     import { get } from 'svelte/store'
+    import { SentryTags } from 'shared/lib/typings/app'
 
     export let locale: Locale
 
@@ -82,7 +83,8 @@
                     if (verified === true) {
                         return Platform.getMachineId().then((machineId) =>
                             getProfileDataPath(profile.name).then((path) => {
-                                initialise(profile.id, path, sendCrashReports, machineId)
+                                const sentryTags: SentryTags = { profileType: profile.type }
+                                initialise(profile.id, path, sendCrashReports, machineId, sentryTags)
                                 api.setStoragePassword(pinCode, {
                                     onSuccess() {
                                         dispatch('next')

@@ -41,6 +41,7 @@ import { IWalletApi } from './typings/walletApi'
 import resolveConfig from 'tailwindcss/resolveConfig'
 import tailwindConfig from 'shared/tailwind.config.js'
 import { setProfileAccount } from 'shared/lib/profile'
+import { SentryTags } from './typings/app'
 
 const configColors = resolveConfig(tailwindConfig).theme.colors
 
@@ -202,16 +203,23 @@ export const getProfileDataPath = async (profileName: string): Promise<string> =
  * @param {string} storagePath The storage directory to use for profile data.
  * @param {boolean} sendCrashReports Determines whether crash reports should be sent from the wallet actor.
  * @param {string} machineId Machine ID for crash reporting
+ * @param {SentryTags} sentryTags Tags to be added to Sentry events
  *
  * CAUTION: Only use the app settings from startup as the wallet actor is initialized dynamically while the
  * Electron app is not.
  */
-export const initialise = (id: string, storagePath: string, sendCrashReports: boolean, machineId: string): void => {
+export const initialise = (
+    id: string,
+    storagePath: string,
+    sendCrashReports: boolean,
+    machineId: string,
+    sentryTags: SentryTags
+): void => {
     if (Object.keys(actors).length > 0) {
         console.error('Initialise called when another actor already initialised')
     }
 
-    actors[id] = WALLET.init(id, storagePath, sendCrashReports, machineId)
+    actors[id] = WALLET.init(id, storagePath, sendCrashReports, machineId, sentryTags)
 }
 
 /**
