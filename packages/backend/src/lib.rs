@@ -124,11 +124,18 @@ fn init_sentry() -> Option<sentry::ClientInitGuard> {
     })
 }
 
+#[derive(Deserialize, Clone)]
+pub struct SentryTags {
+    #[serde(rename = "profileType")]
+    pub profile_type: String,
+}
+
 pub async fn init<A: Into<String>>(
     actor_id: A,
     storage_path: Option<impl AsRef<Path>>,
     send_crash_reports: Option<bool>,
     machine_id: Option<String>,
+    sentry_tags: Option<SentryTags>,
     message_receiver: Arc<Mutex<Sender<String>>>,
 ) {
     let send_crash_reports = send_crash_reports.unwrap_or(false);

@@ -73,6 +73,9 @@ import { Participation } from '@lib/participation/types'
 import addon = require('../index.node')
 
 const onMessageListeners: ((payload: MessageResponse) => void)[] = []
+type SentryTags = {
+    profileType: string
+}
 
 function _poll(
     runtime: typeof addon.ActorSystem,
@@ -93,9 +96,17 @@ function sendMessage(message: BridgeMessage): Promise<string> {
     return new Promise((resolve) => addon.sendMessage(JSON.stringify(message), () => resolve(id)))
 }
 
-export function init(id: string, storagePath?: string, sendCrashReports?: boolean, machineId?: string): IActorHandler {
+export function init(
+    id: string,
+    storagePath?: string,
+    sendCrashReports?: boolean,
+    machineId?: string,
+    sentryTags?: SentryTags
+): IActorHandler {
+    // It's easier to parse this on the Rust side with serde rather than getting each JS property
+    const sentryTagsJson = JSON.stringify(sentryTags || {})
     const runtime = storagePath
-        ? new addon.ActorSystem(id, storagePath, sendCrashReports || false, machineId || '')
+        ? new addon.ActorSystem(id, storagePath, sendCrashReports || false, machineId || '', sentryTagsJson)
         : new addon.ActorSystem(id)
 
     let destroyed = false
