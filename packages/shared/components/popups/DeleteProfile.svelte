@@ -7,7 +7,7 @@
     import { activeProfile, isSoftwareProfile, profiles, removeProfile, removeProfileFolder } from 'shared/lib/profile'
     import { appRouter } from '@core/router'
     import { api, asyncDeleteStorage, asyncStopBackgroundSync } from 'shared/lib/wallet'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
 
     export let locale: Locale
 
@@ -75,7 +75,7 @@
              * CAUTION: This removes the actual directory for the profile,
              * so it should occur last.
              */
-            await removeProfileFolder(_activeProfile.name)
+            await removeProfileFolder(_activeProfile.id)
         } catch (err) {
             if (err && err?.type && err?.type == 'AccountNotEmpty') {
                 showAppNotification({

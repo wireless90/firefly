@@ -26,7 +26,7 @@
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { getProfileDataPath, walletSetupType } from 'shared/lib/wallet'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
     import { SetupType } from 'shared/lib/typings/setup'
 
     export let locale: Locale
@@ -87,16 +87,13 @@
                 }
             }
             const _exportMigrationLog = () => {
-                getProfileDataPath($activeProfile.name)
+                getProfileDataPath($activeProfile.id)
                     .then((source) =>
                         $walletSetupType === SetupType.TrinityLedger
-                            ? Platform.exportLedgerMigrationLog(
-                                  $migrationLog,
-                                  `${$activeProfile.name}-${LOG_FILE_NAME}`
-                              )
+                            ? Platform.exportLedgerMigrationLog($migrationLog, `${$activeProfile.id}-${LOG_FILE_NAME}`)
                             : Platform.exportMigrationLog(
                                   `${source}/${LOG_FILE_NAME}`,
-                                  `${$activeProfile.name}-${LOG_FILE_NAME}`
+                                  `${$activeProfile.id}-${LOG_FILE_NAME}`
                               )
                     )
                     .then((result) => {

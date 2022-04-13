@@ -2,7 +2,7 @@ import { Unit } from '@iota/unit-converter'
 import { isSoftwareProfile } from 'shared/lib/profile'
 import { get, writable } from 'svelte/store'
 import { lastAcceptedPrivacyPolicy, lastAcceptedTos } from './appSettings'
-import { localize } from './i18n'
+import { localize } from '@core/i18n'
 import { stopPollingLedgerStatus } from './ledger'
 import { showAppNotification } from './notifications'
 import { resetParticipation } from './participation'
@@ -47,14 +47,21 @@ export const lastActiveAt = writable<Date>(new Date())
  * Input parameters for sending transactions
  */
 export const sendParams = writable<SendParams>({
-    amount: 0,
+    amount: undefined,
     unit: Unit.Mi,
     address: '',
     message: '',
     isInternal: false,
 })
 export const clearSendParams = (isInternal = false): void =>
-    sendParams.set({ amount: 0, unit: Unit.Mi, address: '', message: '', isInternal })
+    sendParams.set({
+        amount: undefined,
+        unit: Unit.Mi,
+        address: '',
+        message: '',
+        isInternal,
+        toWalletAccount: undefined,
+    })
 
 /**
  * Determines whether a user is logged in

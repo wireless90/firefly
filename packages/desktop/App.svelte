@@ -2,18 +2,17 @@
     import { onDestroy, onMount } from 'svelte'
     import { Popup, Route, TitleBar, ToastContainer } from 'shared/components'
     import { stage, loggedIn } from 'shared/lib/app'
-    import { appSettings, initAppSettings } from 'shared/lib/appSettings'
+    import { appSettings, hasRenamedProfileFoldersToId, initAppSettings } from 'shared/lib/appSettings'
     import { getVersionDetails, pollVersion, versionDetails } from 'shared/lib/appUpdater'
     import { addError } from 'shared/lib/errors'
     import { goto } from 'shared/lib/helpers'
-    import { dir, isLocaleLoaded, setupI18n, _ } from 'shared/lib/i18n'
+    import { localeDirection, isLocaleLoaded, Locale, setupI18n, _ } from '@core/i18n'
     import { pollMarketData } from 'shared/lib/market'
     import { showAppNotification } from 'shared/lib/notifications'
     import { Electron } from 'shared/lib/electron'
     import { openPopup, popupState } from 'shared/lib/popup'
-    import { cleanupEmptyProfiles, cleanupInProgressProfiles } from 'shared/lib/profile'
-    import { AppRoute, DashboardRoute, dashboardRouter, walletRouter, initRouters, openSettings } from '@core/router'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { cleanupEmptyProfiles, cleanupInProgressProfiles, renameAllProfileFoldersToId } from 'shared/lib/profile'
+    import { AppRoute, DashboardRoute, dashboardRouter, accountRouter, initRouters, openSettings } from '@core/router'
     import {
         Appearance,
         Backup,
@@ -59,19 +58,26 @@
     }
     $: Electron.updateMenu('loggedIn', $loggedIn)
 
-    $: if (document.dir !== $dir) {
-        document.dir = $dir
+    $: if (document.dir !== $localeDirection) {
+        document.dir = $localeDirection
     }
 
     let splash = true
     let settings = false
 
     void setupI18n({ fallbackLocale: 'en', initialLocale: $appSettings.language })
+
     onMount(async () => {
         setTimeout(() => {
             splash = false
             initRouters()
         }, 3000)
+
+        // This is added to migrate all profile folder names from using the profile name to the id
+        if (!get(hasRenamedProfileFoldersToId)) {
+            await renameAllProfileFoldersToId()
+            hasRenamedProfileFoldersToId.set(true)
+        }
 
         initAppSettings.set($appSettings)
 
@@ -85,7 +91,7 @@
         }
         Electron.onEvent('menu-navigate-wallet', (route) => {
             $dashboardRouter.goTo(DashboardRoute.Wallet)
-            $walletRouter.goTo(route)
+            $accountRouter.goTo(route)
         })
         Electron.onEvent('menu-navigate-settings', () => {
             if ($loggedIn) {
@@ -147,6 +153,7 @@
                 hideClose={$popupState.hideClose}
                 fullScreen={$popupState.fullScreen}
                 transition={$popupState.transition}
+                overflow={$popupState.overflow}
                 locale={$_}
             />
         {/if}

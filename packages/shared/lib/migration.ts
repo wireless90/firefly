@@ -22,10 +22,11 @@ import {
 import { appRoute, AppRoute } from '@core/router'
 import Validator from 'shared/lib/validator'
 import { api, walletSetupType } from 'shared/lib/wallet'
-import { localize } from './i18n'
+import { localize } from '@core/i18n'
 import { showAppNotification } from './notifications'
 import { LedgerMigrationProgress } from 'shared/lib/typings/migration'
 import { SetupType } from 'shared/lib/typings/setup'
+import { getJsonRequestOptions } from '@lib/utils'
 
 const LEGACY_ADDRESS_WITHOUT_CHECKSUM_LENGTH = 81
 
@@ -1184,11 +1185,7 @@ export type ChrysalisVariablesValidationResponse = {
  * @returns {Promise<void>}
  */
 export async function checkChrysalisSnapshot(): Promise<void> {
-    const requestOptions: RequestInit = {
-        headers: {
-            Accept: 'application/json',
-        },
-    }
+    const requestOptions = getJsonRequestOptions()
     const endpoint = CHRYSALIS_VARIABLES_ENDPOINT
     try {
         const abortController = new AbortController()

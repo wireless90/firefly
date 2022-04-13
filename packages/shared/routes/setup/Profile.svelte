@@ -23,7 +23,7 @@
         validateProfileName,
     } from 'shared/lib/profile'
     import { destroyActor, getProfileDataPath, initialise } from 'shared/lib/wallet'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
     import { Platform } from 'shared/lib/platform'
     import { appRouter } from '@core/router'
     import { Stage } from 'shared/lib/typings/stage'
@@ -65,7 +65,7 @@
             if (nameChanged || hasDeveloperProfileChanged) {
                 storeProfile(name, isDeveloperProfile)
 
-                const path = await getProfileDataPath($newProfile.name)
+                const path = await getProfileDataPath($newProfile.id)
                 const machineId = await Platform.getMachineId()
                 const { sendCrashReports } = $initAppSettings ?? { sendCrashReports: false }
                 initialise($newProfile.id, path, sendCrashReports, machineId)
