@@ -3,7 +3,7 @@ import { convertToFiat, currencies, exchangeRates } from 'shared/lib/currency'
 import { localize } from '@core/i18n'
 import { activeProfile, updateProfile } from 'shared/lib/profile'
 import { formatUnitPrecision } from 'shared/lib/units'
-import { isSelfTransaction, wallet, AccountColors } from 'shared/lib/wallet'
+import { isSelfTransaction, getAccountColors } from 'shared/lib/wallet'
 import { formatDate } from '@core/i18n'
 import { derived, get, writable } from 'svelte/store'
 import { formatCurrencyValue } from './currency'
@@ -113,7 +113,7 @@ export const getAccountActivityData = (
         data: [],
         tooltips: [],
         label: localize('general.incoming'),
-        color: account.color || AccountColors.Blue,
+        color: account.color || getAccountColors().Blue,
     } // TODO: profile colors
     const outgoing: ChartData = {
         data: [],

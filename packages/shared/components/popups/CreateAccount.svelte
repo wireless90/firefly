@@ -6,7 +6,7 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup, popupState } from 'shared/lib/popup'
     import { isLedgerProfile } from 'shared/lib/profile'
-    import { AccountColors, MAX_ACCOUNT_NAME_LENGTH, wallet } from 'shared/lib/wallet'
+    import { getAccountColors, MAX_ACCOUNT_NAME_LENGTH, wallet } from 'shared/lib/wallet'
     import { formatCurrency } from 'shared/lib/currency'
 
     export let error = ''
@@ -16,7 +16,7 @@
 
     let accountAlias = ''
     let isBusy = false
-    let color = AccountColors.Blue
+    let color = getAccountColors().Blue
 
     // This looks odd but sets a reactive dependency on accountAlias, so when it changes the error will clear
     $: accountAlias, (error = '')

@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Text, Icon, Tooltip } from 'shared/components'
-    import { AccountColors } from 'shared/lib/wallet'
+    import { getAccountColors } from 'shared/lib/wallet'
     import { isBright } from 'shared/lib/helpers'
     import { clickOutside } from 'shared/lib/actions'
     import { localize } from '@core/i18n'
@@ -9,7 +9,7 @@
     export let title = localize('views.picker.color.title')
     export let classes = ''
 
-    const accountColors = Object.values(AccountColors).filter((c) => /[#]/.test(c as string))
+    const accountColors = Object.values(getAccountColors()).filter((c) => /[#]/.test(c as string))
     const hex2rgb = (hex) => {
         hex = hex.length >= 7 ? hex : '#FFFFFF'
         return hex
@@ -61,7 +61,7 @@
         <Text type="h5">{title}</Text>
     </div>
     <ul class="flex flex-row flex-wrap gap-3.5">
-        {#each Object.keys(AccountColors).reduce((acc, val) => (/[#]/.test(val) ? acc : [...acc, val.toLowerCase()]), []) as color, i}
+        {#each Object.keys(getAccountColors()).reduce((acc, val) => (/[#]/.test(val) ? acc : [...acc, val.toLowerCase()]), []) as color, i}
             <li
                 tabindex="0"
                 class="w-12 h-12 rounded-lg ring-opacity-30 hover:ring-opacity-40 cursor-pointer flex justify-center items-center

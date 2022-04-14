@@ -1,6 +1,5 @@
 import { HistoryDataProps } from './market'
 import { AvailableExchangeRates } from './currency'
-import { AccountColors } from '../wallet'
 
 export interface Tooltip {
     title: string
@@ -12,7 +11,7 @@ export interface ChartData {
     label?: string
     labels?: string[]
     tooltips?: Tooltip[]
-    color?: string | AccountColors
+    color?: string
     steppedLine?: boolean
 }
 

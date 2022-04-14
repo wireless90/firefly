@@ -3,6 +3,7 @@ import { Payload } from 'shared/lib/typings/message'
 import { formatUnitBestMatch } from 'shared/lib/units'
 import { derived, get, writable } from 'svelte/store'
 import { mnemonic } from './app'
+import { appSettings } from './appSettings'
 import { convertToFiat, currencies, exchangeRates, formatCurrency } from './currency'
 import { deepCopy } from './helpers'
 import { localize } from '@core/i18n'
@@ -31,16 +32,30 @@ import { setProfileAccount } from 'shared/lib/profile'
 
 const configColors = resolveConfig(tailwindConfig).theme.colors
 
-export enum AccountColors {
+export const getAccountColors = (): Record<string, unknown> => get(appSettings).darkMode ? AccountColorsDark : AccountColorsLight
+
+export enum AccountColorsLight {
     Blue = configColors['blue']['500'],
-    LightBlue = configColors['lightblue']['500'],
+    LightBlue = configColors['lightblue']['800'],
     Purple = configColors['purple']['500'],
+    Turquoise = configColors['turquoise']['700'],
+    Green = configColors['green']['600'],
+    Yellow = configColors['yellow']['600'],
+    Orange = configColors['orange']['600'],
+    Red = configColors['red']['500'],
+    Pink = configColors['pink']['700'],
+}
+
+export enum AccountColorsDark {
+    Blue = configColors['blue']['500'],
+    LightBlue = configColors['lightblue']['700'],
+    Purple = configColors['purple']['400'],
     Turquoise = configColors['turquoise']['500'],
-    Green = configColors['green']['500'],
+    Green = configColors['green']['600'],
     Yellow = configColors['yellow']['500'],
     Orange = configColors['orange']['500'],
-    Red = configColors['red']['500'],
-    Pink = configColors['pink']['500'],
+    Red = configColors['red']['400'],
+    Pink = configColors['pink']['600'],
 }
 
 export const MAX_ACCOUNT_NAME_LENGTH = 20

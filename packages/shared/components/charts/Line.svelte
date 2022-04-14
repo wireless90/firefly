@@ -5,14 +5,14 @@
     import tailwindConfig from 'shared/tailwind.config.js'
     import { afterUpdate, onMount } from 'svelte'
     import resolveConfig from 'tailwindcss/resolveConfig'
-    import { AccountColors } from 'shared/lib/wallet'
+    import { getAccountColors } from 'shared/lib/wallet'
 
     export let labels = []
     export let datasets = []
     export let xMaxTicks = 7
     export let yMaxTicks = 6
     export let formatYAxis = (value: unknown): number => Number(value.toString())
-    export let color = AccountColors.Blue.toString()
+    export let color = getAccountColors().Blue.toString()
     export let beginAtZero = false
     export let inlineStyle = 'height: calc(50vh - 140px);'
 

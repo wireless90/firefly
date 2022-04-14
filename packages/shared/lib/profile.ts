@@ -8,7 +8,7 @@ import {
     destroyActor,
     getProfileDataPath,
     getWalletDataPath,
-    AccountColors,
+    getAccountColors,
     selectedAccountId,
 } from 'shared/lib/wallet'
 import { Platform } from './platform'
@@ -396,7 +396,7 @@ export const setProfileAccount = (activeProfile: Profile, profileAccount: Profil
     if (profileAccount.color) {
         updateProfile('accounts', getUpdatedAccounts(activeProfile, profileAccount.id, profileAccount))
     } else if (profileAccount.id) {
-        const accountColors = Object.values(AccountColors).filter((_, i) => !(i % 2))
+        const accountColors = Object.values(getAccountColors()).filter((_, i) => !(i % 2))
         const randomColor = accountColors[Math.floor(Math.random() * accountColors.length)].toString()
         updateProfile(
             'accounts',
@@ -412,7 +412,7 @@ export const setProfileAccount = (activeProfile: Profile, profileAccount: Profil
  *
  * @returns {string}
  */
-export const getColor = (activeProfile: Profile, accountId: string): string | AccountColors => {
+export const getColor = (activeProfile: Profile, accountId: string): string => {
     const { accounts } = activeProfile || {}
 
     if (accounts?.length) {
