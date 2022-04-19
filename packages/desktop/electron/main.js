@@ -154,7 +154,7 @@ const defaultWebPreferences = {
     disableBlinkFeatures: 'Auxclick',
     webviewTag: false,
     enableWebSQL: false,
-    devTools: !app.isPackaged,
+    devTools: true,
     additionalArguments: [`--send-crash-reports=${SEND_CRASH_REPORTS}`],
 }
 
