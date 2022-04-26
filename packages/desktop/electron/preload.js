@@ -1,5 +1,6 @@
 const { ipcRenderer, contextBridge } = require('electron')
 const ElectronApi = require('./electronApi')
+const WalletApi = require('firefly-actor-system-nodejs-bindings')
 
 const SEND_CRASH_REPORTS = window.process.argv.includes('--send-crash-reports=true')
 let captureException = (..._) => {}
@@ -38,17 +39,23 @@ window.addEventListener('unhandledrejection', (event) => {
 try {
     const WalletApi = require('firefly-actor-system-nodejs-bindings')
 
-    if (process.env.NODE_ENV == 'development') {
-        WalletApi.initLogger({
-            color_enabled: true,
-            outputs: [
-                {
-                    name: 'wallet.log',
-                    level_filter: 'debug',
-                },
-            ],
+    ElectronApi.getUserDataPath()
+        .then((userDataPath) => {
+            // if (process.env.NODE_ENV == 'development') {
+            WalletApi.initLogger({
+                color_enabled: true,
+                outputs: [
+                    {
+                        name: `${userDataPath}/wallet.log`,
+                        level_filter: 'debug',
+                    },
+                ],
+            })
+            // }
         })
-    }
+        .catch((err) => {
+            console.error('Unable to retrieve user data path during preload.')
+        })
 
     contextBridge.exposeInMainWorld('__WALLET__', WalletApi)
     contextBridge.exposeInMainWorld('__ELECTRON__', ElectronApi)
