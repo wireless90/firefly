@@ -40,6 +40,13 @@ export interface Account {
     addresses: Address[]
 }
 
+export type AccountMetadata = {
+    balance: number
+    incoming: number
+    outgoing: number
+    depositAddress?: string
+}
+
 export type AccountIdentifier = number | string
 
 export interface SignerType {

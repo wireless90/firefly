@@ -13,7 +13,7 @@ import { showAppNotification } from './notifications'
 import { Platform } from './platform'
 import { activeProfile, isLedgerProfile, updateProfile } from './profile'
 import { WALLET, WalletApi } from './shell/walletApi'
-import { Account, SignerType, SyncAccountOptions, SyncedAccount } from './typings/account'
+import { Account, AccountMetadata, SignerType, SyncAccountOptions, SyncedAccount } from './typings/account'
 import { Address } from './typings/address'
 import { IActorHandler } from './typings/bridge'
 import { CurrencyTypes } from './typings/currency'
@@ -974,15 +974,7 @@ export const getAccountBalanceHistory = (account: WalletAccount, priceData: Pric
 
 export const getAccountMeta = (
     accountId: string,
-    callback: (
-        error: ErrorEventPayload,
-        meta?: {
-            balance: number
-            incoming: number
-            outgoing: number
-            depositAddress: string
-        }
-    ) => void
+    callback: (error: ErrorEventPayload, metadata?: AccountMetadata) => void
 ): void => {
     api.getBalance(accountId, {
         onSuccess(balanceResponse) {
@@ -1006,17 +998,9 @@ export const getAccountMeta = (
     })
 }
 
-export const prepareAccountInfo = (
-    account: Account,
-    meta: {
-        balance: number
-        incoming: number
-        outgoing: number
-        depositAddress: string
-    }
-): WalletAccount => {
+export const prepareAccountInfo = (account: Account, metadata: AccountMetadata): WalletAccount => {
     const { id, index, alias, signerType } = account
-    const { balance, depositAddress } = meta
+    const { balance, depositAddress } = metadata
 
     const activeCurrency = get(activeProfile)?.settings.currency ?? CurrencyTypes.USD
 
