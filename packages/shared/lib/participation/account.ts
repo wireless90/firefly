@@ -112,8 +112,9 @@ export const currentAccountTreasuryVoteValue = derived(
 export const hasCurrentAccountReceivedFundsSinceLastTreasuryVote = derived(
     [selectedAccountParticipationOverview, selectedAccount],
     ([$selectedAccountParticipationOverview, $selectedAccount]) => {
-        const currentParticipation =
-            $selectedAccountParticipationOverview?.trackedParticipations?.[TREASURY_VOTE_EVENT_ID]?.slice(-1)?.[0]
+        const currentParticipation = $selectedAccountParticipationOverview?.trackedParticipations?.[
+            TREASURY_VOTE_EVENT_ID
+        ]?.reduce((max, current) => (max.startMilestoneIndex > current.startMilestoneIndex ? max : current))
         const { amount } = currentParticipation ?? {}
         return $selectedAccount && amount !== $selectedAccount.rawIotaBalance
     }
@@ -126,8 +127,9 @@ export const hasCurrentAccountReceivedFundsSinceLastTreasuryVote = derived(
 export const currentAccountTreasuryVotePartiallyUnvotedAmount = derived(
     [selectedAccountParticipationOverview, selectedAccount],
     ([$selectedAccountParticipationOverview, $selectedAccount]) => {
-        const currentParticipation =
-            $selectedAccountParticipationOverview?.trackedParticipations?.[TREASURY_VOTE_EVENT_ID]?.slice(-1)?.[0]
+        const currentParticipation = $selectedAccountParticipationOverview?.trackedParticipations?.[
+            TREASURY_VOTE_EVENT_ID
+        ]?.reduce((max, current) => (max.startMilestoneIndex > current.startMilestoneIndex ? max : current))
         const { amount } = currentParticipation ?? {}
         const accountBalance = $selectedAccount?.rawIotaBalance ?? 0
         return amount < accountBalance ? accountBalance - amount : 0
