@@ -154,7 +154,7 @@ const defaultWebPreferences = {
     disableBlinkFeatures: 'Auxclick',
     webviewTag: false,
     enableWebSQL: false,
-    devTools: !app.isPackaged,
+    devTools: app.isPackaged,
     additionalArguments: [`--send-crash-reports=${SEND_CRASH_REPORTS}`],
 }
 
@@ -269,7 +269,7 @@ function createWindow() {
 
     mainWindowState.track(windows.main)
 
-    if (!app.isPackaged) {
+    if (app.isPackaged) {
         // Enable dev tools only in developer mode
         windows.main.webContents.openDevTools()
 
