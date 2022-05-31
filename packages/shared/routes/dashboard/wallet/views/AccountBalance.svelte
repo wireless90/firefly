@@ -28,7 +28,7 @@
 
 <div
     class="bg-gradient-to-t from-gray-100 via-white to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-800 relative p-6 {$mobile
-        ? 'pb-0 bg-transparent'
+        ? 'pb-0 pt-20 bg-transparent'
         : 'pb-12'} {classes}"
 >
     <!-- Balance -->
@@ -38,22 +38,30 @@
                 {localize('general.balance')}
             </Text>
         {/if}
-        <div class="flex flex-col flex-wrap items-start mt-6">
+        <div class="flex flex-col flex-wrap {$mobile ? 'items-center' : 'items-start mt-6'}">
             <div on:click={togglePreciseBalance}>
-                <h1 class="font-600 text-32 leading-120 text-gray-800 dark:text-white break-all">
+                <Text
+                    class="font-600 text-32 leading-120 text-gray-800 dark:text-white break-all"
+                    type={$mobile ? 'h1' : 'h2'}
+                >
                     {showPreciseBalance
                         ? formatUnitPrecision($selectedAccountStore?.rawIotaBalance, Unit.Mi)
                         : formatUnitBestMatch($selectedAccountStore?.rawIotaBalance, true, 3)}
-                </h1>
+                </Text>
             </div>
-            <Text type="p">
+            <Text
+                type={$mobile ? 'h4' : 'p'}
+                smaller={$mobile}
+                overrideColor={$mobile}
+                classes={$mobile && 'text-gray-500'}
+            >
                 {$selectedAccountStore?.balanceEquiv}
             </Text>
         </div>
     </div>
     {#if $accountRoute === AccountRoute.Init || $mobile}
         <!-- Action Send / Receive -->
-        <div class="flex flex-row justify-between space-x-4 mt-6">
+        <div class="flex flex-row justify-between space-x-4 mt-6 {$mobile && 'mb-10'}">
             <button
                 class="action p-3 w-full text-center rounded-lg font-semibold text-14 bg-blue-500 text-white"
                 on:click={handleReceiveClick}
@@ -70,7 +78,9 @@
     {/if}
     <button
         on:click={() => onMenuClick()}
-        class="px-2 py-3 flex flex-row space-x-1 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white dark:bg-opacity-50 rounded-lg absolute top-6 right-6"
+        class="{$mobile
+            ? 'menu-mobile'
+            : 'bg-opacity-10 bg-gray-50 dark:bg-gray-900 dark:bg-opacity-50 rounded-lg'} px-2 py-3 flex flex-row space-x-1 text-gray-900 dark:text-white absolute top-6 right-6"
     >
         {#each Array(3) as _}
             <svg width="4" height="4" viewBox="0 0 4 4">
@@ -79,3 +89,11 @@
         {/each}
     </button>
 </div>
+
+<style type="text/scss">
+    .menu-mobile {
+        position: absolute;
+        margin-top: -8px;
+        right: 25px;
+    }
+</style>

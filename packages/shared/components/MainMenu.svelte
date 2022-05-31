@@ -1,16 +1,16 @@
 <script lang="typescript">
+    import { Locale } from '@core/i18n'
+    import { settingsRoute, SettingsRoute, settingsRouter } from '@core/router'
     import { Drawer, Icon, Text } from 'shared/components'
     import { logout } from 'shared/lib/app'
-    import { isBright, getInitials } from 'shared/lib/helpers'
-    import { activeProfile, getColor } from 'shared/lib/profile'
-    import { selectedAccount } from 'shared/lib/wallet'
+    import { getInitials, isBright } from 'shared/lib/helpers'
+    import { activeProfile, getAccountColor } from 'shared/lib/profile'
+    import { selectedAccountStore } from 'shared/lib/wallet'
     import { Settings } from 'shared/routes'
-    import { settingsRoute, settingsRouter, SettingsRoute } from '@core/router'
-    import { Locale } from '@core/i18n'
 
     export let locale: Locale
 
-    $: color = getColor($activeProfile, $selectedAccount?.id) as string
+    $: color = getAccountColor($selectedAccountStore?.id) as string
     $: textColor = isBright(color) ? 'gray-800' : 'white'
 
     let drawer: Drawer
@@ -32,11 +32,11 @@
 </script>
 
 <button
-    class="menu-button fixed top-5 left-6 z-10 w-11 h-11 flex items-center justify-center rounded-full leading-100"
-    style="background-color: {color};"
+    class="menu-button fixed left-6 z-10 w-11 h-11 flex items-center justify-center rounded-full leading-100"
+    style="--background-color: {color};"
     on:click={handleClick}
 >
-    <Text type="h4" overrideColor classes="z-10 uppercase text-{textColor}">{profileInitial || 'A'}</Text>
+    <Text type="h4" overrideColor classes="z-10 uppercase">{profileInitial || 'A'}</Text>
     <div class="w-11 h-11 flex rounded-full bg-white leading-100 opacity-20 absolute" />
 </button>
 <Drawer bind:this={drawer} fromRight dimLength={0} fullScreen classes="flex">
@@ -81,7 +81,8 @@
         border-top: solid transparent calc(env(safe-area-inset-top) / 1.5);
     }
     .menu-button {
-        padding-top: env(safe-area-inset-top);
+        background-color: var(--background-color);
+        margin-top: calc(env(safe-area-inset-top) + 10px);
     }
     .profile-block {
         grid-template-columns: auto 1fr;
