@@ -1,4 +1,4 @@
-# https://github.com/Jems22/fastlane-plugin-increment_version_code/blob/master/lib/fastlane/plugin/increment_version_code/actions/increment_version_code_action.rb
+# Based on https://github.com/Jems22/fastlane-plugin-increment_version_code/blob/master/lib/fastlane/plugin/increment_version_code/actions/increment_version_code_action.rb
 # Modified for versionName
 
 require 'tempfile'
@@ -8,7 +8,6 @@ module Fastlane
   module Actions
     class IncrementVersionNameAction < Action
       def self.run(params)
-        version_name = '0'
         new_version_name ||= params[:version_name]
 
         constant_name ||= params[:ext_constant_name]
@@ -16,16 +15,14 @@ module Fastlane
         gradle_file_path ||= params[:gradle_file_path]
         if !gradle_file_path.nil?
           UI.message("The increment_version_name plugin will use gradle file at (#{gradle_file_path})!")
-          new_version_name = incrementVersion(gradle_file_path, new_version_name, constant_name)
+          new_version_name = increment_version(gradle_file_path, new_version_name, constant_name)
         else
           app_folder_name ||= params[:app_folder_name]
           UI.message("The get_version_name plugin is looking inside your project folder (#{app_folder_name})!")
 
-          # temp_file = Tempfile.new('fastlaneIncrementVersionname')
-          # foundVersionName = "false"
           Dir.glob("**/#{app_folder_name}/build.gradle") do |path|
             UI.message(" -> Found a build.gradle file at path: (#{path})!")
-            new_version_name = incrementVersion(path, new_version_name, constant_name)
+            new_version_name = increment_version(path, new_version_name, constant_name)
           end
 
         end
@@ -41,26 +38,24 @@ module Fastlane
         new_version_name
       end
 
-      def self.incrementVersion(path, new_version_name, constant_name)
+      def self.increment_version(path, new_version_name, constant_name)
         unless File.file?(path)
-          UI.message(" -> No file exist at path: (#{path})!")
+          UI.message(" -> No file exists at path: (#{path})!")
           return -1
         end
         begin
-          foundVersionName = 'false'
+          found_version_name = 'false'
           temp_file = Tempfile.new('fastlaneIncrementVersionName')
           File.open(path, 'r') do |file|
             file.each_line do |line|
-              if line.include? constant_name and foundVersionName == 'false'
+              if line.include?(constant_name) && found_version_name == 'false'
                 UI.message(" -> line: (#{line})!")
-                versionComponents = line.strip.split(' "')
-                version_name = versionComponents[versionComponents.length - 1].tr('"', '')
+                version_components = line.strip.split(' "')
+                version_name = version_components[version_components.length - 1].tr('"', '')
                 line.replace line.sub(version_name, new_version_name)
-                foundVersionName = 'true'
-                temp_file.puts line
-              else
-                temp_file.puts line
+                found_version_name = 'true'
               end
+              temp_file.puts line
             end
             file.close
           end
@@ -69,7 +64,7 @@ module Fastlane
           FileUtils.mv(temp_file.path, path)
           temp_file.unlink
         end
-        return new_version_name if foundVersionName == 'true'
+        return new_version_name if found_version_name == 'true'
 
         -1
       end
