@@ -1,4 +1,4 @@
-# https://github.com/MaximusMcCann/fastlane-plugin-android_change_app_name/blob/master/lib/fastlane/plugin/android_change_app_name/actions/android_change_app_name_action.rb
+# Based on https://github.com/MaximusMcCann/fastlane-plugin-android_change_app_name/blob/master/lib/fastlane/plugin/android_change_app_name/actions/android_change_app_name_action.rb
 # Modified to update metadata in AndroidManifest.xml
 
 module Fastlane
@@ -11,30 +11,26 @@ module Fastlane
         value = params[:value]
         manifest = params[:manifest]
 
-
-        doc = File.open(manifest) { |f|
+        doc = File.open(manifest) do |f|
           @doc = Nokogiri::XML(f)
 
-          @doc.css("meta-data").each do |node|
+          @doc.css('meta-data').each do |node|
             if node.values.include? attribute
-              node["android:value"] = value
+              node['android:value'] = value
               UI.message("Updated #{attribute}")
-            else
-              # UI.message("Attribute #{attribute} does not exist in this node")
             end
           end
 
           File.write(manifest, @doc.to_xml)
-        }
-
+        end
       end
 
       def self.description
-        "Changes a manifest attribute"
+        'Changes a manifest attribute'
       end
 
       def self.authors
-        ["rajivshah3"]
+        ['rajivshah3']
       end
 
       def self.return_value
@@ -42,29 +38,30 @@ module Fastlane
       end
 
       def self.details
-        "Changes a manifest attribute"
+        'Changes a manifest attribute'
       end
 
       def self.available_options
         [
           FastlaneCore::ConfigItem.new(key: :attribute,
-                                  env_name: "",
-                                  description: "The attribute to change the value for",
-                                  optional: false,
-                                  type: String),
+                                       env_name: '',
+                                       description: 'The attribute to change the value for',
+                                       optional: false,
+                                       type: String),
           FastlaneCore::ConfigItem.new(key: :value,
-                                  env_name: "",
-                               description: "The new value for the attribute",
-                                  optional: false,
-                                      type: String),
+                                       env_name: '',
+                                       description: 'The new value for the attribute',
+                                       optional: false,
+                                       type: String),
           FastlaneCore::ConfigItem.new(key: :manifest,
-                                  env_name: "",
-                               description: "Optional custom location for AndroidManifest.xml",
-                                  optional: false,
-                                      type: String,
-                             default_value: "app/src/main/AndroidManifest.xml")
+                                       env_name: '',
+                                       description: 'Optional custom location for AndroidManifest.xml',
+                                       optional: false,
+                                       type: String,
+                                       default_value: 'app/src/main/AndroidManifest.xml')
         ]
       end
+
       def self.is_supported?(platform)
         platform == :android
       end
