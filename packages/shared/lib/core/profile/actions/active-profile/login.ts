@@ -1,4 +1,4 @@
-import { isStrongholdUnlocked } from '@core/profile-manager'
+import { isStrongholdUnlocked, startBackgroundSync } from '@core/profile-manager'
 import { get } from 'svelte/store'
 import { INITIAL_ACCOUNT_GAP_LIMIT, INITIAL_ADDRESS_GAP_LIMIT } from '../../constants'
 import { activeProfile } from '../../stores'
@@ -17,5 +17,6 @@ export async function login(firstTime: boolean = false): Promise<void> {
         lastActiveAt.set(new Date())
         const response = await isStrongholdUnlocked()
         isStrongholdLocked.set(!response)
+        await startBackgroundSync()
     }
 }
