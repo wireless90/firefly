@@ -23,9 +23,9 @@
 </script>
 
 <div
-    class="relative h-full w-full px-6 pb-10 md:px-16 md:py-12 md:bg-white md:dark:bg-gray-900 flex flex-1 {$settingsRoute !==
-        SettingsRoute.Init && 'md:pt-20'} {$mobile && 'overflow-y-auto'} "
-    in:fly={{ duration: $mobile ? 200 : 0, x: 200 }}
+    class="relative h-full w-full pb-10 md:px-16 md:py-12 md:bg-white md:dark:bg-gray-900 flex flex-1 {$settingsRoute !==
+        SettingsRoute.Init && 'md:pt-20'} {$mobile ? 'overflow-y-auto px-2' : 'px-6'} "
+    in:fly={{ duration: $mobile ? 200 : 0, x: -200 }}
 >
     {#if !$mobile}
         <button on:click={handleClose || closeSettings} class="absolute top-8 right-8">

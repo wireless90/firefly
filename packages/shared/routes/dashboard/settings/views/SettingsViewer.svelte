@@ -75,7 +75,7 @@
 </script>
 
 {#key $_}
-    <div class="flex flex-1 flex-row items-start" in:fly={{ duration: $mobile ? 200 : 0, x: 200 }}>
+    <div class="flex flex-1 flex-row items-start" in:fly={{ duration: $mobile ? 200 : 0, x: -200 }}>
         {#if !$mobile}
             <SettingsNavigator
                 {routes}

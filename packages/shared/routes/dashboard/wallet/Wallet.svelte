@@ -12,6 +12,7 @@
         DeleteAccount,
         ExportTransactionHistory,
         HideAccount,
+        NetworkIndicator,
     } from 'shared/components/drawerContent'
     import { clearSendParams, loggedIn, mobile, sendParams } from 'shared/lib/app'
     import { deepCopy } from 'shared/lib/helpers'
@@ -420,7 +421,7 @@
             <div class="flex flex-auto flex-col">
                 <!-- Total Balance, Accounts list & Send/Receive -->
                 <div class="flex">
-                    <AccountBalance classes="w-full" onMenuClick={handleMenuClick} />
+                    <AccountBalance classes="w-full" />
                     <Drawer
                         opened={$accountRoute !== AccountRoute.Init}
                         bind:this={drawer}
@@ -431,7 +432,7 @@
                         {:else if $accountRoute === AccountRoute.Receive}
                             <Receive {isGeneratingAddress} {onGenerateAddress} />
                         {:else if $accountRoute === AccountRoute.Actions}
-                            <AccountActions />
+                            <AccountActions onMenuClick={handleMenuClick} />
                         {:else if $accountRoute === AccountRoute.Manage}
                             <ManageAccount account={$selectedAccount} />
                         {:else if $accountRoute === AccountRoute.AddressHistory}
@@ -453,7 +454,7 @@
                             </div>
                         {:else if $walletRoute === WalletRoute.AccountHistory}
                             <div class="h-full" in:fade={{ duration: 200 }} out:fade={{ duration: 200 }}>
-                                <AccountHistory classes="pb-0" transactions={getAccountMessages($selectedAccount)} />
+                                <AccountHistory transactions={getAccountMessages($selectedAccount)} />
                             </div>
                         {/if}
                     </DashboardPane>

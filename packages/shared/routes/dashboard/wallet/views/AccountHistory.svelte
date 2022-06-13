@@ -168,7 +168,7 @@
 </script>
 
 {#if $mobile}
-    <div class="flex flex-row justify-items-start px-9 pt-6 -mb-6">
+    <div class="flex flex-row justify-items-start px-6 pt-6 -mb-8">
         <Text type="h5">
             {localize('general.transactions')}
             <span class="text-gray-500 font-bold align-text-top">• {queryTransactions.length}</span>
@@ -177,7 +177,7 @@
             <button on:click={handleSyncAccountClick} class:pointer-events-none={$isSyncing}>
                 <Icon
                     icon="refresh"
-                    classes="{$isSyncing && 'animate-spin-reverse'} text-gray-500 dark:text-white -mt-1 ml-3"
+                    classes="{$isSyncing && 'animate-spin-reverse'} text-gray-500 dark:text-white -mt-0.5 ml-3"
                 />
             </button>
         {/if}

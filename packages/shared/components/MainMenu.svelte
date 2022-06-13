@@ -1,5 +1,5 @@
 <script lang="typescript">
-	import { Drawer, Icon, Text, ProfileActions } from 'shared/components'
+	import { Drawer, Icon, NetworkIndicator, Text, ProfileActions } from 'shared/components'
     import { getInitials } from 'shared/lib/helpers'
     import { activeProfile, getColor } from 'shared/lib/profile'
     import { selectedAccount } from 'shared/lib/wallet'
@@ -17,6 +17,7 @@
     $: profileColor = getColor($activeProfile, $selectedAccount?.id) as string
 
     let drawer: Drawer
+    let showNetworkIndicator = false
 
     $: profileInitial = getInitials($activeProfile?.name, 1)
 
@@ -37,6 +38,10 @@
 
     function handleSettingsClick() {
         $profileRouter.goTo(ProfileRoute.Settings)
+    }
+
+    function handleNetworkStatusClick() {
+        showNetworkIndicator = !showNetworkIndicator
     }
 </script>
 
@@ -68,12 +73,14 @@
         {#if $profileRoute === ProfileRoute.ProfileActions}
             <ProfileActions 
                 {profileColor} {profileInitial} 
-                {handleSettingsClick} />
+                {handleSettingsClick} {handleNetworkStatusClick} />
         {:else if $profileRoute === ProfileRoute.Settings}
             <Settings />
         {/if}
-        
     </div>
+</Drawer>
+<Drawer opened={showNetworkIndicator}>
+    <NetworkIndicator />
 </Drawer>
 
 <style>
