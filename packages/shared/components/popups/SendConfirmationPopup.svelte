@@ -9,6 +9,7 @@
     import { Recipient, trySend, ActivityType, InclusionState } from '@core/wallet'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from '@lib/currency'
     import { CurrencyTypes } from '@lib/typings/currency'
+    import { showAppNotification } from '@lib/notifications'
 
     export let internal = false
     export let recipient: Recipient
@@ -20,18 +21,25 @@
     $: internal = recipient.type === 'account'
 
     function onConfirm(): void {
-        closePopup()
-
         if ($isSoftwareProfile) {
             void send()
         } else if ($isLedgerProfile) {
+            closePopup()
             promptUserToConnectLedger(false, () => send(), undefined)
         }
     }
 
     function send(): Promise<void> {
         const recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
-        return trySend(recipientAddress, rawAmount)
+        if (expireDate > new Date()) {
+            closePopup()
+            return trySend(recipientAddress, rawAmount)
+        } else {
+            showAppNotification({
+                type: 'error',
+                message: localize('error.invalidTime'),
+            })
+        }
     }
 
     function onCancel(): void {
