@@ -30,13 +30,12 @@
         StakingAirdrop,
     } from 'shared/lib/participation/types'
     import { openPopup, popupState } from 'shared/lib/popup'
-    import { checkStronghold } from 'shared/lib/stronghold'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
     import { doesNodeHavePlugin, networkStatus, NodePlugin } from '@core/network'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { transferState } from 'shared/lib/wallet'
     import { localize } from '@core/i18n'
-    import { activeProfile, isSoftwareProfile } from '@core/profile'
+    import { activeProfile, checkStronghold, isSoftwareProfile } from '@core/profile'
     import { selectedAccount, IAccountState } from '@core/account'
 
     export let shouldParticipateOnMount = false

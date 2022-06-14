@@ -2,8 +2,8 @@ import { localize } from '@core/i18n'
 import { isLedgerProfile } from '@core/profile'
 import { isStrongholdUnlocked } from '@core/profile-manager'
 import { get } from 'svelte/store'
-import { showAppNotification } from './notifications'
-import { openPopup } from './popup'
+import { showAppNotification } from '@lib/notifications'
+import { openPopup } from '@lib/popup'
 
 export async function checkStronghold(callback: () => unknown): Promise<void> {
     if (get(isLedgerProfile)) {

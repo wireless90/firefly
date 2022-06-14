@@ -1,3 +1,4 @@
+export * from './checkStronghold'
 export * from './login'
 export * from './loadAccounts'
 export * from './loadPersistedProfileIntoActiveProfile'

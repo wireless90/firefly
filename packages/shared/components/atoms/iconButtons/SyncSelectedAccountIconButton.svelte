@@ -1,7 +1,6 @@
 <script lang="typescript">
     import { selectedAccount, syncSelectedAccount } from '@core/account'
-    import { isSoftwareProfile } from '@core/profile'
-    import { checkStronghold } from '@lib/stronghold'
+    import { checkStronghold, isSoftwareProfile } from '@core/profile'
     import { Icon } from 'shared/components'
 
     function handleSyncAccountClick() {
