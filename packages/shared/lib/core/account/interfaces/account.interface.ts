@@ -57,5 +57,6 @@ export interface IAccount {
     ): Promise<TransactionResult>
     sendNft(addressesAndNftIds: AddressNftId[], transferOptions?: TransactionOptions): Promise<TransactionResult>
     sendTransfer(outputs: OutputData[], transferOptions?: TransactionOptions): Promise<TransactionResult>
+    setAlias(alias: string): Promise<void>
     tryCollectOutputs(outputsToCollect: OutputsToCollect): Promise<TransactionResult>
 }
