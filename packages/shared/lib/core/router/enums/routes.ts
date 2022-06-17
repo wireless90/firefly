@@ -67,6 +67,7 @@ export enum GeneralSettings {
     Notifications = 'notifications',
     NetworkStatus = 'networkStatus',
     ChangeProfileName = 'changeProfileName',
+    ExplorerUrl = 'explorerUrl',
 }
 
 export enum GeneralSettingsNoProfile {

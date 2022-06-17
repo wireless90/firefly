@@ -8,4 +8,5 @@ export interface IProfileSettings {
     lockScreenTimeoutInMinutes: number
     chartSelectors: ChartSelectors
     hideNetworkStatistics: boolean
+    explorerUrl?: string
 }

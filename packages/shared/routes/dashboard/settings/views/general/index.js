@@ -1,3 +1,5 @@
+export { default as ChangeProfileName } from './ChangeProfileName.svelte'
+export { default as ExplorerUrlSetting } from './ExplorerUrlSetting.svelte'
 export { default as Currency } from './Currency.svelte'
 export { default as Language } from './Language.svelte'
 export { default as NetworkStatus } from './NetworkStatus.svelte'

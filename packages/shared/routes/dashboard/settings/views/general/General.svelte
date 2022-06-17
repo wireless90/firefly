@@ -1,8 +1,7 @@
 <script lang="typescript">
     import { HR } from 'shared/components'
     import { GeneralSettings } from '@core/router'
-    import { Currency, Language, NetworkStatus, Notifications, Theme } from './'
-    import ChangeProfileName from './ChangeProfileName.svelte'
+    import { Currency, Language, NetworkStatus, Notifications, Theme, ExplorerUrlSetting, ChangeProfileName } from './'
     import { activeProfile } from '@core/profile'
     import features from 'shared/features/features'
 
@@ -17,6 +16,7 @@
         { component: Notifications, childRoute: GeneralSettings.Notifications },
         { component: NetworkStatus, childRoute: GeneralSettings.NetworkStatus, requireLogin: true },
         { component: ChangeProfileName, childRoute: GeneralSettings.ChangeProfileName, requireLogin: true },
+        { component: ExplorerUrlSetting, childRoute: GeneralSettings.ExplorerUrl, requireLogin: true },
     ]
     const visibleSettings = settings.filter((setting) => features?.settings?.general?.[setting.childRoute]?.enabled)
 

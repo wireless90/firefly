@@ -27,4 +27,5 @@ export enum SettingsIcons {
     faq = 'speech',
     discord = 'discord',
     reportAnIssue = 'help',
+    explorerUrl = 'export',
 }

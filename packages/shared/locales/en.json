@@ -523,6 +523,12 @@
             "reportAnIssue": {
                 "title": "Report an issue",
                 "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported"
+            },
+            "explorerUrl": {
+                "title": "Explorer url",
+                "description": "Change the url used for the explorer links",
+                "button": "Change explorer",
+                "success": "Explorer url updated"
             }
         },
         "login": {

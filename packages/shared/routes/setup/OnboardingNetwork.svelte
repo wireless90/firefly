@@ -6,8 +6,8 @@
     import { appRouter } from '@core/router'
     import { Button, OnboardingLayout, Text } from 'shared/components'
     import { TextType } from 'shared/components/Text.svelte'
-    import features from 'shared/features/features'
     import { cleanupOnboarding } from '@contexts/onboarding'
+    import features from 'shared/features/features'
 
     const networkIcon = {
         [NetworkType.Mainnet]: $newProfile?.networkProtocol,
