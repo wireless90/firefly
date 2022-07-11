@@ -16,7 +16,7 @@ export const NETWORK_HEALTH_COLORS = {
 /**
  * Default interval for polling the network status
  */
-const DEFAULT_NETWORK_STATUS_POLL_INTERVAL = 10 * MILLISECONDS_PER_SECOND
+const DEFAULT_NETWORK_STATUS_POLL_INTERVAL = 100 * MILLISECONDS_PER_SECOND
 
 export const networkStatus = writable<NetworkStatus>({
     messagesPerSecond: 0,
