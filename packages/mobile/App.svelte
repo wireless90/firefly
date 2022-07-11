@@ -52,16 +52,14 @@
     async function hideSplashScreen() {
         await tick()
         nativeSplash.hide()
+        setTimeout(() => {
+            showSplash = false
+        }, 1000)
     }
 
     void setupI18n({ fallbackLocale: 'en', initialLocale: $appSettings.language })
 
     onMount(async () => {
-        // Display splash screen at least for 3 seconds
-        setTimeout(() => {
-            showSplash = false
-        }, 3000)
-
         initRouters()
         await pollMarketData()
         await pollNetworkStatus()
