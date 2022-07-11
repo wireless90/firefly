@@ -27,6 +27,7 @@ import { showAppNotification } from './notifications'
 import { LedgerMigrationProgress } from 'shared/lib/typings/migration'
 import { SetupType } from 'shared/lib/typings/setup'
 import { getJsonRequestOptions } from '@lib/utils'
+import { mobile } from './app'
 
 const LEGACY_ADDRESS_WITHOUT_CHECKSUM_LENGTH = 81
 
@@ -1166,7 +1167,10 @@ export const confirmedBundles = derived(get(migration).bundles, (_bundles) =>
 const CHRYSALIS_VARIABLES_ENDPOINT =
     'https://raw.githubusercontent.com/iotaledger/firefly/develop/packages/shared/lib/chrysalis.json'
 const DEFAULT_CHRYSALIS_VARIABLES_ENDPOINT_TIMEOUT = 5000
-const DEFAULT_CHRYSALIS_VARIABLES_POLL_INTERVAL = 60000 // 1 minute
+// since on mobile we don't use polling, the intention is
+// to reduce the interval to gain perf,
+// due Capacitor send too many messages
+const DEFAULT_CHRYSALIS_VARIABLES_POLL_INTERVAL = 260000 // 1 minute
 
 type ChrysalisVariables = {
     snapshot: boolean
