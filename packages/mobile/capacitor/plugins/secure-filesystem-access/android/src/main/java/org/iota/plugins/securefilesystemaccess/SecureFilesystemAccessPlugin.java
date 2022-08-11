@@ -17,6 +17,7 @@ import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
+import com.getcapacitor.JSArray;
 import com.getcapacitor.JSObject;
 import com.getcapacitor.PermissionState;
 import com.getcapacitor.Plugin;
@@ -35,6 +36,9 @@ import java.nio.channels.FileChannel;
 import java.util.Objects;
 
 import static android.os.Environment.DIRECTORY_DOWNLOADS;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 @CapacitorPlugin(
         name = "SecureFilesystemAccess",
@@ -355,21 +359,22 @@ public class SecureFilesystemAccessPlugin extends Plugin {
     }
 
     @PluginMethod
-    public void listProfileFolders(PluginCall call) {
+    public void listProfileFolders(PluginCall call) throws JSONException {
         if (!call.getData().has("folder")) {
             call.reject("folder is required");
             return;
         }
         String folder = call.getString("folder");
         String[] files = null;
-        File fileObject = new File(getContext().getFilesDir(), "__storage__" + File.separator + folder);
+        assert folder != null;
+        File fileObject = new File(getContext().getFilesDir(), "__storage__");
         if (fileObject.exists()) {
             files = fileObject.list();
         } else {
             call.reject("Folder does not exist");
         }
         JSObject response = new JSObject();
-        response.put("folderList", files);
+        response.put("files", new JSONArray(files));
         call.resolve(response);
     }
 
