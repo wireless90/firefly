@@ -537,14 +537,14 @@
   dependencies:
     big-integer "^1.6.51"
 
-"@iota/wallet@2.0.2-alpha.20":
-  version "2.0.2-alpha.20"
-  resolved "https://registry.yarnpkg.com/@iota/wallet/-/wallet-2.0.2-alpha.20.tgz#09394fd6d2379689c5906a2340356ccab55c4e5d"
-  integrity sha512-7sD0PVArSUrUIOpIiluhINGvqjTxx1BIDYEtG1RD1B/7zS/W1XgfiroR6Ss/ixnfkylxlKmwM6ei/5EDWFz8Qg==
+"@iota/wallet@2.0.2-alpha.21":
+  version "2.0.2-alpha.21"
+  resolved "https://registry.yarnpkg.com/@iota/wallet/-/wallet-2.0.2-alpha.21.tgz#47c4de330e57e4f998a6fecd1117cd822ef3eb33"
+  integrity sha512-/LFhdLS849Ci+ZQ22rFHjS4NABuvbN5pb6PxapcEc3xGiyWdHCT5+F8aFzzy8HBy0Xj9kqvqa4CqB5J+8R0qTA==
   dependencies:
     "@iota/types" "^1.0.0-beta.11"
     cargo-cp-artifact "^0.1.5"
-    prebuild-install "^5.3.3"
+    prebuild-install "^7.1.1"
     typescript "^4.7.4"
 
 "@istanbuljs/load-nyc-config@^1.0.0":
@@ -7325,7 +7325,7 @@ prebuild-install@^6.0.0:
     tunnel-agent "^0.6.0"
     which-pm-runs "^1.0.0"
 
-prebuild-install@^7.0.1:
+prebuild-install@^7.0.1, prebuild-install@^7.1.1:
   version "7.1.1"
   resolved "https://registry.yarnpkg.com/prebuild-install/-/prebuild-install-7.1.1.tgz#de97d5b34a70a0c81334fd24641f2a1702352e45"
   integrity sha512-jAXscXWMcCK8GgCoHOfIr0ODh5ai8mj63L2nWrjuAgXE6tDyYGnx4/8o/rCgU+B4JSyZBKbeZqzhtwtC3ovxjw==
