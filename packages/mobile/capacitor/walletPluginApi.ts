@@ -111,9 +111,9 @@ export function init(
     //     event: 'ErrorThrown',
     // })
     return {
-        destroy() {
-            void WalletPlugin.destroy({ actorId: id })
-            void walletListener.remove()
+        async destroy() {
+            await walletListener.remove()
+            await WalletPlugin.destroy({ actorId: id })
         },
         removeEventListeners() {
             // we cant remove listener because we are working with plugin listener, not with polls
