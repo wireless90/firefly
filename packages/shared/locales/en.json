@@ -1308,7 +1308,8 @@
         "participating": "Please wait until all staking/voting transactions are completed to change wallets.",
         "claimed": {
             "success": "Transaction claimed",
-            "error": "Claiming transaction failed"
+            "error": "Claiming transaction failed",
+            "claimSpendOutputs": "Cannot claim already spent outputs"
         },
         "hideActivity": {
             "success": "Successfully hidden activity",

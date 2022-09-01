@@ -1,5 +1,5 @@
 import { selectedAccount } from '@core/account/stores/selected-account.store'
-import { BaseError } from '@core/error'
+import { handleError } from '@core/error/handlers/handleError'
 import { localize } from '@core/i18n'
 import { checkStronghold } from '@lib/stronghold'
 import { get } from 'svelte/store'
@@ -19,15 +19,11 @@ export async function claimActivity(activityId: string, data: ITransactionActivi
                 type: ActivityType.Transaction,
                 claimingTransactionId: transactionId,
             })
+        } else {
+            throw Error(localize('notifications.claimed.claimSpendOutputs'))
         }
     } catch (err) {
-        if (!err.message) {
-            new BaseError({
-                message: localize('notifications.claimed.error'),
-                logToConsole: true,
-                showNotification: true,
-            })
-        }
+        handleError(err)
         updateActivityDataByActivityId(account.id, activityId, { type: ActivityType.Transaction, isClaiming: false })
     }
 }

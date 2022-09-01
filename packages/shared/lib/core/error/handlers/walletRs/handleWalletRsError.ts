@@ -1,6 +1,6 @@
 import { IError } from '../../interfaces'
 import { WalletRsError } from '../../enums'
-import { handleClientError } from './subhandlers'
+import { handleClientError, handleInsufficientFundsError } from './subhandlers'
 import { handleGenericError } from '../handleGenericError'
 
 export function handleWalletRsError(error: IError): void {
@@ -8,6 +8,9 @@ export function handleWalletRsError(error: IError): void {
         switch (error?.type) {
             case WalletRsError.ClientError:
                 handleClientError(error)
+                break
+            case WalletRsError.InsufficientFunds:
+                handleInsufficientFundsError()
                 break
             default:
                 handleGenericError(error)
