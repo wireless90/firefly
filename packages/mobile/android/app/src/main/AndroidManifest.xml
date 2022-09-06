@@ -8,11 +8,9 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <!-- android:maxSdkVersion="28" />-->
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
             tools:ignore="ScopedStorage" />
-    <!-- android:maxSdkVersion="28" -->
 
     <uses-sdk tools:overrideLibrary="com.google.zxing.client.android" />
 
@@ -36,7 +34,6 @@
             android:windowSoftInputMode="adjustPan"
             tools:ignore="LockedOrientationActivity"
             android:exported="true">
-            <!-- android:requestLegacyExternalStorage="true">-->
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

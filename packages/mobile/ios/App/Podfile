@@ -1,5 +1,7 @@
+require_relative '../../node_modules/@capacitor/ios/scripts/pods_helpers'
 
-platform :ios, '12.1'
+
+platform :ios, '13.0'
 use_frameworks!
 
 # workaround to avoid Xcode caching of Pods that requires
@@ -13,14 +15,15 @@ def capacitor_pods
   pod 'CapacitorCommunityBarcodeScanner', :path => '../../../../node_modules/@capacitor-community/barcode-scanner'
   pod 'CapacitorCommunityPrivacyScreen', :path => '../../../../node_modules/@capacitor-community/privacy-screen'
   pod 'CapacitorActionSheet', :path => '../../../../node_modules/@capacitor/action-sheet'
-  pod 'CapacitorKeyboard', :path => '../../../../node_modules/@capacitor/keyboard'
   pod 'CapacitorApp', :path => '../../../../node_modules/@capacitor/app'
+  pod 'CapacitorDevice', :path => '../../../../node_modules/@capacitor/device'
+  pod 'CapacitorKeyboard', :path => '../../../../node_modules/@capacitor/keyboard'
   pod 'CapacitorShare', :path => '../../../../node_modules/@capacitor/share'
   pod 'CapacitorSplashScreen', :path => '../../../../node_modules/@capacitor/splash-screen'
   pod 'CapacitorStatusBar', :path => '../../../../node_modules/@capacitor/status-bar'
   pod 'CapacitorSecureFilesystemAccess', :path => '../../../../node_modules/capacitor-secure-filesystem-access'
   pod 'CapacitorSecureStoragePlugin', :path => '../../../../node_modules/capacitor-secure-storage-plugin'
-  pod 'FireflyActorSystemCapacitorBindings', :path => '../../node_modules/firefly-actor-system-capacitor-bindings'
+  pod 'FireflyActorSystemCapacitorBindings', :path => '../../../../node_modules/firefly-actor-system-capacitor-bindings'
 end
 
 target 'App' do
@@ -31,6 +34,8 @@ target 'App' do
 end
 
 post_install do |installer|
+  assertDeploymentTarget(installer)
+
   installer.pods_project.build_configurations.each do |config|
     config.build_settings["EXCLUDED_ARCHS[sdk=iphonesimulator*]"] = "arm64"
   end
