@@ -2,11 +2,12 @@ import { BaseError } from '@core/error'
 import { isStrongholdUnlocked } from '@core/profile-manager'
 import { openPopup, popupState } from '@lib/popup'
 import { get } from 'svelte/store'
+import { ProfileAuthCheckCallback, ProfileAuthCheckResult } from '@core/profile'
 
 export async function checkOrUnlockStronghold(
-    callback: () => Promise<unknown> = async () => {},
+    callback: ProfileAuthCheckCallback,
     reopenPopup?: boolean
-): Promise<unknown> {
+): ProfileAuthCheckResult {
     const previousPopup = get(popupState)
     function _callback(): Promise<unknown> {
         if (reopenPopup) {

@@ -1,6 +1,6 @@
 import { get } from 'svelte/store'
 
-import { login, UnableToFindProfileSetupTypeError } from '@core/profile'
+import { login, ProfileType, UnableToFindProfileSetupTypeError, UnableToFindProfileTypeError } from '@core/profile'
 
 import { ProfileSetupType } from '../enums'
 import { onboardingProfile } from '../stores'
@@ -11,14 +11,23 @@ import { cleanupOnboarding } from './cleanupOnboarding'
 export async function completeOnboardingProcess(): Promise<void> {
     addOnboardingProfile()
 
-    const setupType = get(onboardingProfile)?.setupType
+    const { setupType, type } = get(onboardingProfile)
     if (!setupType) {
         throw new UnableToFindProfileSetupTypeError()
     }
 
+    if (!type) {
+        throw new UnableToFindProfileTypeError()
+    }
+
     const shouldRecoverAccounts = setupType === ProfileSetupType.Recovered
     const shouldCreateAccount = setupType === ProfileSetupType.New
-    void login({ isFromOnboardingFlow: true, shouldRecoverAccounts, shouldCreateAccount })
+    if (type === ProfileType.Ledger) {
+        checkOnboardingProfileAuth()
+        void login({ isFromOnboardingFlow: true, shouldRecoverAccounts, shouldCreateAccount })
+    } else if (type === ProfileType.Software) {
+        void login({ isFromOnboardingFlow: true, shouldRecoverAccounts, shouldCreateAccount })
+    }
 
     await cleanupOnboarding()
 }
