@@ -32,7 +32,7 @@
 
 <script lang="typescript">
     import { appSettings } from 'shared/lib/appSettings'
-    import { createEventDispatcher, onMount, tick } from 'svelte'
+    import { createEventDispatcher, onMount } from 'svelte'
     import { quintOut } from 'svelte/easing'
     import { tweened } from 'svelte/motion'
     import { slidable } from '@lib/actions'
@@ -46,7 +46,7 @@
     export let preventClose = false
     export let zIndex = 'z-30'
 
-    let content: HTMLElement = undefined
+    let contentHeight = 0
     let isOpen = false
     let isVelocityReached = false
 
@@ -91,12 +91,10 @@
             }),
             { duration: 0 }
         )
-        await tick()
     }
 
     async function handleSlideEnd() {
-        const contentHeight = parseInt(getComputedStyle(content).height)
-        const isThresholdUnreached = fromLeft ? viewportLength / 2 > $coords.x : contentHeight / 2 > $coords.y
+        const isThresholdUnreached = fromLeft ? viewportLength / 2 > -$coords.x : contentHeight / 2 > $coords.y
         if (isThresholdUnreached && !isVelocityReached) {
             await open()
         } else {
@@ -146,7 +144,7 @@
         <div id="dim" class="h-screen" style="--opacity: {dimOpacity}" />
     </dim-zone>
     <content
-        bind:this={content}
+        bind:clientHeight={contentHeight}
         use:slidable={!preventClose}
         on:slideMove={handleSlideMove}
         on:slideEnd={handleSlideEnd}
