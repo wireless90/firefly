@@ -1,13 +1,14 @@
-const { ipcRenderer, contextBridge } = require('electron')
-const ElectronApi = require('./electronApi')
-const WalletApi = require('@iota/wallet')
-const fs = require('fs')
+import { ipcRenderer, contextBridge } from 'electron'
+import ElectronApi from './electron.api'
+import WalletApi from '@iota/wallet'
+import fs from 'fs'
+import sentry from '../sentry'
 
-const SEND_CRASH_REPORTS = window.process.argv.includes('--send-crash-reports=true')
+const SEND_CRASH_REPORTS: boolean = window.process.argv.includes('--send-crash-reports=true')
+// eslint-disable-next-line
 let captureException = (..._) => {}
-
 if (SEND_CRASH_REPORTS) {
-    captureException = require('../sentry')(true).captureException
+    captureException = sentry(true).captureException
 }
 
 const profileManagers = {}
@@ -15,7 +16,7 @@ const profileManagers = {}
 // Hook the error handlers as early as possible
 window.addEventListener('error', (event) => {
     if (event.error && event.error.message) {
-        ipcRenderer.invoke('handle-error', '[Preload Context] Error', {
+        void ipcRenderer.invoke('handle-error', '[Preload Context] Error', {
             message: event.error.message,
             stack: event.error.stack,
         })
@@ -24,7 +25,7 @@ window.addEventListener('error', (event) => {
             captureException(event.error)
         }
     } else {
-        ipcRenderer.invoke('handle-error', '[Preload Context] Error', event.error || event)
+        void ipcRenderer.invoke('handle-error', '[Preload Context] Error', event.error || event)
 
         if (SEND_CRASH_REPORTS) {
             captureException(event)
@@ -35,7 +36,7 @@ window.addEventListener('error', (event) => {
 })
 
 window.addEventListener('unhandledrejection', (event) => {
-    ipcRenderer.invoke('handle-error', '[Preload Context] Unhandled Rejection', event.reason)
+    void ipcRenderer.invoke('handle-error', '[Preload Context] Unhandled Rejection', event.reason)
     event.preventDefault()
     console.error(event.reason)
 })
@@ -48,7 +49,7 @@ try {
         }
 
         const today = new Date().toISOString().slice(0, 16).replace('T', '-').replace(':', '-')
-        const loggerOptions = {
+        const loggerOptions: WalletApi.LoggerConfig = {
             colorEnabled: true,
             name: `./log/wallet-${today}.log`,
             levelFilter: 'debug',
@@ -68,6 +69,7 @@ try {
     contextBridge.exposeInMainWorld('__WALLET__API__', {
         createAccountManager(id, options) {
             const manager = new WalletApi.AccountManager(options)
+            // @ts-expect-error TODO
             manager.id = id
             profileManagers[id] = manager
             bindMethodsAcrossContextBridge(WalletApi.AccountManager.prototype, manager)
@@ -105,10 +107,10 @@ try {
     })
     contextBridge.exposeInMainWorld('__ELECTRON__', ElectronApi)
 } catch (error) {
-    ipcRenderer.invoke('handle-error', '[Preload Context] Error', error)
+    void ipcRenderer.invoke('handle-error', '[Preload Context] Error', error)
 }
 
-function bindMethodsAcrossContextBridge(prototype, object) {
+function bindMethodsAcrossContextBridge(prototype, object): void {
     const prototypeProperties = Object.getOwnPropertyNames(prototype)
     prototypeProperties.forEach((key) => {
         if (key !== 'constructor') {

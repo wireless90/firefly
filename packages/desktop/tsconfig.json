@@ -15,5 +15,5 @@
         },
         "types": ["node"]
     },
-    "include": ["./lib/**/*.ts", "../shared/lib/**/*.ts"]
+    "include": ["./lib/**/*.ts", "../shared/lib/**/*.ts", "./electron"]
 }

@@ -1,9 +1,9 @@
-const { contextBridge, ipcRenderer } = require('electron')
-const { version } = require('../../package.json')
+import { contextBridge, ipcRenderer } from 'electron'
+import { version } from '../../../package.json'
 
 contextBridge.exposeInMainWorld('error', {
-    getData: () =>
-        ipcRenderer.invoke('error-data').then((data) => ({
+    getData(): void {
+        void ipcRenderer.invoke('error-data').then((data) => ({
             iconPath: './assets/logos/firefly_logo.svg',
             version,
             diagnostics: data.diagnostics
@@ -11,8 +11,9 @@ contextBridge.exposeInMainWorld('error', {
                 .join('\r\n'),
             errorType: data.errorType,
             error: data.error,
-        })),
-    openUrl: (url) => {
-        ipcRenderer.invoke('open-url', url)
+        }))
+    },
+    openUrl(url: string): void {
+        void ipcRenderer.invoke('open-url', url)
     },
 })
