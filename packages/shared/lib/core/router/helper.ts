@@ -2,7 +2,7 @@ import { get } from 'svelte/store'
 
 import { closePopup } from '@lib/popup'
 
-import { appRouter, AppRouter } from './app-router'
+import { appRouter, AppRouter } from '../../../../mobile/lib/core/router'
 import { collectiblesRouter, CollectiblesRouter } from './collectibles-router'
 import { DashboardRouter, dashboardRouter } from './dashboard-router'
 import { DashboardRoute } from './enums'
@@ -28,8 +28,8 @@ import {
     strongholdSetupRouter,
     StrongholdSetupRouter,
     LoginRouter,
-    loginRouter,
 } from './subrouters'
+import { loginRouter } from '../../../../mobile/lib/core/router'
 
 export function initialiseRouters(): void {
     /**
@@ -91,14 +91,6 @@ function resetBaseRouters(): void {
 function resetSubrouters(): void {
     get(appSetupRouter).reset()
     get(loginRouter).reset()
-    get(ledgerSetupRouter).reset()
-    get(networkSetupRouter).reset()
-    get(strongholdSetupRouter).reset()
-    get(profileBackupRouter).reset()
-    get(profileRecoveryRouter).reset()
-    get(profileSetupRouter).reset()
-    get(storageProtectionSetupRouter).reset()
-    get(shimmerClaimingRouter).reset()
 }
 
 export function resetWalletRoute(): void {
