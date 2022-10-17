@@ -1082,7 +1082,7 @@
         "sendToAddress": "Send to address",
         "scanQrOrPaste": "Scanează un cod QR sau lipește o Adresă",
         "moveFundsBetweenAccounts": "Move funds between wallets",
-        "sendTokensToAddress": "Send tokens to an address",
+        "sendTokensOnLayer1": "Send tokens to an address",
         "manageAccount": "Manage Wallet",
         "customizeAcount": "Customize your wallet",
         "account": "Wallet",

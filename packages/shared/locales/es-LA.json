@@ -1082,7 +1082,7 @@
         "sendToAddress": "Enviar a la dirección",
         "scanQrOrPaste": "Escanea un código QR o pega una dirección",
         "moveFundsBetweenAccounts": "Mover fondos entre billeteras",
-        "sendTokensToAddress": "Enviar tokens a una dirección",
+        "sendTokensOnLayer1": "Enviar tokens a una dirección",
         "manageAccount": "Administrar Billetera",
         "customizeAcount": "Personaliza tu billetera",
         "account": "Billetera",

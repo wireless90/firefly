@@ -1082,7 +1082,7 @@
         "sendToAddress": "Stuur naar rekening",
         "scanQrOrPaste": "Scan een QR-code of plak een adres",
         "moveFundsBetweenAccounts": "Verplaats tegoeden tussen portemonnees",
-        "sendTokensToAddress": "Verstuur tokens naar een adres",
+        "sendTokensOnLayer1": "Verstuur tokens naar een adres",
         "manageAccount": "Portemonnee beheren",
         "customizeAcount": "Aanpassen van uw portemonnee",
         "account": "Portemonnee",

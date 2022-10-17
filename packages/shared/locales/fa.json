@@ -1082,7 +1082,7 @@
         "sendToAddress": "ارسال به آدرس",
         "scanQrOrPaste": "کد QR یا آدرس را وارد کنید",
         "moveFundsBetweenAccounts": "جابجایی وجه بین حساب ها",
-        "sendTokensToAddress": "ارسال توکن به یک آدرس",
+        "sendTokensOnLayer1": "ارسال توکن به یک آدرس",
         "manageAccount": "مدیریت کیف پول",
         "customizeAcount": "شخصی سازی حساب خود",
         "account": "Wallet",

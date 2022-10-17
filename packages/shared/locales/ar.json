@@ -1082,7 +1082,7 @@
         "sendToAddress": "إرسال إلى العنوان",
         "scanQrOrPaste": "قراءة رمز QR أو لصق عنوان",
         "moveFundsBetweenAccounts": "نقل الأموال بين المحافظ",
-        "sendTokensToAddress": "إرسال التوكينز إلى عنوان",
+        "sendTokensOnLayer1": "إرسال التوكينز إلى عنوان",
         "manageAccount": "إدارة المحفظة",
         "customizeAcount": "تخصيص محفظتك",
         "account": "Wallet",

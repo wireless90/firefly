@@ -1082,7 +1082,7 @@
         "sendToAddress": "ලිපිනයට යවන්න",
         "scanQrOrPaste": "QR කේතයක් පරිලෝකනය කරන්න හෝ ලිපිනයක් අලවන්න",
         "moveFundsBetweenAccounts": "මුදල් පසුම්බි අතර මුදල් මාරු කරන්න",
-        "sendTokensToAddress": "ලිපිනයකට ටෝකන යවන්න",
+        "sendTokensOnLayer1": "ලිපිනයකට ටෝකන යවන්න",
         "manageAccount": "Wallet කළමනාකරණය කරන්න",
         "customizeAcount": "ඔබේ මුදල් පසුම්බිය අභිරුචිකරණය කරන්න",
         "account": "පසුම්බිය",

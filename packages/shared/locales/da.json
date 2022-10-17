@@ -1082,7 +1082,7 @@
         "sendToAddress": "Send til adresse",
         "scanQrOrPaste": "Scan en QR-kode eller indsæt en adresse",
         "moveFundsBetweenAccounts": "Flyt midler mellem wallets",
-        "sendTokensToAddress": "Send tokens til en adresse",
+        "sendTokensOnLayer1": "Send tokens til en adresse",
         "manageAccount": "Håndtér Wallet",
         "customizeAcount": "Tilpas din wallet",
         "account": "Wallet",

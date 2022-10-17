@@ -1082,7 +1082,7 @@
         "sendToAddress": "주소로 보내기",
         "scanQrOrPaste": "QR 코드를 스캔하거나 주소를 복사해 붙이기",
         "moveFundsBetweenAccounts": "지갑간 자금 이체하기",
-        "sendTokensToAddress": "주소로 토큰 보내기",
+        "sendTokensOnLayer1": "주소로 토큰 보내기",
         "manageAccount": "지갑 관리",
         "customizeAcount": "취향대로 지갑 설정하기",
         "account": "Wallet",

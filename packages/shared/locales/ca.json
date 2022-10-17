@@ -1082,7 +1082,7 @@
         "sendToAddress": "Enviar a l’adreça",
         "scanQrOrPaste": "Escaneja un codi QR o enganxa una adreça",
         "moveFundsBetweenAccounts": "Mou fons entre moneders",
-        "sendTokensToAddress": "Enviar fitxes a una adreça",
+        "sendTokensOnLayer1": "Enviar fitxes a una adreça",
         "manageAccount": "Gestiona moneder",
         "customizeAcount": "Personalitzeu el vostre moneder",
         "account": "Cartera",

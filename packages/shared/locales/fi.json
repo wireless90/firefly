@@ -1082,7 +1082,7 @@
         "sendToAddress": "Lähetä osoitteeseen",
         "scanQrOrPaste": "Skannaa QR-koodi tai liitä osoite",
         "moveFundsBetweenAccounts": "Siirrä varoja lompakkojen välillä",
-        "sendTokensToAddress": "Lähetä tokenit osoitteeseen",
+        "sendTokensOnLayer1": "Lähetä tokenit osoitteeseen",
         "manageAccount": "Hallitse lompakkoa",
         "customizeAcount": "Mukauta lompakkoasi",
         "account": "Lompakko",

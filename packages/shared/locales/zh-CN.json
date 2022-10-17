@@ -1082,7 +1082,7 @@
         "sendToAddress": "发送至地址",
         "scanQrOrPaste": "扫描二维码或粘贴地址",
         "moveFundsBetweenAccounts": "钱包间资金互转",
-        "sendTokensToAddress": "发送Token到另一个地址",
+        "sendTokensOnLayer1": "发送Token到另一个地址",
         "manageAccount": "管理钱包",
         "customizeAcount": "自定义你的钱包",
         "account": "钱包",

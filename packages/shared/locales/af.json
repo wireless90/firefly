@@ -1082,7 +1082,7 @@
         "sendToAddress": "Stuur na 'n adres",
         "scanQrOrPaste": "Skandeer 'n QR-kode of plak 'n adres",
         "moveFundsBetweenAccounts": "Skuif fondse tussen jou beursies",
-        "sendTokensToAddress": "Stuur tokens na 'n adres",
+        "sendTokensOnLayer1": "Stuur tokens na 'n adres",
         "manageAccount": "Bestuur beursie",
         "customizeAcount": "Pas you beursie aan",
         "account": "Wallet",

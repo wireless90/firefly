@@ -1082,7 +1082,7 @@
         "sendToAddress": "Skicka till adress",
         "scanQrOrPaste": "Skanna en QR-kod eller klistra in en adress",
         "moveFundsBetweenAccounts": "Flytta IOTA mellan dina plånböcker",
-        "sendTokensToAddress": "Skicka tokens till en adress",
+        "sendTokensOnLayer1": "Skicka tokens till en adress",
         "manageAccount": "Hantera plånbok",
         "customizeAcount": "Anpassa din plånbok",
         "account": "Plånbok",

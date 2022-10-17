@@ -1082,7 +1082,7 @@
         "sendToAddress": "アドレスへ送金する",
         "scanQrOrPaste": "QRコードをスキャンするかアドレスを貼り付けてください",
         "moveFundsBetweenAccounts": "ウォレット間で資金を移動する",
-        "sendTokensToAddress": "トークンをアドレスに送金",
+        "sendTokensOnLayer1": "トークンをアドレスに送金",
         "manageAccount": "ウォレットの管理",
         "customizeAcount": "ウォレットをカスタマイズする",
         "account": "Wallet",

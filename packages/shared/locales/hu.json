@@ -1082,7 +1082,7 @@
         "sendToAddress": "Küldés a következő címre",
         "scanQrOrPaste": "QR-kód beolvasása vagy cím beillesztése",
         "moveFundsBetweenAccounts": "Egyenleg átvezetése tárcák között",
-        "sendTokensToAddress": "Tokenek küldése",
+        "sendTokensOnLayer1": "Tokenek küldése",
         "manageAccount": "Tárca kezelése",
         "customizeAcount": "Tárca testre szabása",
         "account": "Tárca",

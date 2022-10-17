@@ -1082,7 +1082,7 @@
         "sendToAddress": "Enviar para o endereço",
         "scanQrOrPaste": "Escaneie um QR code ou cole um endereço",
         "moveFundsBetweenAccounts": "Mover fundos entre carteiras",
-        "sendTokensToAddress": "Enviar tokens para um endereço",
+        "sendTokensOnLayer1": "Enviar tokens para um endereço",
         "manageAccount": "Gerenciar Carteira",
         "customizeAcount": "Personalizar sua carteira",
         "account": "Wallet",

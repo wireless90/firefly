@@ -101,10 +101,10 @@ const features = {
         sendAndReceive: {
             enabled: true,
             nft: {
-                enabled: false,
+                enabled: true,
             },
             layer2: {
-                enabled: false,
+                enabled: true,
             },
         },
         assets: {

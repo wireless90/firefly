@@ -1082,7 +1082,7 @@
         "sendToAddress": "Sendu al adreso",
         "scanQrOrPaste": "Skanu QR-kodon aŭ alglui adreson",
         "moveFundsBetweenAccounts": "Movi bonhavojn inter monujoj",
-        "sendTokensToAddress": "Sendu ĵetonojn al adreso",
+        "sendTokensOnLayer1": "Sendu ĵetonojn al adreso",
         "manageAccount": "Administri monujon",
         "customizeAcount": "Agordu vian monujon",
         "account": "Wallet",

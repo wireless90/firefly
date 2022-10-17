@@ -1082,7 +1082,7 @@
         "sendToAddress": "Envoyer à l'adresse",
         "scanQrOrPaste": "Scannez un QR code ou collez une Adresse",
         "moveFundsBetweenAccounts": "Déplacer des fonds entre portefeuilles",
-        "sendTokensToAddress": "Envoyer des jetons à une adresse",
+        "sendTokensOnLayer1": "Envoyer des jetons à une adresse",
         "manageAccount": "Gérer le Portefeuille",
         "customizeAcount": "Personnaliser votre portefeuille",
         "account": "Portefeuille",

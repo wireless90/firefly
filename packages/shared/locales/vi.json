@@ -1082,7 +1082,7 @@
         "sendToAddress": "Gửi đến địa chỉ",
         "scanQrOrPaste": "Quét mã QR hoặc dán vào một địa chỉ ví",
         "moveFundsBetweenAccounts": "Chuyển tài sản giữa các ví",
-        "sendTokensToAddress": "Gửi các token tới một địa chỉ ví",
+        "sendTokensOnLayer1": "Gửi các token tới một địa chỉ ví",
         "manageAccount": "Quản lý ví",
         "customizeAcount": "Tùy chỉnh ví của bạn",
         "account": "Wallet",

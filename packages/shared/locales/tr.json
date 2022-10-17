@@ -1082,7 +1082,7 @@
         "sendToAddress": "Adresini Gönder",
         "scanQrOrPaste": "Bir QR kodunu tarayın veya bir Adres yapıştırın",
         "moveFundsBetweenAccounts": "Cüzdanlarınız arasında bakiye aktarın",
-        "sendTokensToAddress": "Bir adrese Iota gönder",
+        "sendTokensOnLayer1": "Bir adrese Iota gönder",
         "manageAccount": "Cüzdanı Yönet",
         "customizeAcount": "Cüzdanınızı özelleştirin",
         "account": "Wallet",

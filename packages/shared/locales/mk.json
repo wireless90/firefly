@@ -1082,7 +1082,7 @@
         "sendToAddress": "Прати на адреса",
         "scanQrOrPaste": "Скенирајте QR код или залепете адреса",
         "moveFundsBetweenAccounts": "Преместете ги средствата помеѓу паричниците",
-        "sendTokensToAddress": "Испратете токени на адреса",
+        "sendTokensOnLayer1": "Испратете токени на адреса",
         "manageAccount": "Управувај со паричникот",
         "customizeAcount": "Прилагодете го вашиот паричник",
         "account": "Wallet",

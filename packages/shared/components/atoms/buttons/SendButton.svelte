@@ -23,7 +23,7 @@
         const options = [
             {
                 title: localize('general.sendFunds'),
-                description: localize('general.sendTokensToAddress'),
+                description: localize('general.sendTokensOnLayer1'),
                 action: onL1SendClick,
             },
         ]
@@ -36,8 +36,8 @@
         }
         if (sendFeatures.layer2.enabled) {
             options.push({
-                title: localize('general.sendToLayer2'),
-                description: localize('general.sendToLayer2Address'),
+                title: localize('general.sendFunds'),
+                description: localize('general.sendTokensToLayer2'),
                 action: onL2SendClick,
             })
         }

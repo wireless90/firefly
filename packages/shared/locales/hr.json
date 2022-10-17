@@ -1082,7 +1082,7 @@
         "sendToAddress": "Slanje na adresu",
         "scanQrOrPaste": "Skenirajte QR kȏd ili zalijepite Adresu",
         "moveFundsBetweenAccounts": "Prebacite sredstva između svojih novčanika",
-        "sendTokensToAddress": "Šalji tokene na adresu",
+        "sendTokensOnLayer1": "Šalji tokene na adresu",
         "manageAccount": "Upravljanje novčanikom",
         "customizeAcount": "Personaliziraj novčanik",
         "account": "Novčanik",

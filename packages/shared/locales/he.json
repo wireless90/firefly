@@ -1082,7 +1082,7 @@
         "sendToAddress": "שלח לארנק",
         "scanQrOrPaste": "סרוק קוד QR או הדבק כתובת",
         "moveFundsBetweenAccounts": "העבר כספים בין הארנקים",
-        "sendTokensToAddress": "שלח מטבעות לכתובת",
+        "sendTokensOnLayer1": "שלח מטבעות לכתובת",
         "manageAccount": "נהל ארנק",
         "customizeAcount": "ערוך את הארנק שלך",
         "account": "ארנק",

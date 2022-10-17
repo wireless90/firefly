@@ -1082,7 +1082,7 @@
         "sendToAddress": "पते पर भेजें",
         "scanQrOrPaste": "QR कोड स्कैन करें या एक पता पेस्ट करें",
         "moveFundsBetweenAccounts": "अपने खातों के बीच धन ले जाएँ",
-        "sendTokensToAddress": "एक पते पर टोकन भेजें",
+        "sendTokensOnLayer1": "एक पते पर टोकन भेजें",
         "manageAccount": "वॉलेट प्रबंधित करें",
         "customizeAcount": "अनुकूलित करें अपना खाता",
         "account": "वॉलेट",

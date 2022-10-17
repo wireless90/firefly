@@ -1082,7 +1082,7 @@
         "sendToAddress": "Αποστολή προς διεύθυνση",
         "scanQrOrPaste": "Σαρώστε τον κωδικό QR ή επικολλήστε μια διεύθυνση",
         "moveFundsBetweenAccounts": "Μετακίνηση κεφαλαίων μεταξύ λογαριασμών",
-        "sendTokensToAddress": "Αποστολή κεφαλαίων σε μια διεύθυνση",
+        "sendTokensOnLayer1": "Αποστολή κεφαλαίων σε μια διεύθυνση",
         "manageAccount": "Διαχείριση Πορτοφολιού",
         "customizeAcount": "Προσαρμόστε το πορτοφόλι σας",
         "account": "Wallet",

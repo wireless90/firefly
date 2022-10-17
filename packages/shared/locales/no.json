@@ -1082,7 +1082,7 @@
         "sendToAddress": "Send til adresse",
         "scanQrOrPaste": "Skann en QR-kode eller lim inn en adresse",
         "moveFundsBetweenAccounts": "Flytt midler mellom lommebøker",
-        "sendTokensToAddress": "Send tokens til en adresse",
+        "sendTokensOnLayer1": "Send tokens til en adresse",
         "manageAccount": "Administrere lommebok",
         "customizeAcount": "Tilpass lommebok",
         "account": "Wallet",

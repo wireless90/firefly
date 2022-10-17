@@ -1082,7 +1082,7 @@
         "sendToAddress": "Изпращане към адрес",
         "scanQrOrPaste": "Сканирайте QR код или въведете адрес",
         "moveFundsBetweenAccounts": "Преместване на средства между портфейли",
-        "sendTokensToAddress": "Изпрати средства към адрес",
+        "sendTokensOnLayer1": "Изпрати средства към адрес",
         "manageAccount": "Управление на портфейла",
         "customizeAcount": "Настройка на портфейла",
         "account": "Портфейл",

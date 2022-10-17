@@ -1082,7 +1082,7 @@
         "sendToAddress": "Отправить на адрес",
         "scanQrOrPaste": "Сканировать QR-код или вставить Адрес",
         "moveFundsBetweenAccounts": "Переместить средства между кошельками",
-        "sendTokensToAddress": "Отправить токены на адрес",
+        "sendTokensOnLayer1": "Отправить токены на адрес",
         "manageAccount": "Управление кошельками",
         "customizeAcount": "Персонализируйте свой кошелек",
         "account": "Кошелёк",

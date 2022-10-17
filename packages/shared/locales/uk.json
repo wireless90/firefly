@@ -1082,7 +1082,7 @@
         "sendToAddress": "Надіслати на адресу",
         "scanQrOrPaste": "Скануйте QR код або вставте адресу",
         "moveFundsBetweenAccounts": "Переміщення коштів між гаманцями",
-        "sendTokensToAddress": "Надіслати токени на адресу",
+        "sendTokensOnLayer1": "Надіслати токени на адресу",
         "manageAccount": "Керування гаманцем",
         "customizeAcount": "Налаштуйте свій гаманець",
         "account": "Гаманець",

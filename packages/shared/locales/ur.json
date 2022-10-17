@@ -1082,7 +1082,7 @@
         "sendToAddress": "اس ایڈریس پر بھیجیں",
         "scanQrOrPaste": "ایک QR کوڈ اسکین کریں یا ایڈریس پیسٹ کریں",
         "moveFundsBetweenAccounts": "والٹس کے مابین فنڈز منتقل کریں",
-        "sendTokensToAddress": "کسی ایڈریس پر ٹوکن بھیجیں",
+        "sendTokensOnLayer1": "کسی ایڈریس پر ٹوکن بھیجیں",
         "manageAccount": "والٹ کا نظم کریں",
         "customizeAcount": "اپنے والٹ کو اپنی مرضی کے مطابق بنائیں",
         "account": "والٹ",

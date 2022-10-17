@@ -1082,7 +1082,7 @@
         "sendToAddress": "Kirim ke alamat",
         "scanQrOrPaste": "Pindai kode QR atau salin sebuah Alamat",
         "moveFundsBetweenAccounts": "Pemindahan dana antar dompet",
-        "sendTokensToAddress": "Kirim token ke suatu alamat",
+        "sendTokensOnLayer1": "Kirim token ke suatu alamat",
         "manageAccount": "Kelola Dompet",
         "customizeAcount": "Menyesuaikan dompet Anda",
         "account": "Wallet",

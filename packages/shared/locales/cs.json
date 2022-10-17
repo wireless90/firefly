@@ -1082,7 +1082,7 @@
         "sendToAddress": "Odeslat na adresu",
         "scanQrOrPaste": "Naskenujte QR kód nebo vložte adresu",
         "moveFundsBetweenAccounts": "Převod mezi účty",
-        "sendTokensToAddress": "Poslat tokeny na adresu",
+        "sendTokensOnLayer1": "Poslat tokeny na adresu",
         "manageAccount": "Spravovat peněženku",
         "customizeAcount": "Přizpůsobit peněženku",
         "account": "Wallet",
