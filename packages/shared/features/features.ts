@@ -103,6 +103,9 @@ const features = {
             nft: {
                 enabled: false,
             },
+            layer2: {
+                enabled: false,
+            },
         },
         assets: {
             enabled: true,

@@ -4,9 +4,11 @@
     import { resetNewTransactionDetails, selectedSendOptionIndex } from '@core/wallet'
     import { openPopup } from '@lib/popup'
     import { appSettings } from '@core/app'
-    import { Text, FontWeight, TextType, Icon, Modal } from 'shared/components'
+    import { Text, FontWeight, TextType, Icon, Modal, ButtonOptions } from 'shared/components'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import features from '@features/features'
+
+    const sendFeatures = features.wallet.sendAndReceive
 
     let modal: Modal = undefined
     let isModalOpened: boolean = false
@@ -15,22 +17,32 @@
     $: selectedOption = buttonOptions[$selectedSendOptionIndex]
     $: hasMultipleOptions = buttonOptions.length > 1
 
-    const buttonOptions = [
-        {
-            title: localize('general.sendFunds'),
-            description: localize('general.sendTokensToAddress'),
-            action: onL1SendClick,
-        },
-        ...(features.wallet.sendAndReceive.nft.enabled
-            ? [
-                  {
-                      title: localize('general.sendNft'),
-                      description: localize('general.sendNftToAddress'),
-                      action: onNftSendClick,
-                  },
-              ]
-            : []),
-    ]
+    const buttonOptions = getButtonOptions()
+
+    function getButtonOptions(): ButtonOptions[] {
+        const options = [
+            {
+                title: localize('general.sendFunds'),
+                description: localize('general.sendTokensToAddress'),
+                action: onL1SendClick,
+            },
+        ]
+        if (sendFeatures.nft.enabled) {
+            options.push({
+                title: localize('general.sendNft'),
+                description: localize('general.sendNftToAddress'),
+                action: onNftSendClick,
+            })
+        }
+        if (sendFeatures.layer2.enabled) {
+            options.push({
+                title: localize('general.sendToLayer2'),
+                description: localize('general.sendToLayer2Address'),
+                action: onL2SendClick,
+            })
+        }
+        return options
+    }
 
     function openModal(): void {
         isModalOpened = true
@@ -48,9 +60,15 @@
     }
 
     function onL1SendClick(): void {
-        resetNewTransactionDetails()
-        resetLedgerPreparedOutput()
-        resetShowInternalVerificationPopup()
+        resetPopup()
+        openPopup({
+            type: 'sendForm',
+            overflow: true,
+        })
+    }
+
+    function onL2SendClick(): void {
+        resetPopup()
         openPopup({
             type: 'sendForm',
             overflow: true,
@@ -58,13 +76,17 @@
     }
 
     function onNftSendClick(): void {
-        resetNewTransactionDetails()
-        resetLedgerPreparedOutput()
-        resetShowInternalVerificationPopup()
+        resetPopup()
         openPopup({
             type: 'sendForm',
             overflow: true,
         })
+    }
+
+    function resetPopup(): void {
+        resetNewTransactionDetails()
+        resetLedgerPreparedOutput()
+        resetShowInternalVerificationPopup()
     }
 </script>
 
