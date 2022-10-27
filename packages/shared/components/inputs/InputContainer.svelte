@@ -46,7 +46,7 @@
                 ? 'border-blue-500'
                 : error
                 ? 'border-red-300 hover:border-red-500'
-                : 'border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 focus:border-blue-500 dark:focus:border-gray-600'}"
+                : 'border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 focus-visible:border-blue-500 dark:focus-visible:border-gray-600'}"
             {...$$restProps}
         >
             <slot />

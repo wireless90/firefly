@@ -15,7 +15,7 @@
                     body {
                         margin: 0px;
                     }
-                    video:focus {
+                    video:focus-visible {
                         outline: none;
                     }
                 </style>

@@ -10,7 +10,7 @@
 <account-input class="w-full h-full relative">
     <button
         on:click={() => modal?.open()}
-        class="w-full flex flex-row flex-1 justify-between px-4 py-3 rounded-lg border border-solid border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 focus:border-blue-500 dark:focus:border-gray-600"
+        class="w-full flex flex-row flex-1 justify-between px-4 py-3 rounded-lg border border-solid border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 focus:border-blue-500 dark:focus-visible:border-gray-600"
     >
         <AccountLabel {account} />
     </button>

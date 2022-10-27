@@ -161,7 +161,7 @@
         }
 
         &:active,
-        &:focus {
+        &:focus-visible {
             @apply bg-#{$color}-700;
             @apply ring-4;
             @apply ring-#{$color}-400;
@@ -181,7 +181,7 @@
             }
 
             &:active,
-            &:focus {
+            &:focus-visible {
                 @apply bg-#{$color}-100;
                 @apply border-#{$color}-400;
                 @apply text-#{$color}-600;
@@ -226,7 +226,7 @@
         }
 
         &:active,
-        &:focus {
+        &:focus-visible {
             @apply bg-opacity-40;
             @apply border-blue-400;
             @apply border-opacity-100;

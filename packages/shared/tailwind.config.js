@@ -306,8 +306,8 @@ module.exports = {
     },
     variants: {
         fontWeight: ['hover', 'focus', 'group-hover'],
-        textColor: ['dark', 'responsive', 'hover', 'dark-hover', 'focus', 'dark-focus', 'group-hover'],
-        backgroundColor: ['dark', 'responsive', 'hover', 'dark-hover', 'focus', 'dark-focus', 'group-hover'],
+        textColor: ['dark', 'responsive', 'hover', 'dark-hover', 'focus', 'dark-focus-hover', 'group-hover'],
+        backgroundColor: ['dark', 'responsive', 'hover', 'dark-hover', 'focus', 'dark-focus-hover', 'group-hover'],
         backgroundOpacity: ['dark'],
         opacity: ['responsive', 'group-hover', 'focus-within', 'hover', 'focus', 'disabled', 'dark'],
         cursor: ['responsive', 'disabled'],
@@ -372,8 +372,10 @@ module.exports = {
             })
         }),
         plugin(({ addVariant, e }) => {
-            addVariant('dark-focus', ({ modifySelectors, separator }) => {
-                modifySelectors(({ className }) => `.scheme-dark .${e(`dark:focus${separator}${className}`)}:focus`)
+            addVariant('dark-focus-hover', ({ modifySelectors, separator }) => {
+                modifySelectors(
+                    ({ className }) => `.scheme-dark .${e(`dark:focus-visible${separator}${className}`)}:focus-visible`
+                )
             })
         }),
     ],

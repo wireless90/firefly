@@ -240,7 +240,7 @@
                     }
                 }
 
-                &:focus {
+                &:focus-visible {
                     @apply outline-none;
                 }
             }

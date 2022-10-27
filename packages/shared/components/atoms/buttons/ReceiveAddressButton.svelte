@@ -44,14 +44,14 @@
             @apply border-gray-500;
         }
         &:active,
-        &:focus {
+        &:focus-visible {
             @apply bg-blue-100;
             @apply border-blue-400;
         }
         &.darkmode {
             @apply border-gray-700;
             &:hover,
-            &:focus,
+            &:focus-visible,
             &:active {
                 @apply bg-gray-700;
                 @apply bg-opacity-20;

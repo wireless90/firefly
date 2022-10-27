@@ -47,7 +47,7 @@
             @apply fill-current;
         }
         &:hover,
-        &:focus {
+        &:focus-visible {
             :global(svg path) {
                 @apply text-blue-500;
             }

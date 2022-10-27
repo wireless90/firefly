@@ -151,7 +151,7 @@
 
             button {
                 &:hover,
-                &:focus,
+                &:focus-visible,
                 &:active {
                     @apply bg-gray-700;
                     @apply bg-opacity-20;
@@ -177,7 +177,7 @@
             }
 
             &:active,
-            &:focus {
+            &:focus-visible {
                 @apply bg-blue-100;
                 @apply border-blue-400;
             }

@@ -116,7 +116,7 @@
     .highlight {
         transition: filter 0.2s;
 
-        &:focus {
+        &:focus-visible {
             filter: brightness(1.3);
         }
     }
