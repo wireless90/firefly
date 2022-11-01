@@ -15,6 +15,7 @@
     import ConfirmationPopup from './ConfirmationPopup.svelte'
     import ConnectLedgerPopup from './ConnectLedgerPopup.svelte'
     import CreateAccountPopup from './CreateAccountPopup.svelte'
+    import CreateContactPopup from './CreateContactPopup.svelte'
     import DeepLinkErrorPopup from './DeepLinkErrorPopup.svelte'
     import DeleteAccount from './DeleteAccount.svelte'
     import Diagnostics from './Diagnostics.svelte'
@@ -102,6 +103,7 @@
         storageDepositBreakdown: StorageDepositBreakdownPopup,
         errorLog: ErrorLog,
         createAccount: CreateAccountPopup,
+        createContact: CreateContactPopup,
         diagnostics: Diagnostics,
         walletFinder: WalletFinderPopup,
         video: Video,

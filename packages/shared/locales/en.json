@@ -933,6 +933,9 @@
         "faucetRequest": {
             "title": "Faucet request",
             "body": "Are you sure you want to request {token} tokens from the {network} faucet?"
+        },
+        "createContact": {
+            "title": "Create contact"
         }
     },
     "charts": {
@@ -1312,7 +1315,8 @@
         "hash": "Hash",
         "creating": "Creating",
         "updating": "Updating",
-        "enterAddress": "Enter address"
+        "enterAddress": "Enter address",
+        "name": "Name"
     },
     "filters":{
         "title": "Filters",
@@ -1466,6 +1470,10 @@
         "claimShimmerRewards": {
             "success": "Shimmer rewards claimed for {accountAlias}",
             "error": "An error occurred while claiming. Try again."
+        },
+        "createContact": {
+            "success": "New contact created",
+            "error": "Unable to create contact"
         }
     },
     "error": {
