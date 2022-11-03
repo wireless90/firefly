@@ -90,7 +90,7 @@
 
 <style type="text/scss">
     panel {
-        transition: bottom 0.2s ease;
+        transition: bottom 0.2s ease, left 0.2s ease;
         max-height: 100%;
         &.moving {
             transition: none;
