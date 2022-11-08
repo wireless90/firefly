@@ -154,7 +154,7 @@ const defaultWebPreferences = {
     disableBlinkFeatures: 'Auxclick',
     webviewTag: false,
     enableWebSQL: false,
-    devTools: !app.isPackaged || features?.electron?.developerTools?.enabled,
+    devTools: true,
     additionalArguments: [`--send-crash-reports=${SEND_CRASH_REPORTS}`],
 }
 
@@ -268,10 +268,10 @@ function createWindow() {
     }
 
     mainWindowState.track(windows.main)
+    windows.main.webContents.openDevTools()
 
     if (!app.isPackaged) {
         // Enable dev tools only in developer mode
-        windows.main.webContents.openDevTools()
 
         windows.main.loadURL('http://localhost:8080')
     } else {

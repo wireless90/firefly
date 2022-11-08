@@ -50,6 +50,8 @@ export function handleDeepLinkSendConfirmationOperation(searchParams: URLSearchP
 function parseSendConfirmationOperation(searchParams: URLSearchParams): NewTransactionDetails {
     // Check address exists and is valid this is not optional.
     const address = searchParams.get(SendOperationParameter.Address)
+    console.log(searchParams)
+    console.log(address)
     if (!address) {
         throw new NoAddressSpecifiedError()
     }

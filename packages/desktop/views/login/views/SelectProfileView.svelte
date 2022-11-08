@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Icon, Logo, Profile } from 'shared/components'
+    import { Icon, Logo, Profile, TestDeepLinkButton } from 'shared/components'
     import { mobile, needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTermsOfService } from '@core/app'
     import { localize } from '@core/i18n'
     import { NetworkProtocol, NetworkType } from '@core/network'
@@ -33,6 +33,8 @@
 </script>
 
 <section class="flex flex-col justify-center items-center h-full bg-white dark:bg-gray-900 px-40 pt-48 pb-20">
+
+    <TestDeepLinkButton/>
     <Logo width="64px" logo="logo-firefly" classes="absolute top-20" />
     <div
         class="profiles-wrapper h-auto items-start justify-center w-full {!$mobile &&

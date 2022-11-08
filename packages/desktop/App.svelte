@@ -171,7 +171,6 @@
         {#if settings}
             <Settings handleClose={() => (settings = false)} />
         {/if}
-
         <ToastContainer />
     {/if}
 </TitleBar>
