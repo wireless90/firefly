@@ -560,6 +560,7 @@ ipcMain.on('check-deep-link-request-exists', () => {
     if (deepLinkUrl) {
         windows.main.webContents.send('deep-link-params', deepLinkUrl)
     }
+    windows.main.webContents.send('deep-link-params', deepLinkUrl)
 })
 
 /**

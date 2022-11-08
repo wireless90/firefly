@@ -41,7 +41,7 @@
         })
 
         Platform.onEvent('deep-link-params', (data: string) => {
-            console.log('FE deep link called')
+            console.log('FE deep link called', data)
             handleDeepLinkRequest(data)
         })
 
