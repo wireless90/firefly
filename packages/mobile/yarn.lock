@@ -56,6 +56,13 @@
   dependencies:
     tslib "^2.1.0"
 
+"@capacitor/core@^3.4.0":
+  version "3.9.0"
+  resolved "https://registry.yarnpkg.com/@capacitor/core/-/core-3.9.0.tgz#ab5eccbeb02e140382e983b794ead296f1db7e6d"
+  integrity sha512-j1lL0+/7stY8YhIq1Lm6xixvUqIn89vtyH5ZpJNNmcZ0kwz6K9eLkcG6fvq1UWMDgSVZg9JrRGSFhb4LLoYOsw==
+  dependencies:
+    tslib "^2.1.0"
+
 "@capacitor/device@1.1.2":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@capacitor/device/-/device-1.1.2.tgz#ac22702ad29971456cb83143ab11e712174e38a0"
@@ -3489,6 +3496,11 @@ vary@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
   integrity sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==
+
+wallet-rs-capacitor-plugin@./capacitor/plugins/wallet-rs-capacitor-plugin:
+  version "0.0.1"
+  dependencies:
+    "@capacitor/core" "^3.4.0"
 
 watchpack@^2.4.0:
   version "2.4.0"

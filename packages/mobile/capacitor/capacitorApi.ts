@@ -1,146 +1,145 @@
-// import { Capacitor } from '@capacitor/core'
-// import { SplashScreen } from '@capacitor/splash-screen'
+import { Capacitor } from '@capacitor/core'
+import { SplashScreen } from '@capacitor/splash-screen'
 
-// import { IAppVersionDetails, IPlatform } from '@core/app'
+import { IAppVersionDetails, IPlatform } from '@core/app'
 
-// import { DeepLinkManager } from './lib/deepLinkManager'
-// import { NotificationManager } from './lib/notificationManager'
-// import { PincodeManager } from './lib/pincodeManager'
+import { DeepLinkManager } from './lib/deepLinkManager'
+import { NotificationManager } from './lib/notificationManager'
+import { PincodeManager } from './lib/pincodeManager'
 
-// let activeProfileId = null
+import * as WalletBindings from './walletPluginApi'
 
-// export const nativeSplash = SplashScreen
+window['__WALLET__API__'] = WalletBindings
 
-// export const CapacitorApi: IPlatform = {
-//     updateAppSettings() {
-//         return new Promise((resolve) => resolve())
-//     },
+let activeProfileId = null
 
-//     getActiveProfile() {
-//         return activeProfileId
-//     },
+export const nativeSplash = SplashScreen
 
-//     updateActiveProfile(id) {
-//         activeProfileId = id
-//     },
+export const CapacitorApi: IPlatform = {
+    updateAppSettings() {
+        return new Promise((resolve) => resolve())
+    },
 
-//     renameProfileFolder: () => new Promise<void>(() => {}),
+    getActiveProfile() {
+        return activeProfileId
+    },
 
-//     removeProfileFolder: () => new Promise<void>(() => {}),
+    updateActiveProfile(id) {
+        activeProfileId = id
+    },
 
-//     listProfileFolders: () => new Promise<string[]>(() => {}),
+    renameProfileFolder: () => new Promise<void>(() => {}),
 
-//     PincodeManager: PincodeManager,
+    removeProfileFolder: () => new Promise<void>(() => {}),
 
-//     DeepLinkManager: DeepLinkManager,
+    listProfileFolders: () => new Promise<string[]>(() => {}),
 
-//     NotificationManager: NotificationManager,
+    PincodeManager: PincodeManager,
 
-//     getStrongholdBackupDestination: () => new Promise<string>(() => {}),
+    DeepLinkManager: DeepLinkManager,
 
-//     exportTransactionHistory: async () => new Promise<string>(() => {}),
+    NotificationManager: NotificationManager,
 
-//     exportMigrationLog: () => new Promise<boolean>(() => {}),
+    getStrongholdBackupDestination: () => new Promise<string>(() => {}),
 
-//     exportLedgerMigrationLog: () => new Promise<boolean>(() => {}),
+    exportTransactionHistory: async () => new Promise<string>(() => {}),
 
-//     importLegacySeed: () => new Promise<string>(() => {}),
+    getUserDataPath: () =>
+        new Promise<string>((resolve) => {
+            resolve('DATA')
+        }),
 
-//     getUserDataPath: () =>
-//         new Promise<string>((resolve) => {
-//             resolve('DATA')
-//         }),
+    getDiagnostics: () => new Promise<{ label: string; value: string }[]>(() => {}),
 
-//     getDiagnostics: () => new Promise<{ label: string; value: string }[]>(() => {}),
+    getOS: () => new Promise<string>((resolve) => resolve(Capacitor.getPlatform())),
 
-//     getOS: () => new Promise<string>((resolve) => resolve(Capacitor.getPlatform())),
+    getMachineId: () => new Promise<string>((resolve) => resolve('')),
 
-//     getMachineId: () => new Promise<string>((resolve) => resolve('')),
+    /**
+     * Starts an update of the application
+     *
+     * @method updateDownload
+     *
+     * @returns void
+     */
+    downloadAppUpdate: () => new Promise<void>(() => {}),
 
-//     /**
-//      * Starts an update of the application
-//      *
-//      * @method updateDownload
-//      *
-//      * @returns void
-//      */
-//     downloadAppUpdate: () => new Promise<void>(() => {}),
+    /**
+     * Cancels an update of the application
+     *
+     * @method updateCancel
+     *
+     * @returns void
+     */
+    cancelAppUpdateDownload: () => new Promise<void>(() => {}),
 
-//     /**
-//      * Cancels an update of the application
-//      *
-//      * @method updateCancel
-//      *
-//      * @returns void
-//      */
-//     cancelAppUpdateDownload: () => new Promise<void>(() => {}),
+    /**
+     * Install an update of the application
+     *
+     * @method updateInstall
+     *
+     * @returns void
+     */
+    installAppUpdate: () => new Promise<void>(() => {}),
 
-//     /**
-//      * Install an update of the application
-//      *
-//      * @method updateInstall
-//      *
-//      * @returns void
-//      */
-//     installAppUpdate: () => new Promise<void>(() => {}),
+    /**
+     * Check for an update of the application
+     *
+     * @method updateCheck
+     *
+     * @returns void
+     */
+    checkForAppUpdate: () => new Promise<void>(() => {}),
 
-//     /**
-//      * Check for an update of the application
-//      *
-//      * @method updateCheck
-//      *
-//      * @returns void
-//      */
-//     checkForAppUpdate: () => new Promise<void>(() => {}),
+    /**
+     * Get version details
+     *
+     * @method getVersionDetails
+     *
+     * @returns void
+     */
+    getAppVersionDetails: () => new Promise<IAppVersionDetails>(() => {}),
 
-//     /**
-//      * Get version details
-//      *
-//      * @method getVersionDetails
-//      *
-//      * @returns void
-//      */
-//     getAppVersionDetails: () => new Promise<IAppVersionDetails>(() => {}),
+    /**
+     * Change menu state to determine what menu items to display
+     * @returns {undefined}
+     */
+    updateMenu: () => new Promise<void>(() => {}),
 
-//     /**
-//      * Change menu state to determine what menu items to display
-//      * @returns {undefined}
-//      */
-//     updateMenu: () => new Promise<void>(() => {}),
+    /**
+     * Show the popup menu
+     * @returns {undefined}
+     */
+    popupMenu: () => new Promise<void>(() => {}),
 
-//     /**
-//      * Show the popup menu
-//      * @returns {undefined}
-//      */
-//     popupMenu: () => new Promise<void>(() => {}),
+    minimize: () => new Promise<void>(() => {}),
 
-//     minimize: () => new Promise<void>(() => {}),
+    maximize: () => new Promise<boolean>(() => {}),
 
-//     maximize: () => new Promise<boolean>(() => {}),
+    isMaximized: () => new Promise<boolean>(() => {}),
 
-//     isMaximized: () => new Promise<boolean>(() => {}),
+    /**
+     * Close the app
+     * @returns {undefined}
+     */
+    close: () => new Promise<void>(() => {}),
 
-//     /**
-//      * Close the app
-//      * @returns {undefined}
-//      */
-//     close: () => new Promise<void>(() => {}),
+    openUrl: () => new Promise<void>(() => {}),
 
-//     openUrl: () => new Promise<void>(() => {}),
+    copyFile: () => new Promise<void>(() => {}),
 
-//     /**
-//      * Log unhandled exception
-//      * @param {string} errorType The type of eerror
-//      * @param {Errir} error The error
-//      */
-//     unhandledException: () => new Promise<void>(() => {}),
+    /**
+     * Log unhandled exception
+     * @param {string} errorType The type of eerror
+     * @param {Errir} error The error
+     */
+    unhandledException: () => new Promise<void>(() => {}),
 
-//     onEvent: () => new Promise<void>(() => {}),
+    onEvent: () => new Promise<void>(() => {}),
 
-//     removeListenersForEvent: () => new Promise<void>(() => {}),
+    removeListenersForEvent: () => new Promise<void>(() => {}),
 
-//     saveRecoveryKit: () => new Promise<void>(() => {}),
-//     ledger: undefined,
-// }
+    saveRecoveryKit: () => new Promise<void>(() => {}),
+}
 
-// window['__CAPACITOR__'] = CapacitorApi
+window['__CAPACITOR__'] = CapacitorApi
