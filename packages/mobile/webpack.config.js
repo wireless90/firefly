@@ -7,20 +7,25 @@ const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin')
 
 const mode = process.env.NODE_ENV || 'development'
 const prod = mode === 'production'
+const hardcodeNodeEnv = typeof process.env.HARDCODE_NODE_ENV !== 'undefined'
+const stage = process.env.STAGE || 'alpha'
+/**
+ * If stage = 'prod' -> 'Firefly'
+ * If stage = 'alpha' -> 'Firefly Alpha'
+ */
+const appName =
+    stage === 'prod' ? 'Firefly Shimmer' : `Firefly Shimmer - ${stage.replace(/^\w/, (c) => c.toUpperCase())}`
 
-// ------------------------ Resolve ------------------------
-const tsConfigOptions = {
-    configFile: './tsconfig.json',
-}
+const appProtocol = stage === 'prod' ? 'firefly' : `firefly-${stage.toLowerCase()}`
 
 const resolve = {
     alias: {
         svelte: path.dirname(require.resolve('svelte/package.json')),
-        '@auxiliary': path.resolve(__dirname, './lib/auxiliary'),
+        '@auxiliary': path.resolve(__dirname, '../shared/lib/auxiliary'),
         '@contexts': path.resolve(__dirname, '../shared/lib/contexts'),
         '@components': path.resolve(__dirname, './components/'),
         '@core': path.resolve(__dirname, '../shared/lib/core'),
-        '@features': path.resolve(__dirname, './features'),
+        '@features': path.resolve(__dirname, '../mobile/features'),
         '@lib': path.resolve(__dirname, '../shared/lib'),
         '@ui': path.resolve(__dirname, '../shared/components/'),
         '@views': path.resolve(__dirname, './views/'),
@@ -114,9 +119,10 @@ const rendererPlugins = [
         filename: '[name].css',
     }),
     new DefinePlugin({
-        devMode: JSON.stringify(mode === 'development'),
-        'process.env.PLATFORM': JSON.stringify(process.env.PLATFORM),
-        'process.env.STAGE': JSON.stringify(process.env.STAGE),
+        APP_NAME: JSON.stringify(appName),
+        'process.env.PLATFORM': JSON.stringify(process.env.PLATFORM || 'mobile'),
+        'process.env.STAGE': JSON.stringify(stage),
+        'process.env.APP_PROTOCOL': JSON.stringify(appProtocol),
     }),
 ]
 

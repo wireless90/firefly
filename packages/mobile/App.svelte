@@ -19,7 +19,8 @@
     import { isKeyboardOpen, keyboardHeight } from './lib/auxiliary/keyboard'
     import { DashboardView, LoginRouter, OnboardingRouter } from './views'
 
-    appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
+    // TODO: update this: devmode only
+    appStage.set(AppStage.ALPHA)
 
     checkAndMigrateProfiles()
 
