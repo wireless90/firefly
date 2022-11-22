@@ -56,8 +56,8 @@ public class WalletPlugin extends Plugin {
         // // Print the account.
         // System.out.println(a);
 
-        System.out.println('im hereee');
-        call.resolve('hereee');
+        System.out.println("im hereee");
+        call.resolve("hereee");
     }
 
     @PluginMethod
