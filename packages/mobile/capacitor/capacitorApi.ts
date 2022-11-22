@@ -6,10 +6,7 @@ import { IAppVersionDetails, IPlatform } from '@core/app'
 import { DeepLinkManager } from './lib/deepLinkManager'
 import { NotificationManager } from './lib/notificationManager'
 import { PincodeManager } from './lib/pincodeManager'
-
 import * as WalletBindings from './walletPluginApi'
-
-window['__WALLET__API__'] = WalletBindings
 
 let activeProfileId = null
 
@@ -143,3 +140,4 @@ export const CapacitorApi: IPlatform = {
 }
 
 window['__CAPACITOR__'] = CapacitorApi
+window['__WALLET__API__'] = WalletBindings

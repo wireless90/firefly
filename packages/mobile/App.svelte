@@ -53,10 +53,10 @@
         //     pollCheckForAppUpdate()
         // }
 
-        await cleanupEmptyProfiles()
+        // await cleanupEmptyProfiles()
         // loadPersistedProfileIntoActiveProfile($activeProfileId)
 
-        const platform = await Platform.getOS()
+        const platform = window['__CAPACITOR__']
         setPlatform(platform)
     })
 
