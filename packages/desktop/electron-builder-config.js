@@ -84,7 +84,10 @@ const prodConfig = () => ({
     mac: {
         icon: './public/assets/icons/prod/icon1024x1024.png',
         category: 'public.app-category.finance',
-        target: ['dmg', 'zip'],
+        target: {
+            target: 'default',
+            arch: ['universal'],
+        },
         entitlements: './entitlements.mac.plist',
         entitlementsInherit: './entitlements.mac.plist',
         hardenedRuntime: true,
