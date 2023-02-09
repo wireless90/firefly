@@ -59,7 +59,14 @@ const output = {
 const mainRules = [
     {
         test: /\.ts$/,
-        loader: 'ts-loader',
+        loader: 'swc-loader',
+        options: {
+            jsc: {
+                parser: {
+                    syntax: 'typescript',
+                },
+            },
+        },
         exclude: /node_modules/,
     },
     {
@@ -74,7 +81,14 @@ const mainRules = [
 const rendererRules = [
     {
         test: /\.ts$/,
-        loader: 'ts-loader',
+        loader: 'swc-loader',
+        options: {
+            jsc: {
+                parser: {
+                    syntax: 'typescript',
+                },
+            },
+        },
         exclude: /node_modules/,
     },
     {
