@@ -1,7 +1,8 @@
-import { updateActiveProfile } from '@core/profile'
-import { backup } from '@core/profile-manager'
-import { Platform } from '@core/app'
-import { getDefaultStrongholdName } from '@core/stronghold'
+import { Platform } from '@core/app/classes'
+import { updateActiveProfile } from '@core/profile/stores'
+import { backup } from '@core/profile-manager/api'
+
+import { getDefaultStrongholdName } from '../utils'
 
 export async function exportStronghold(
     password: string,

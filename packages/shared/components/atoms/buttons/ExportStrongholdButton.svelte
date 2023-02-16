@@ -1,9 +1,9 @@
 <script lang="ts">
-    import { exportStronghold } from '@contexts/settings'
-    import { localize } from '@core/i18n'
+    import { Button, ButtonSize } from 'shared/components'
     import { showAppNotification } from '@auxiliary/notification'
     import { openPopup } from '@auxiliary/popup'
-    import { Button, ButtonSize } from 'shared/components'
+    import { localize } from '@core/i18n'
+    import { exportStronghold } from '@core/stronghold'
 
     export let isBusy = false
     export let message = ''
