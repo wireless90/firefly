@@ -1,5 +1,6 @@
 <script lang="ts">
-    import { Modal, AccountActionsMenu, MeatballMenuButton } from 'shared/components'
+    import { AccountActionsMenu } from '@components'
+    import { Modal, MeatballMenuButton } from '@ui'
 
     let modal: Modal
 </script>
