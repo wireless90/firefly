@@ -34,7 +34,8 @@
         "electron-updater": "4.3.5",
         "keytar": "^7.9.0",
         "node-machine-id": "^1.1.12",
-        "shared": "0.0.0"
+        "shared": "0.0.0",
+        "ws": "^8.12.1"
     },
     "devDependencies": {
         "@sentry/webpack-plugin": "^1.18.5",

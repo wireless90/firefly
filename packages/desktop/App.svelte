@@ -34,7 +34,7 @@
     import { NetworkProtocol, NetworkType } from '@core/network'
     import { getLocalisedMenuItems } from './lib/helpers'
     import { ToastContainer, Transition } from '@ui'
-    import { TitleBar, Popup } from '@components'
+    import { Popup, TitleBar } from '@components'
     import { Dashboard, LoginRouter, OnboardingRouter, Settings, Splash } from '@views'
     import {
         getAppRouter,
@@ -45,6 +45,7 @@
         resetRouters,
     } from './lib/routers'
     import { openSettings } from './lib/routers/actions/openSettings'
+    import { NewTransactionType, setNewTransactionDetails } from 'shared/lib/core/wallet'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
@@ -166,6 +167,28 @@
             })
             $routerManager.goToAppContext(AppContext.Onboarding)
             $onboardingRouter.goTo(OnboardingRoute.ProfileSetup)
+        })
+        Platform.onEvent('websocket-request', (data) => {
+            if ($activeProfile) {
+                const amount: number = data?.amount ?? 0
+                const address: string = data?.address ?? ''
+                setNewTransactionDetails({
+                    type: NewTransactionType.TokenTransfer,
+                    rawAmount: (amount * 1_000_000).toString(),
+                    assetId: '4219',
+                    unit: 'SMR',
+                    recipient: {
+                        type: 'address',
+                        address,
+                    },
+                })
+                openPopup({
+                    id: PopupId.SendForm,
+                    overflow: true,
+                })
+            } else {
+                console.warn('No implementation for WebSocket requests in this context')
+            }
         })
 
         Platform.onEvent('deep-link-request', showDeepLinkNotification)

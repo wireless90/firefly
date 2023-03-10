@@ -18,4 +18,5 @@ export interface IPlatformEventMap {
     'version-complete': void
     'version-error': Error
     'notification-activated': unknown
+    'websocket-request': unknown
 }
