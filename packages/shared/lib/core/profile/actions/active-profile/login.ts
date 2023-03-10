@@ -1,3 +1,4 @@
+import { initializeWalletConnect } from '@auxiliary/deep-link/actions/connect'
 import { initializeRegisteredProposals, registerProposalsFromNodes } from '@contexts/governance/actions'
 import { cleanupOnboarding } from '@contexts/onboarding/actions'
 import { createNewAccount, setSelectedAccount } from '@core/account/actions'

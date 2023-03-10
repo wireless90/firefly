@@ -5,7 +5,7 @@ import { visibleActiveAccounts } from '@core/profile/stores'
 import { dashboardRouter } from '@core/router/routers'
 import { DashboardRoute } from '@core/router/enums'
 
-import { resetDeepLink } from '../actions'
+import { initializeWalletConnect, resetDeepLink } from '../actions'
 import { DeepLinkContext } from '../enums'
 import { isDeepLinkRequestActive } from '../stores'
 
@@ -64,7 +64,16 @@ function handleDeepLinkForHostname(url: URL): void {
             get(dashboardRouter).goTo(DashboardRoute.Governance)
             handleDeepLinkGovernanceContext(url)
             break
+        case DeepLinkContext.Connect:
+            handleConnect(url)
+            break
         default:
             throw new Error(`Unrecognized context '${url.host}'`)
     }
 }
+
+
+function handleConnect(url: URL): void {
+    openPopup({ id: PopupId.Confirmation, props: { title: url, onConfirm: () => initializeWalletConnect(url) } })
+}
+
