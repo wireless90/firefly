@@ -27,7 +27,8 @@ export async function buildAccountState(account: IAccount, metadata: IAccountMet
     try {
         balances = await account.getBalance()
         depositAddress = await getDepositAddress(account)
-        votingPower = await account.getVotingPower()
+        // temporally hidden for testing branch, remove before publish PR!
+        // votingPower = await account.getVotingPower()
     } catch (err) {
         console.error(err)
     }
