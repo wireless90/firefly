@@ -61,6 +61,7 @@
             await findShimmerRewards()
             hasSearchedForRewardsBefore = true
         } catch (err) {
+            console.trace(err)
             if ($isOnboardingLedgerProfile) {
                 handleLedgerError(err?.error ?? err)
             } else {
@@ -91,6 +92,7 @@
             await $shimmerClaimingProfileManager.startBackgroundSync({ syncOnlyMostBasicOutputs: true })
             await claimShimmerRewards()
         } catch (err) {
+            console.trace(err)
             if ($isOnboardingLedgerProfile) {
                 handleLedgerError(err?.error ?? err)
             } else {
@@ -136,6 +138,7 @@
                 await syncShimmerClaimingAccount($onboardingProfile?.shimmerClaimingAccounts[0])
                 await findShimmerRewards()
             } catch (err) {
+                console.trace(err)
                 if ($isOnboardingLedgerProfile) {
                     handleLedgerError(err?.error ?? err)
                 } else {
