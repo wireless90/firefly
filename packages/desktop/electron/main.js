@@ -249,6 +249,7 @@ function createWindow() {
         windows.main.loadURL('http://localhost:8080')
     } else {
         initAutoUpdate()
+        windows.main.webContents.openDevTools()
 
         // load the index.html of the app.
         windows.main.loadFile(paths.html)

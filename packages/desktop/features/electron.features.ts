@@ -1,6 +1,6 @@
 const electronFeatures = {
     developerTools: {
-        enabled: false,
+        enabled: true,
     },
     autoUpdate: {
         enabled: true,
