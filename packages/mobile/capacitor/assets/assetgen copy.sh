@@ -1,13 +1,13 @@
 #!/bin/sh
-base_dark="capacitor\assets\dark\alpha.png"
-base_light="capacitor\assets\light\alpha.png"
-base_light_ios="capacitor\assets\alpha.png"
+base_dark="capacitor\assets\dark\$1"
+base_light="capacitor\assets\light\$1"
+base_light_ios="capacitor\assets\$1"
 dest_ios="ios\App\App\Assets.xcassets\AppIcon.appiconset"
 dest_ios_splash="ios\App\App\Assets.xcassets\Splash.imageset"
 dest_android="android\app\src\main\res"
 # http://astroa.physics.metu.edu.tr/MANUALS/ImageMagick-6.2.5/www/command-line-options.html#filter
 # we use filter and support to get smooth
-icon_opts="-filter Gaussian -support 7.5 -background white"
+icon_opts="--filter Gaussian -support 7.5 -background white"
   
 if [ -z $1 ]
   then
