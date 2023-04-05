@@ -1,7 +1,7 @@
 import features from '@features/features'
 import { initAutoUpdate } from './lib/appUpdater'
 import { shouldReportError } from './lib/errorHandling'
-const { app, dialog, ipcMain, protocol, shell, BrowserWindow, session } = require('electron')
+const { ipcRenderer, app, dialog, ipcMain, protocol, shell, BrowserWindow, session } = require('electron')
 const path = require('path')
 const os = require('os')
 const fs = require('fs')
@@ -77,10 +77,6 @@ let lastError = {}
 const handleError = (errorType, error, isRenderProcessError) => {
     if (app.isPackaged) {
         const errorMessage = error.message || error.reason || error
-        if (!shouldReportError(errorMessage)) {
-            console.error(error)
-            return
-        }
 
         lastError = {
             diagnostics: getDiagnostics(),
@@ -282,6 +278,16 @@ function createWindow() {
 
     windows.main.webContents.on('did-finish-load', () => {
         windows.main.webContents.send('version-details', versionDetails)
+    })
+
+    windows.webContents.on('render-process-gone', (event, detailed) => {
+        ipcRenderer.invoke('get-path', 'userData').then((baseDir) => {
+            fs.writeFileSync(
+                baseDir + 'hoila',
+                '!crashed, reason: ' + detailed.reason + ', exitCode = ' + detailed.exitCode,
+                'utf-8'
+            )
+        })
     })
 
     /**
