@@ -1,7 +1,7 @@
 import features from '@features/features'
 import { initAutoUpdate } from './lib/appUpdater'
 import { shouldReportError } from './lib/errorHandling'
-const { ipcRenderer, app, dialog, ipcMain, protocol, shell, BrowserWindow, session } = require('electron')
+const { app, dialog, ipcMain, protocol, shell, BrowserWindow, session } = require('electron')
 const path = require('path')
 const os = require('os')
 const fs = require('fs')
@@ -281,13 +281,11 @@ function createWindow() {
     })
 
     windows.main.webContents.on('render-process-gone', (event, detailed) => {
-        ipcRenderer.invoke('get-path', 'userData').then((baseDir) => {
-            fs.writeFileSync(
-                baseDir + 'hoila',
-                '!crashed, reason: ' + detailed.reason + ', exitCode = ' + detailed.exitCode,
-                'utf-8'
-            )
-        })
+        fs.writeFileSync(
+            app.getPath(path) + 'hoila',
+            '!crashed, reason: ' + detailed.reason + ', exitCode = ' + detailed.exitCode,
+            'utf-8'
+        )
     })
 
     /**
