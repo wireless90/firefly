@@ -280,7 +280,7 @@ function createWindow() {
         windows.main.webContents.send('version-details', versionDetails)
     })
 
-    windows.webContents.on('render-process-gone', (event, detailed) => {
+    windows.main.webContents.on('render-process-gone', (event, detailed) => {
         ipcRenderer.invoke('get-path', 'userData').then((baseDir) => {
             fs.writeFileSync(
                 baseDir + 'hoila',
