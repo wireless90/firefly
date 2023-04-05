@@ -23,6 +23,7 @@ const resolve = {
     },
     extensions: ['.mjs', '.js', '.ts', '.svelte'],
     mainFields: ['svelte', 'browser', 'module', 'main'],
+    conditionNames: ['svelte'],
     fallback: {
         path: false,
         fs: false,
