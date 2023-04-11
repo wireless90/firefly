@@ -1,11 +1,9 @@
 <script lang="ts">
-    import { Animation, OnboardingButton, Text } from 'shared/components'
     import { OnboardingLayout } from '@components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { NetworkProtocol } from '@core/network'
     import { profileRecoveryRouter } from '@core/router'
-    import { onboardingProfile } from '@contexts/onboarding'
+    import { Animation, OnboardingButton, Text } from 'shared/components'
 
     function onContinueClick(): void {
         $profileRecoveryRouter.next()
@@ -28,13 +26,6 @@
             primaryText={localize('views.importFromLedger.haveFireflyLedger')}
             secondaryText={localize('views.importFromLedger.haveFireflyLedgerDescription')}
             icon="settings"
-            onClick={onContinueClick}
-        />
-        <OnboardingButton
-            primaryText={localize('views.importFromLedger.haveTrinityLedger')}
-            secondaryText={localize('views.importFromLedger.haveTrinityLedgerDescription')}
-            icon="settings"
-            hidden={$onboardingProfile.networkProtocol === NetworkProtocol.Shimmer}
             onClick={onContinueClick}
         />
     </div>
