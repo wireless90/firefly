@@ -4,7 +4,7 @@
     import features from '@features/features'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { formatProtocolName, NetworkProtocol } from '@core/network'
+    import { formatProtocolName, NetworkId } from '@core/network'
     import { appSetupRouter } from '@core/router'
 
     function onContinueClick(): void {
@@ -22,8 +22,8 @@
                 >{localize('views.onboarding.appSetup.welcome.title', {
                     values: {
                         protocol: features?.onboarding?.iota?.enabled
-                            ? formatProtocolName(NetworkProtocol.IOTA)
-                            : formatProtocolName(NetworkProtocol.Shimmer),
+                            ? formatProtocolName(NetworkId.Iota)
+                            : formatProtocolName(NetworkId.Shimmer),
                     },
                 })}
             </Text>
