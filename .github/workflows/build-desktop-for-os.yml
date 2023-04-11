@@ -15,7 +15,7 @@ on:
                 type: string
 
 jobs:
-    build:
+    build-for-os:
         runs-on: ${{ inputs.os }}
         if: ${{ always() }}
         env:

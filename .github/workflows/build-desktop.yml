@@ -6,7 +6,10 @@ on:
             debugElectronBuilder:
                 description: 'Verbose electron-builder output'
                 required: true
-                default: 'true'
+                type: choice
+                options:
+                - 'true'
+                - 'false'
             stage:
                 description: 'Stage'
                 required: true
