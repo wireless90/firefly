@@ -1,6 +1,5 @@
 <script lang="ts">
     import { IAccountState, selectedAccount } from '@core/account'
-    import { BASE_TOKEN } from '@core/network'
     import { visibleActiveAccounts, activeProfile } from '@core/profile'
     import { formatTokenAmountBestMatch } from '@core/wallet'
     import { AccountLabel, Modal, Text, TextType } from 'shared/components'
@@ -25,10 +24,7 @@
 
     function getSuffixForAccount(account: IAccountState): string {
         return showBalance
-            ? formatTokenAmountBestMatch(
-                  Number(account.balances.baseCoin.available),
-                  BASE_TOKEN[$activeProfile.networkProtocol]
-              )
+            ? formatTokenAmountBestMatch(Number(account.balances.baseCoin.available), $activeProfile.network.baseToken)
             : truncateString(account?.depositAddress, 10, 10)
     }
 

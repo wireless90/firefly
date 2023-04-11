@@ -1,5 +1,5 @@
 import { BASE_TOKEN } from '../constants'
-import { NetworkId, NetworkProtocol } from '../enums'
+import { NetworkId } from '../enums'
 import { INetwork } from '../interfaces'
 
 export const NETWORK: Readonly<{ [key in NetworkId]?: INetwork }> = {
@@ -19,7 +19,7 @@ export const NETWORK: Readonly<{ [key in NetworkId]?: INetwork }> = {
             },
             tokenSupply: undefined,
         },
-        baseToken: BASE_TOKEN[NetworkProtocol.IOTA],
+        baseToken: BASE_TOKEN[NetworkId.Iota],
     },
     [NetworkId.Shimmer]: {
         id: NetworkId.Shimmer,
@@ -37,7 +37,7 @@ export const NETWORK: Readonly<{ [key in NetworkId]?: INetwork }> = {
             },
             tokenSupply: '1813620509061365',
         },
-        baseToken: BASE_TOKEN[NetworkProtocol.Shimmer],
+        baseToken: BASE_TOKEN[NetworkId.Shimmer],
     },
     [NetworkId.Testnet]: {
         id: NetworkId.Testnet,
@@ -55,6 +55,6 @@ export const NETWORK: Readonly<{ [key in NetworkId]?: INetwork }> = {
             },
             tokenSupply: '1450896407249092',
         },
-        baseToken: BASE_TOKEN[NetworkProtocol.Shimmer],
+        baseToken: BASE_TOKEN[NetworkId.Shimmer],
     },
 }

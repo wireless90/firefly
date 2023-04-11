@@ -8,7 +8,6 @@
     import { handleError } from '@core/error/handlers/handleError'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { CURRENT_IRC27_VERSION } from '@core/nfts'
-    import { BASE_TOKEN } from '@core/network'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
@@ -106,25 +105,16 @@
                         <KeyValueBox keyText={localize('general.quantity')} valueText={quantity} />
                         <KeyValueBox
                             keyText={localize('general.storageDepositPerNft')}
-                            valueText={formatTokenAmountPrecise(
-                                storageDeposit,
-                                BASE_TOKEN[$activeProfile?.networkProtocol]
-                            )}
+                            valueText={formatTokenAmountPrecise(storageDeposit, $activeProfile?.network.baseToken)}
                         />
                         <KeyValueBox
                             keyText={localize('general.totalStorageDeposit')}
-                            valueText={formatTokenAmountPrecise(
-                                totalStorageDeposit,
-                                BASE_TOKEN[$activeProfile?.networkProtocol]
-                            )}
+                            valueText={formatTokenAmountPrecise(totalStorageDeposit, $activeProfile?.network.baseToken)}
                         />
                     {:else}
                         <KeyValueBox
                             keyText={localize('general.storageDeposit')}
-                            valueText={formatTokenAmountPrecise(
-                                storageDeposit,
-                                BASE_TOKEN[$activeProfile?.networkProtocol]
-                            )}
+                            valueText={formatTokenAmountPrecise(storageDeposit, $activeProfile?.network.baseToken)}
                         />
                     {/if}
                     <KeyValueBox

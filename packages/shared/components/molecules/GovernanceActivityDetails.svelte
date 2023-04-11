@@ -2,7 +2,7 @@
     import { AmountBox, ActivityInclusionStatusPill, Text, FontWeight } from 'shared/components'
     import { formatTokenAmountDefault, getAssetFromPersistedAssets } from '@core/wallet'
     import { GovernanceActivity } from '@core/wallet'
-    import { BASE_TOKEN, COIN_TYPE } from '@core/network'
+    import { COIN_TYPE } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { getVotingEvent } from '@contexts/governance/actions'
     import { truncateString } from '@core/utils'
@@ -15,7 +15,7 @@
     $: amount = activity.votingPowerDifference
         ? formatTokenAmountDefault(
               Number(activity.votingPowerDifference),
-              BASE_TOKEN[$activeProfile.networkProtocol],
+              $activeProfile.network.baseToken,
               asset?.metadata?.unit
           )
         : ''

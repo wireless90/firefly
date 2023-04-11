@@ -6,7 +6,6 @@
     import { displayNotificationForLedgerProfile, ledgerNanoStatus } from '@core/ledger'
     import { sumBalanceForAccounts } from '@core/account'
     import { localize } from '@core/i18n'
-    import { BASE_TOKEN } from '@core/network'
     import {
         activeAccounts,
         activeProfile,
@@ -134,7 +133,7 @@
         />
         <KeyValueBox
             keyText={localize('popups.walletFinder.totalWalletBalance')}
-            valueText={formatTokenAmountBestMatch(totalBalance, BASE_TOKEN[$activeProfile.networkProtocol])}
+            valueText={formatTokenAmountBestMatch(totalBalance, $activeProfile?.network.baseToken)}
         />
     </div>
 

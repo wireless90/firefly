@@ -3,7 +3,7 @@
     import { getFormattedTimeStamp, localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'
     import { Activity, formatTokenAmountPrecise } from '@core/wallet'
-    import { BASE_TOKEN, ExplorerEndpoint } from '@core/network'
+    import { ExplorerEndpoint } from '@core/network'
     import { getOfficialExplorerUrl } from '@core/network/utils'
     import { openUrlInBrowser } from '@core/app'
     import { IKeyValueBoxList, truncateString } from '@core/utils'
@@ -21,7 +21,7 @@
 
     $: formattedTransactionTime = getFormattedTimeStamp(activity?.time)
     $: formattedTimelockDate = getFormattedTimeStamp(activity?.asyncData?.timelockDate)
-    $: baseToken = BASE_TOKEN[$activeProfile?.networkProtocol]
+    $: baseToken = $activeProfile?.network.baseToken
     $: formattedStorageDeposit = formatTokenAmountPrecise(activity?.storageDeposit ?? 0, baseToken)
     $: formattedGiftedStorageDeposit = formatTokenAmountPrecise(activity?.giftedStorageDeposit ?? 0, baseToken)
     $: formattedSurplus = formatTokenAmountPrecise(activity?.surplus ?? 0, baseToken)

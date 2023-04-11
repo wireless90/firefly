@@ -1,8 +1,8 @@
 import { ITokenMetadata } from '@core/wallet'
-import { NetworkProtocol } from '../enums'
+import { NetworkId } from '../enums'
 
-export const BASE_TOKEN: Readonly<{ [key in NetworkProtocol]: ITokenMetadata }> = {
-    [NetworkProtocol.IOTA]: {
+export const BASE_TOKEN: Readonly<{ [key in NetworkId]?: ITokenMetadata }> = {
+    [NetworkId.Iota]: {
         name: 'IOTA',
         tickerSymbol: 'MIOTA',
         unit: 'i',
@@ -11,7 +11,7 @@ export const BASE_TOKEN: Readonly<{ [key in NetworkProtocol]: ITokenMetadata }> 
         useMetricPrefix: true,
         primaryColor: '#6E82A4',
     },
-    [NetworkProtocol.Shimmer]: {
+    [NetworkId.Shimmer]: {
         name: 'Shimmer',
         tickerSymbol: 'SMR',
         unit: 'SMR',

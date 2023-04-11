@@ -17,7 +17,6 @@
     import { openUrlInBrowser } from '@core/app/utils'
     import { localize } from '@core/i18n'
     import { ExplorerEndpoint, getOfficialExplorerUrl } from '@core/network'
-    import { BASE_TOKEN } from '@core/network/constants'
     import {
         allAccountNfts,
         convertAndFormatNftMetadata,
@@ -125,7 +124,7 @@
 
         storageDeposit = formatTokenAmountPrecise(
             Number(recentNftOutput?.output.amount ?? 0),
-            BASE_TOKEN[$activeProfile?.networkProtocol]
+            $activeProfile?.network.baseToken
         )
     }
 

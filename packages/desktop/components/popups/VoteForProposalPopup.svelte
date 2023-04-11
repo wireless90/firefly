@@ -4,7 +4,6 @@
     import { closePopup, openPopup } from '@auxiliary/popup/actions'
     import { selectedAccount } from '@core/account/stores'
     import { localize } from '@core/i18n'
-    import { BASE_TOKEN } from '@core/network/constants'
     import { checkActiveProfileAuth } from '@core/profile/actions'
     import { activeProfile } from '@core/profile/stores'
     import { formatTokenAmountBestMatch } from '@core/wallet/utils'
@@ -17,7 +16,7 @@
 
     $: formattedVotingPower = formatTokenAmountBestMatch(
         Number($selectedAccount?.votingPower),
-        BASE_TOKEN[$activeProfile.networkProtocol]
+        $activeProfile?.network.baseToken
     )
     $: hasVotingPower = Number($selectedAccount?.votingPower) > 0
 

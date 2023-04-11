@@ -11,5 +11,5 @@ export interface INetwork {
     id: NetworkId
     name: string
     protocol: IProtocol
-    baseToken?: ITokenMetadata
+    baseToken: ITokenMetadata
 }
