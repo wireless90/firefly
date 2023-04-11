@@ -4,17 +4,15 @@ on:
     workflow_call:
         inputs:
             debugElectronBuilder:
-                description: 'Verbose electron-builder output'
                 required: true
+                type: string
                 default: 'true'
             stage:
-                description: 'Stage (alpha, beta, or prod)'
                 required: true
-                default: 'alpha'
+                type: string
             os:
-                description: 'OS (macos-11, ubuntu-20.04, windows-2019)'
                 required: true
-                default: 'macos-11'
+                type: string
 
 jobs:
     build:
