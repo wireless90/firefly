@@ -18,7 +18,6 @@ jobs:
     build:
         runs-on: ${{ inputs.os }}
         if: ${{ always() }}
-        needs: [setup]
         env:
             VERSION: ${{ needs.setup.outputs.version }}
             STAGE: ${{ needs.setup.outputs.stage || github.event.inputs.stage }}

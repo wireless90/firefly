@@ -25,6 +25,7 @@ on:
                 - windows-2019
 jobs:
     build:
+        needs: [setup]
         uses: ./.github/workflows/build-desktop-for-os.yml
         with:
             debugElectronBuilder: inputs.debugElectronBuilder
