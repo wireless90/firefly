@@ -82,6 +82,7 @@ const ElectronApi = {
                 return result.filePath
             })
     },
+    saveStrongholdBackup: ({ allowAccess }) => null,
     async exportTransactionHistory(defaultPath, contents) {
         return ipcRenderer
             .invoke('show-save-dialog', {
@@ -260,6 +261,9 @@ const ElectronApi = {
     },
     copyFile(sourceFilePath, destinationFilePath) {
         return ipcRenderer.invoke('copy-file', sourceFilePath, destinationFilePath)
+    },
+    deleteFile(filePath) {
+        return ipcRenderer.invoke('delete-file', filePath)
     },
     /**
      * Log unhandled exception

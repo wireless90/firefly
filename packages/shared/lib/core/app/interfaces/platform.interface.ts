@@ -7,6 +7,7 @@ import { IPlatformEventMap } from './platform-event-map.interface'
 
 export interface IPlatform {
     getStrongholdBackupDestination(defaultPath: string): Promise<string | null>
+    saveStrongholdBackup({ allowAccess }: { allowAccess: boolean }): Promise<void>
     exportTransactionHistory(defaultPath: string, contents: string): Promise<string | null>
     getUserDataPath(): Promise<string>
     getDiagnostics(): Promise<{ label: string; value: string }[]>
@@ -27,6 +28,7 @@ export interface IPlatform {
     saveRecoveryKit(kitData: ArrayBuffer): Promise<void>
     openUrl(url: string): void
     copyFile(sourceFilePath: string, destinationFilePath: string): Promise<void>
+    deleteFile(filePath: string): Promise<void>
     downloadNft(url: string, destinationFilePath: string, nftId: string, accountIndex: number): Promise<void>
     cancelNftDownload(nftId: string): Promise<void>
     checkIfFileExists(filePath: string): Promise<boolean>
@@ -48,4 +50,6 @@ export interface IPlatform {
     removeListenersForEvent<K extends keyof IPlatformEventMap>(eventName: K): void
 
     isFeatureFlagEnabled(keyPath: string): boolean
+
+    getLanguageCode(): Promise<string>
 }

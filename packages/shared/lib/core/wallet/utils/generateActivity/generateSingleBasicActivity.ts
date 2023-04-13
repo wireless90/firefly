@@ -1,22 +1,16 @@
 import { isShimmerClaimingTransaction } from '@contexts/onboarding'
 import { IAccountState } from '@core/account'
-import {
-    DestinationNetwork,
-    getDestinationNetworkFromAddress,
-    Layer2Metadata,
-    parseLayer2Metadata,
-} from '@core/layer-2'
-import { COIN_TYPE } from '@core/network'
-import { activeProfile, activeProfileId } from '@core/profile'
+import { activeProfileId, getCoinType } from '@core/profile'
 import { IActivityGenerationParameters } from '@core/wallet/interfaces'
 import { TransactionActivity } from '@core/wallet/types'
 import { IBasicOutput } from '@iota/types'
 import { get } from 'svelte/store'
-import { ActivityAction, ActivityType } from '../../enums'
 import { activityOutputContainsValue, getNativeTokenFromOutput } from '..'
+import { ActivityAction, ActivityType } from '../../enums'
 import {
     getAmountFromOutput,
     getAsyncDataFromOutput,
+    getLayer2ActivityInformation,
     getMetadataFromOutput,
     getSendingInformation,
     getStorageDepositFromOutput,
@@ -49,32 +43,23 @@ export function generateSingleBasicActivity(
     const sendingInfo = getSendingInformation(processedTransaction, output, account)
     const asyncData = getAsyncDataFromOutput(output, outputId, claimingData, account)
 
-    let parsedLayer2Metadata: Layer2Metadata
-    let destinationNetwork: string
-    try {
-        parsedLayer2Metadata = parseLayer2Metadata(metadata)
-        destinationNetwork = getDestinationNetworkFromAddress(
-            sendingInfo.subject.type === 'address' ? sendingInfo.subject.address : undefined
-        )
-    } catch (_) {
-        parsedLayer2Metadata = null
-        destinationNetwork = DestinationNetwork.Shimmer
-    }
+    const { parsedLayer2Metadata, destinationNetwork } = getLayer2ActivityInformation(metadata, sendingInfo)
+    const gasBudget = Number(parsedLayer2Metadata?.gasBudget ?? '0')
 
     let { storageDeposit, giftedStorageDeposit } = getStorageDepositFromOutput(output)
     giftedStorageDeposit = action === ActivityAction.Burn ? 0 : giftedStorageDeposit
+    giftedStorageDeposit = gasBudget === 0 ? giftedStorageDeposit : 0
 
-    const gasBudget = Number(parsedLayer2Metadata?.gasBudget ?? '0')
     const baseTokenAmount = getAmountFromOutput(output) - storageDeposit - gasBudget
 
     const nativeToken = getNativeTokenFromOutput(output)
-    const assetId = fallbackAssetId ?? nativeToken?.id ?? String(COIN_TYPE[get(activeProfile).networkProtocol])
+    const assetId = fallbackAssetId ?? nativeToken?.id ?? getCoinType()
 
-    let rawAmount
-    if (fallbackAmount !== undefined) {
-        rawAmount = fallbackAmount
-    } else {
+    let rawAmount: number
+    if (fallbackAmount === undefined) {
         rawAmount = nativeToken ? Number(nativeToken?.amount) : baseTokenAmount
+    } else {
+        rawAmount = fallbackAmount
     }
 
     return {

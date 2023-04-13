@@ -85,8 +85,14 @@ const Platform: IPlatform = {
     copyFile(copyFilePath: string, destinationFilePath: string): Promise<void> {
         return Promise.resolve()
     },
+    deleteFile(filePath: string): Promise<void> {
+        return Promise.resolve()
+    },
     isFeatureFlagEnabled(keyPath: string): boolean {
         return false
+    },
+    getLanguageCode(): Promise<string> {
+        return Promise.resolve('')
     },
 }
 
