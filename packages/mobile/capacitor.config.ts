@@ -6,7 +6,7 @@ const prod = process.env.NODE_ENV === 'production'
 const ip = process.env.CAP_IP || 'localhost'
 
 const serverConfig = {
-    url: `http://${ip}:8080`,
+    url: `http://${ip}:8000`,
     cleartext: true,
 }
 
