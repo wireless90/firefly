@@ -143,6 +143,7 @@ const webpackConfig: Configuration[] = [
             hot: true,
             static: path.join(__dirname, 'public'),
             host: '0.0.0.0',
+            port: '8000',
             client: {
                 reconnect: true,
                 progress: true,
