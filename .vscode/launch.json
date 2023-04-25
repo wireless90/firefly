@@ -11,6 +11,13 @@
             "program": "${workspaceRoot}/packages/desktop/public/build/index.node",
             "pid": "${command:pickMyProcess}",
             "sourceLanguages": ["rust"]
-        }
+        },
+        // Requires https://marketplace.visualstudio.com/items?itemName=mpotthoff.vscode-android-webview-debug
+        {
+            "type": "android-webview",
+            "request": "attach",
+            "name": "🔗 Android",
+            "application": "org.iota.firefly.mobile.shimmer.alpha",
+        },
     ]
 }
