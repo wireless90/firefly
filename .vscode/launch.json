@@ -19,5 +19,29 @@
             "name": "🔗 Android",
             "application": "org.iota.firefly.mobile.shimmer.alpha",
         },
+        // Requires https://marketplace.visualstudio.com/items?itemName=nisargjhaveri.ios-debug
+        {
+            "name": "▶ Simulator",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/packages/mobile/ios/App/DerivedData/App/Build/Products/Debug-iphonesimulator/App.app",
+            "iosBundleId": "org.iota.firefly.mobile.shimmer.alpha",
+            "iosTarget": "last-selected",
+          },
+          {
+            "name": "🔗 Simulator",
+            "type": "lldb",
+            "request": "attach",
+            "program": "${workspaceFolder}/packages/mobile/ios/App/DerivedData/App/Build/Products/Debug-iphonesimulator/App.app",
+            "iosBundleId": "org.iota.firefly.mobile.shimmer.alpha",
+            "iosTarget": "last-selected",
+          },
+          {
+            "name": "🔗 IPhone",
+            "type": "lldb",
+            "request": "attach",
+            "program": "${workspaceFolder}/packages/mobile/ios/App/DerivedData/App/Build/Products/Debug-iphoneos/App.app",
+            "iosBundleId": "org.iota.firefly.mobile.shimmer.alpha",
+          },
     ]
 }
