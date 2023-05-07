@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import { Button, Error, FontWeight, OptionalInput, Text, TextInput, TextType, TooltipIcon } from 'shared/components'
+    import { AliasInput, Button, Error, FontWeight, OptionalInput, Text, TextInput, TextType, TooltipIcon } from '@ui'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { BaseError } from '@core/error/classes'
     import { handleError } from '@core/error/handlers/handleError'
@@ -15,8 +15,13 @@
     import { composeUrlFromNftUri } from '@core/nfts'
     import { HttpHeader } from '@core/utils'
     import { getNetworkHrp } from '@core/profile'
+    import { selectedAccount } from '@core/account'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
+
+    let aliasInput: AliasInput
+    let aliasId: string
+    let aliasIdError: string
 
     let { standard, version, type, uri, name, collectionName, royalties, issuerName, description, attributes } =
         $mintNftDetails.metadata
@@ -221,6 +226,7 @@
 
     function convertInputsToMetadataType(): IMintNftDetails {
         return {
+            issuer: aliasId || $selectedAccount.depositAddress,
             outputType: OutputType.Nft,
             metadata: {
                 standard: standard ?? TokenStandard.Irc27,
@@ -253,6 +259,7 @@
     </Text>
 
     <popup-inputs class="block space-y-4 max-h-100 scrollable-y overflow-x-hidden flex-1">
+        <AliasInput bind:this={aliasInput} bind:alias={aliasId} bind:error={aliasIdError} />
         <TextInput
             bind:value={uri}
             bind:error={uriError}

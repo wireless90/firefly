@@ -12,14 +12,14 @@ import { NftActivity } from '../types'
 import { preprocessTransaction } from '../utils'
 import { generateSingleNftActivity } from '../utils/generateActivity/generateSingleNftActivity'
 
-export async function mintNft(metadata: IIrc27Metadata, quantity: number): Promise<void> {
+export async function mintNft(issuer: string, metadata: IIrc27Metadata, quantity: number): Promise<void> {
     try {
         const account = get(selectedAccount)
         updateSelectedAccount({ isTransferring: true })
 
         // Set NFT options
         const nftOptions: NftOptions = {
-            issuer: account.depositAddress,
+            issuer: issuer,
             immutableMetadata: Converter.utf8ToHex(JSON.stringify(metadata)),
         }
         const allNfts: NftOptions[] = Array(quantity).fill(nftOptions)

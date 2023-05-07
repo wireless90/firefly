@@ -72,7 +72,7 @@
 
     async function mintAction(): Promise<void> {
         try {
-            await mintNft(irc27Metadata, Number($mintNftDetails.quantity))
+            await mintNft($mintNftDetails.issuer, irc27Metadata, Number($mintNftDetails.quantity))
             closePopup()
         } catch (err) {
             handleError(err)

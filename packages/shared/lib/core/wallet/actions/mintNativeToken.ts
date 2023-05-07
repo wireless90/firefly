@@ -13,6 +13,7 @@ import { addPersistedAsset } from '../stores/persisted-assets.store'
 import { processAndAddToActivities } from '../utils'
 
 export async function mintNativeToken(
+    aliasId: string,
     maximumSupply: number,
     circulatingSupply: number,
     metadata: IIrc30Metadata
@@ -22,6 +23,7 @@ export async function mintNativeToken(
         const account = get(selectedAccount)
 
         const nativeTokenOptions: NativeTokenOptions = {
+            aliasId,
             maximumSupply: Converter.decimalToHex(maximumSupply),
             circulatingSupply: Converter.decimalToHex(circulatingSupply),
             foundryMetadata: Converter.utf8ToHex(JSON.stringify(metadata)),

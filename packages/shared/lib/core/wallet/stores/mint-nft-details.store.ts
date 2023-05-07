@@ -3,6 +3,7 @@ import { IMintNftDetails } from '../interfaces'
 import { OutputType, TokenStandard } from '../enums'
 
 export const mintNftDetails = writable<IMintNftDetails>({
+    issuer: '',
     outputType: OutputType.Nft,
     metadata: {
         standard: TokenStandard.Irc27,
@@ -25,6 +26,7 @@ export function setMintNftDetails(payload: IMintNftDetails): void {
 
 export function resetMintNftDetails(): void {
     mintNftDetails.set({
+        issuer: '',
         outputType: OutputType.Nft,
         metadata: {
             standard: TokenStandard.Irc27,
