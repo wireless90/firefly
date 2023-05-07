@@ -35,6 +35,8 @@
     import ManageVotingPowerPopup from './ManageVotingPowerPopup.svelte'
     import MintNativeTokenConfirmationPopup from './MintNativeTokenConfirmationPopup.svelte'
     import MintNativeTokenFormPopup from './MintNativeTokenFormPopup.svelte'
+    import MintNftCollectionConfirmationPopup from './MintNftCollectionConfirmationPopup.svelte'
+    import MintNftCollectionFormPopup from './MintNftCollectionFormPopup.svelte'
     import MintNftConfirmationPopup from './MintNftConfirmationPopup.svelte'
     import MintNftFormPopup from './MintNftFormPopup.svelte'
     import NodeAuthRequiredPopup from './NodeAuthRequiredPopup.svelte'
@@ -117,6 +119,8 @@
         [PopupId.ManageVotingPower]: ManageVotingPowerPopup,
         [PopupId.MintNativeTokenConfirmation]: MintNativeTokenConfirmationPopup,
         [PopupId.MintNativeTokenForm]: MintNativeTokenFormPopup,
+        [PopupId.MintNftCollectionConfirmation]: MintNftCollectionConfirmationPopup,
+        [PopupId.MintNftCollectionForm]: MintNftCollectionFormPopup,
         [PopupId.MintNftConfirmation]: MintNftConfirmationPopup,
         [PopupId.MintNftForm]: MintNftFormPopup,
         [PopupId.NodeAuthRequired]: NodeAuthRequiredPopup,

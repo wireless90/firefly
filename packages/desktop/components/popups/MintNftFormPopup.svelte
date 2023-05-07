@@ -8,7 +8,7 @@
     import { MimeType } from '@core/nfts/types'
     import { isValidUri } from '@core/utils/validation'
     import { validateBech32Address } from '@core/utils/crypto'
-    import { TokenStandard } from '@core/wallet/enums'
+    import { OutputType, TokenStandard } from '@core/wallet/enums'
     import { mintNftDetails, setMintNftDetails } from '@core/wallet/stores'
     import { IMintNftDetails } from '@core/wallet'
     import { fetchWithTimeout } from '@core/nfts/utils/fetchWithTimeout'
@@ -18,19 +18,9 @@
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
-    let {
-        standard,
-        version,
-        type,
-        uri,
-        quantity,
-        name,
-        collectionName,
-        royalties,
-        issuerName,
-        description,
-        attributes,
-    } = $mintNftDetails
+    let { standard, version, type, uri, name, collectionName, royalties, issuerName, description, attributes } =
+        $mintNftDetails.metadata
+    const { quantity } = $mintNftDetails
 
     interface IOptionalInputs {
         [key: string]: {
@@ -231,17 +221,20 @@
 
     function convertInputsToMetadataType(): IMintNftDetails {
         return {
-            standard: standard ?? TokenStandard.Irc27,
-            version,
-            issuerName: optionalInputs.issuerName?.value,
-            description: optionalInputs.description?.value,
-            collectionName: optionalInputs.collectionName?.value,
+            outputType: OutputType.Nft,
+            metadata: {
+                standard: standard ?? TokenStandard.Irc27,
+                version,
+                type: type as MimeType,
+                uri,
+                name,
+                issuerName: optionalInputs.issuerName?.value,
+                collectionName: optionalInputs.collectionName?.value,
+                description: optionalInputs.description?.value,
+                attributes: optionalInputs.attributes?.value ? JSON.parse(optionalInputs.attributes.value) : undefined,
+                royalties: optionalInputs.royalties?.value ? JSON.parse(optionalInputs.royalties.value) : undefined,
+            },
             quantity: optionalInputs.quantity?.value ? Number(optionalInputs.quantity.value) : 1,
-            uri,
-            name,
-            royalties: optionalInputs.royalties?.value ? JSON.parse(optionalInputs.royalties.value) : undefined,
-            attributes: optionalInputs.attributes?.value ? JSON.parse(optionalInputs.attributes.value) : undefined,
-            type: type as MimeType,
         }
     }
 

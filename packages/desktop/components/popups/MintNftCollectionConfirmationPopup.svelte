@@ -2,14 +2,14 @@
     import { onMount } from 'svelte'
     import { Button, Text, FontWeight, NftImageOrIconBox, Tabs, KeyValueBox } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { selectedAccount } from '@core/account'
+    import { selectedAccount, updateSelectedAccount } from '@core/account'
     import {
         OutputType,
         buildAliasOutputData,
         buildNftOutputData,
         formatTokenAmountPrecise,
-        mintNft,
         mintNftDetails,
+        processAndAddToActivities,
     } from '@core/wallet'
     import { getBaseToken, checkActiveProfileAuth } from '@core/profile'
     import { handleError } from '@core/error/handlers/handleError'
@@ -63,16 +63,30 @@
         totalStorageDeposit = storageDeposit * $mintNftDetails.quantity
     }
 
+    let preparedOutput
     async function prepareAliasOutput(): Promise<void> {
         const outputData = buildAliasOutputData(irc27Metadata, $selectedAccount.depositAddress)
-        const preparedOutput = await $selectedAccount.buildAliasOutput(outputData)
+        preparedOutput = await $selectedAccount.buildAliasOutput(outputData)
         storageDeposit = Number(preparedOutput.amount) ?? 0
         totalStorageDeposit = storageDeposit * $mintNftDetails.quantity
     }
 
+    async function mintNft(): Promise<void> {
+        try {
+            updateSelectedAccount({ isTransferring: true })
+            const transaction = await $selectedAccount.sendOutputs([preparedOutput])
+            await processAndAddToActivities(transaction, $selectedAccount)
+            closePopup()
+        } catch (err) {
+            handleError(err)
+        } finally {
+            updateSelectedAccount({ isTransferring: false })
+        }
+    }
+
     async function mintAction(): Promise<void> {
         try {
-            await mintNft(irc27Metadata, Number($mintNftDetails.quantity))
+            await mintNft()
             closePopup()
         } catch (err) {
             handleError(err)
@@ -139,8 +153,14 @@
                         />
                     {/if}
                     <KeyValueBox
-                        keyText={localize('general.immutableIssuer')}
+                        keyText={localize('general.governorAddress')}
                         valueText={$selectedAccount.depositAddress}
+                        isCopyable
+                    />
+                    <KeyValueBox
+                        keyText={localize('general.stateControllerAddress')}
+                        valueText={$selectedAccount.depositAddress}
+                        isCopyable
                     />
                 {:else if activeTab === Tab.Nft}
                     {#each Object.entries(nftTabDetails) as [key, value]}

@@ -25,6 +25,8 @@ export enum PopupId {
     ManageVotingPower = 'manageVotingPower',
     MintNativeTokenConfirmation = 'mintNativeTokenConfirmation',
     MintNativeTokenForm = 'mintNativeTokenForm',
+    MintNftCollectionConfirmation = 'mintNftCollectionConfirmation',
+    MintNftCollectionForm = 'mintNftCollectionForm',
     MintNftConfirmation = 'mintNftConfirmation',
     MintNftForm = 'mintNftForm',
     NodeAuthRequired = 'nodeAuthRequired',

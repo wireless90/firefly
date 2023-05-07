@@ -10,9 +10,9 @@ export interface IIrc27Metadata {
     uri: string
     name: string
     collectionName?: string
-    royalties?: Record<string, number>
     issuerName?: string
     description?: string
     attributes?: IIrc27Attribute[]
     soonaverseAttributes?: ISoonaverseAttributes
+    royalties?: Record<string, number>
 }

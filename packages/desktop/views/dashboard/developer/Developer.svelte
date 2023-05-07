@@ -4,6 +4,7 @@
         FaucetRequestButton,
         MintNativeTokenButton,
         MintNftButton,
+        MintNftCollectionButton,
         RefreshTokenMetadataButton,
         TestDeepLinkButton,
     } from '@components'
@@ -32,6 +33,7 @@
                         <MintNativeTokenButton />
                     {/if}
                     {#if features.developerTools.mintNft.enabled}
+                        <MintNftCollectionButton />
                         <MintNftButton />
                     {/if}
                 </Pane>
