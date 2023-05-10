@@ -8,7 +8,6 @@
         needsToAcceptLatestPrivacyPolicy,
         needsToAcceptLatestTermsOfService,
     } from '@core/app'
-    import { localize } from '@core/i18n'
     import { ProfileType, loadPersistedProfileIntoActiveProfile, profiles, removeProfileFolder } from '@core/profile'
     import { destroyProfileManager } from '@core/profile-manager/actions'
     import { loginRouter, routerManager } from '@core/router'
@@ -64,14 +63,15 @@
                         !isLatestStrongholdVersion(profile?.strongholdVersion) &&
                         features.onboarding.strongholdVersionCheck.enabled}
                     classes="cursor-pointer"
+                    truncate
                 />
             </div>
         {/each}
         <div class="mx-7 mb-8">
             <Profile
                 onClick={onAddProfileClick}
-                name={localize('general.addProfile')}
                 classes="border-solid border-2 border-gray-400 cursor-pointer"
+                truncate
             >
                 <Icon height="15" width="15" icon="plus" classes="text-blue-500" />
             </Profile>

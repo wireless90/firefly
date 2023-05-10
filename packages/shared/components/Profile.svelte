@@ -1,19 +1,31 @@
 <script lang="ts">
-    import { DeveloperIndicatorPill, Icon, NetworkIconBadge, StrongholdBadge, Text, TextType } from '@ui'
+    import { DeveloperIndicatorPill, Icon, NetworkIconBadge, StrongholdBadge, Text, TextType, Tooltip } from '@ui'
+    import { Position } from '@ui/enums'
 
     import { IPersistedProfile, ProfileType } from '@core/profile'
     import { getInitials as _getInitials } from '@core/utils'
 
     import { Icon as IconEnum } from '@auxiliary/icon/enums'
 
-    export let profile: IPersistedProfile
+    export let profile: IPersistedProfile = undefined
     export let classes: string = undefined
     export let bgColor: string = ''
     export let updateRequired: boolean = false
+    export let truncate: boolean = false
 
     export let onClick: undefined | ((profileId: string) => void) = undefined
 
     const slots = $$props.$$slots
+
+    const position: Position = Position.Right
+    let anchor: HTMLElement
+    let isTooltipVisible = false
+
+    function showTooltip(show: boolean): void {
+        if (truncate) {
+            isTooltipVisible = show
+        }
+    }
 
     function onProfileClick(): void {
         onClick && onClick(profile?.id)
@@ -30,7 +42,7 @@
     }
 </script>
 
-<profile-container class="flex items-center justify-center w-24">
+<profile-container class="flex items-center justify-center {truncate ? 'w-24' : ''}">
     <div class="flex flex-col justify-between items-center w-full">
         <button type="button" on:click={onProfileClick} class="relative cursor-pointer mb-3">
             <div
@@ -59,11 +71,21 @@
                 />
             {/if}
             {#if profile?.name}
-                <Text type={TextType.h5} classes="text-center truncate">{profile?.name}</Text>
+                <div
+                    class="max-w-full"
+                    bind:this={anchor}
+                    on:mouseenter={() => showTooltip(true)}
+                    on:mouseleave={() => showTooltip(false)}
+                >
+                    <Text type={TextType.h5} classes="text-center {truncate ? 'truncate' : ''}">{profile?.name}</Text>
+                </div>
             {/if}
         </div>
         {#if profile?.isDeveloperProfile}
             <DeveloperIndicatorPill />
+        {/if}
+        {#if isTooltipVisible}
+            <Tooltip {anchor} {position} size="small"><Text>{profile?.name}</Text></Tooltip>
         {/if}
     </div>
 </profile-container>
